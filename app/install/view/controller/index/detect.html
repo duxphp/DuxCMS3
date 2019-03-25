@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>DuxCMS安装向导</title>
+    {load_js('jquery')}
+    {load_ui($sysPublic)}
+    <link rel="stylesheet" href="__PUBLIC__/install/css/style.css">
+</head>
+<body>
+<nav class="uk-section-primary uk-dark">
+    <div class="uk-container uk-navbar">
+        <div class="uk-navbar-left">
+            <a href="__ROOT__/" class="uk-navbar-item uk-logo dux-logo"><img width="48" src="__PUBLIC__/images/logo-Invert.png"
+                                                                             class="uk-margin-small-right"
+                                                                             > DUX
+                <small>&</small>
+                CMS 内容管理系统</a>
+        </div>
+        <div class="uk-navbar-right">
+            <div class="uk-navbar-item">
+                安装向导
+            </div>
+        </div>
+    </div>
+</nav>
+<br>
+<div class="uk-container">
+    <div class="uk-grid">
+        <div class="uk-width-1-4">
+            <div class="uk-card uk-card-default uk-card-body uk-card-small">
+                <ul class="uk-tab uk-tab-left">
+                    <li><a href="#">使用协议</a></li>
+                    <li class="uk-active"><a href="#">环境监测</a></li>
+                    <li><a href="#">参数配置</a></li>
+                    <li><a href="#">完成安装</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="uk-width-3-4">
+            <div class="uk-card uk-card-default uk-card-body ">
+                <h2>
+                    目录权限检测
+                </h2>
+                <table class="uk-table uk-table-striped">
+                    <tbody>
+                    <!--loop{$list as $vo}-->
+                    <tr>
+                        <td>{$vo.dir}</td>
+                        <!--if{$vo.writeable}-->
+                        <td width="80"><span class="uk-label uk-label-success">可写</span></td>
+                        <!--{else}-->
+                        <td width="80"><span class="uk-label uk-label-danger">无权限</span></td>
+                        <!--{/if}-->
+                    </tr>
+                    <!--{/loop}-->
+                    </tbody>
+                </table>
+
+                <h2>
+                    功能支持检测
+                </h2>
+                <table class="uk-table uk-table-striped">
+                    <tbody>
+                    <!--loop{$funList as $vo}-->
+                    <tr>
+                        <td>{$vo.name}
+                            <!--if{!$vo.must}-->
+                            {非必须}
+                            <!--{/if}-->
+                        </td>
+                        <!--if{$vo.status}-->
+                        <td width="80"><span class="uk-label uk-label-success">支持</span></td>
+                        <!--{else}-->
+                        <td width="80"><span class="uk-label uk-label-danger">不支持</span></td>
+                        <!--{/if}-->
+                    </tr>
+                    <!--{/loop}-->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="uk-margin-top uk-text-right">
+                <a class="uk-button uk-button-danger" href="{url('index')}">上一步</a>
+                <a class="uk-button uk-button-primary" href="{url('config')}">下一步</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

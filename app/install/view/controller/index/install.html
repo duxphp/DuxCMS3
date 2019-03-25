@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>DuxCMS安装向导</title>
+    {load_js('jquery')}
+    {load_ui($sysPublic)}
+    <link rel="stylesheet" href="__PUBLIC__/install/css/style.css">
+</head>
+<body>
+<nav class="uk-section-primary uk-dark">
+    <div class="uk-container uk-navbar">
+        <div class="uk-navbar-left">
+            <a href="__ROOT__/" class="uk-navbar-item uk-logo dux-logo"><img width="48" src="__PUBLIC__/images/logo-Invert.png"
+                                                                             class="uk-margin-small-right"
+                                                                             > DUX
+                <small>&</small>
+                CMS 内容管理系统</a>
+        </div>
+        <div class="uk-navbar-right">
+            <div class="uk-navbar-item">
+                安装向导
+            </div>
+        </div>
+    </div>
+</nav>
+<br>
+<div class="uk-container">
+    <div class="uk-grid">
+        <div class="uk-width-1-4">
+            <div class="uk-card uk-card-default uk-card-body uk-card-small">
+                <ul class="uk-tab uk-tab-left">
+                    <li><a href="#">使用协议</a></li>
+                    <li><a href="#">环境监测</a></li>
+                    <li><a href="#">参数配置</a></li>
+                    <li class="uk-active"><a href="#">完成安装</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="uk-width-3-4">
+            <div class="uk-card uk-card-default uk-card-body ">
+                <div class="dux-content" id="log">
+                    <!--loop{$msgLog as $vo}-->
+                    <!--if{$vo.error}-->
+                    <span class="text-danger">{$vo.msg}</span>
+                    <!--{else}-->
+                    {$vo.msg}
+                    <!--{/if}-->
+                    <br>
+                    <!--{/loop}-->
+                </div>
+
+            </div>
+
+            <div class="uk-margin-top uk-text-right">
+                <span class="uk-hidden" id="error">
+                    <a class="uk-button uk-button-danger" href="{url('config')}">上一步</a>
+                </span>
+
+                <div class="uk-hidden" id="complete">
+                    <a class="uk-button uk-button-default" href="<?php echo ROOT_URL; ?>/">进入前台</a>
+                    <a class="uk-button uk-button-primary" href="{url('admin/system/Index/index')}">进入后台</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+<script>
+    var msg = function (str, error) {
+        var html = '<p>';
+        if (error) {
+            html += '<span class="uk-text-danger">' + str + '</span>';
+        } else {
+            html += str;
+        }
+        html += '</p>';
+        $('#log').append(html);
+        if (error) {
+            $('#error').removeClass('uk-hidden');
+        }
+    };
+    var complete = function (str) {
+        msg(str);
+        $('#complete').removeClass('uk-hidden');
+    };
+</script>
