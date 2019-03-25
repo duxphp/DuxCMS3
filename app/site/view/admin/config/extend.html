@@ -1,0 +1,54 @@
+
+<!--loop{$hookConfig as $key => $vo}-->
+<div class="uk-card uk-card-small uk-card-default dux-panel">
+    <div class="uk-card-header">{$vo.name}</div>
+    <div class="uk-card-body">
+        <form class="dux-form uk-form  uk-form-horizontal" method="post" action="{url()}" data-dux="form-bind">
+            <fieldset>
+                <!--loop{$vo.list as $k => $v}-->
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">{$v.name}</label>
+                    <div class="uk-form-controls">
+
+                        <!--if{$v.type == 'image'}-->
+                        <div class="uk-input-group">
+                            <input class="uk-input" type="text" name="{$v.field}" id="{$v.field}" value="{$info[$v['field']]}"
+                                   placeholder="上传图片">
+                            <span class="uk-input-group-btn">
+                                            <button class="uk-button uk-button-default" type="button" data-type="image" data-dux="system-attach"
+                                                    data-target="#{$v.field}"><i class="fa fa-upload"></i></button>
+                                        </span>
+                            <span class="uk-input-group-btn">
+                                <button class="uk-button uk-button-default" type="button" data-dux="form-preview" data-target="#{$v.field}"><i class="fa fa-image"></i></button>
+                            </span>
+                        </div>
+                        <!--{/if}-->
+
+                        <!--if{$v.type == 'text'}-->
+                        <div class="uk-form-group">
+                            <label class=" uk-form-label">文字默认色</label>
+                            <div class="uk-form-controls">
+                                <input class="uk-input" type="text" data-dux="form-color" name="{$v.field}" value="{$info[$v['field']]}">
+                            </div>
+                        </div>
+                        <!--{/if}-->
+
+                        <!--if{$v.help}-->
+                        <div class="uk-form-help">
+                            {$v.help}
+                        </div>
+                        <!--{/if}-->
+
+                    </div>
+                </div>
+                <!--{/loop}-->
+                <div class="uk-form-group">
+                    <div class="uk-form-controls">
+                        <button class="uk-button uk-button-primary" type="submit">保存</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+<!--{/loop}-->

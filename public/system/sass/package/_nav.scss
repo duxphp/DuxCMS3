@@ -1,0 +1,21 @@
+
+
+.dux-menu {
+  padding: 10px;
+  list-style: none;
+  margin: 0;
+  li {
+    &.active {
+      a {
+        background: $global-primary-background;
+        color: #fff;
+      }
+    }
+    a {
+      padding: 1rem;
+      display: block;
+      border-radius: 2px;
+    }
+
+  }
+}

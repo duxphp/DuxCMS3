@@ -1,0 +1,107 @@
+/* fix */
+
+html {
+  font-size: 12px;
+}
+
+body {
+  font-size: 1.4rem;
+}
+
+p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+}
+
+.uk-article {
+  .uk-article-title {
+    font-size: 1.8rem;
+  }
+  p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+  }
+}
+
+.dux-logo {
+  color: #fff !important;
+  img {
+    width: 45px;
+    height: 45px;
+  }
+  svg {
+    width: 45px;
+  }
+}
+
+
+/* common */
+.dux-header {
+
+
+}
+
+.dux-footer {
+  padding: 30px;
+  text-align: center;
+  margin-top: 50px;
+  font-size: 1.4rem;
+  border-top: 1px solid #ddd;
+  color: #666;
+  .link {
+    margin-bottom: 20px;
+  }
+  p {
+    margin: 0;
+  }
+  a {
+    font-size: 1.6rem;
+  }
+}
+
+
+/* module */
+.dux-banner {
+  padding-top: 10px;
+}
+
+.dux-side-list {
+  background: #eee;
+  padding: 10px 20px;
+  margin-top: 0;
+  .am-list {
+    margin-bottom: 0;
+  }
+  .am-list>li {
+    background: #eee;
+    &:first-child{
+      border-top: none;
+    }
+    &:last-child {
+      border-bottom: none;
+    }
+
+  }
+}
+
+
+.dux-pages {
+  a,span {
+    position: relative;
+    display: inline-block;
+    padding: .5em 1em;
+    text-decoration: none;
+    line-height: 1.2;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 0;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    &.current {
+      background-color: #0e90d2;
+      border-color: #0e90d2;
+      color: #fff;
+    }
+
+  }
+}

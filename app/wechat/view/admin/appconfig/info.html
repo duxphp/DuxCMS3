@@ -1,0 +1,53 @@
+<script src="https://cdn.bootcss.com/masonry/4.2.2/masonry.pkgd.min.js"></script>
+
+<!-- <div class="dux-page-header uk-clearfix">
+    <div class="page-title">
+        <a class="uk-button uk-button-primary" href="{url('index')}"> 应用列表</a>
+    </div>
+    <div class="page-action">
+        <a class="uk-button uk-button-danger" href="javascript:location.reload();"><i class="fa fa-refresh"></i></a>
+    </div>
+</div>
+
+<div class="uk-margin-top"> -->
+    <div class="uk-card uk-card-default uk-card-small dux-panel">
+        <div class="uk-card-header">{$assignName}应用</div>
+        <div class="uk-card-body">
+            <form class="dux-form uk-form   uk-form-horizontal " data-dux="form-bind" method="post">
+                <fieldset>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">应用名称</label>
+                        <div class="uk-form-controls">
+                            <input type="text" class="uk-input" name="name" value="{$info.name}" placeholder="请输入应用名称" required>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">应用标识</label>
+                        <div class="uk-form-controls">
+                            <input type="text" class="uk-input" name="label" value="{$info.label}" placeholder="请输入应用标识" required>
+                            <div class="uk-form-help">系统接口调用唯一标识</div>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">APPID</label>
+                        <div class="uk-form-controls">
+                            <input type="text" class="uk-input" name="appid" value="{$info.appid}" placeholder="请输入应用ID" required>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">SECRET</label>
+                        <div class="uk-form-controls">
+                            <input type="text" class="uk-input" name="secret" value="{$info.secret}" placeholder="请输入应用密钥" required>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <div class="uk-form-controls">
+                            <input type="hidden" class="uk-input" name="id" value="{$info.id}">
+                            <button class="uk-button uk-button-primary" type="submit" disabled>保存</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div> 

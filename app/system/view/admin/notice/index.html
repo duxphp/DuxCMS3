@@ -1,0 +1,39 @@
+<div data-dux="table-bind" class="dux-table-layout">
+    <div class="dux-page-table">
+        <table class="uk-table    uk-table-hover uk-table-middle dux-table" data-table>
+            <thead>
+            <tr>
+                <th width="100" class="uk-text-center">@</th>
+                <th>通知内容
+                <th class="uk-text-center" width="100">删除</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--loop{$list as $vo}-->
+            <tr>
+                <td class="uk-text-center"><i class="fa fa-btn fa-btn-small uk-text-{$vo.type} fa-{$vo.icon}"></i></td>
+                <td>{$vo.content} ({date('Y-m-d H:i:s', $vo.time)})
+                    <!--if{$vo.url}-->
+                    <a href="{$vo.url}">详情 &lt;&lt;</a>
+                    <!--{/if}-->
+                </td>
+                <td class="uk-text-center">
+                    <a class="uk-button uk-button-danger uk-button-small" href="javascript:;" data-url="{url('del')}"
+                       data-id="{$vo[$pri]}" title="删除" data-del><i class=" fa fa-trash"></i></a>
+                </td>
+            </tr>
+            <!--{/loop}-->
+            <!--if{empty($list)}-->
+            <tr>
+                <td colspan="3" class="uk-text-center">
+                    暂无通知消息
+                </td>
+            </tr>
+            <!--{/if}-->
+            </tbody>
+        </table>
+    </div>
+    <div class="dux-page-foot uk-clearfix">
+        {$page}
+    </div>
+</div>

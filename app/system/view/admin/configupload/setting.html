@@ -1,0 +1,49 @@
+<div class="dux-page-header uk-clearfix">
+    <div class="page-title">
+        <a class="uk-button uk-button-primary" href="{url('index')}"> 驱动列表</a>
+    </div>
+    <div class="page-action">
+        <a class="uk-button uk-button-danger" href="javascript:location.reload();"><i class="fa fa-refresh"></i></a>
+    </div>
+</div>
+<div class="uk-margin-top">
+    <div class="uk-card uk-card-default uk-card-small dux-panel">
+        <div class="uk-card-header">{$name[$uploadConfig.driver]}设置</div>
+        <div class="uk-card-body">
+            <form class="dux-form uk-form   uk-form-horizontal " data-dux="form-bind" method="post">
+                <fieldset>
+                    <!--loop{$uploadConfig as $key => $vo}-->
+                    <!--if{$key == 'name' || $key == 'driver'}-->
+                    <?php continue; ?>
+                    <!--{/if}-->
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">{$tip[$key] ? $tip[$key] : $key}</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="{$key}" value="{$vo}">
+                            <div class="uk-form-help">
+                                {$key}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--{/loop}-->
+                    <div class="uk-form-group">
+                        <div class="uk-form-controls">
+                            <input type="hidden" name="driver" value="{$uploadConfig.driver}">
+                            <button class="uk-button uk-button-primary" type="submit" disabled>保存</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    Do('base', function () {
+        window.upload = function (info) {
+            $($(this).data('target')).val(info.file);
+            $(this).parent().prev('input').val('文件已上传');
+        };
+    });
+</script>

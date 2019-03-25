@@ -1,0 +1,159 @@
+<div class="uk-card uk-card-small uk-card-default dux-panel">
+    <div class="uk-card-body">
+        <form class="dux-form uk-form  uk-form-horizontal  " method="post" action="{url()}" data-dux="form-bind">
+            <fieldset>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">系统调试</label>
+                    <div class="uk-form-controls uk-form-controls-text">
+                        <div class="uk-grid">
+                            <label>
+                                <!--if{$info.debug}-->
+                                <input name="debug" value="true" checked="checked" type="radio"  class="uk-radio" >
+                                <!--{else}-->
+                                <input name="debug" value="true" type="radio"  class="uk-radio" >
+                                <!--{/if}-->
+                                开启
+                            </label>
+                            <label>
+                                <!--if{!$info.debug}-->
+                                <input name="debug" checked="checked" value="false" type="radio"  class="uk-radio" >
+                                <!--{else}-->
+                                <input name="debug" value="false" type="radio"  class="uk-radio" >
+                                <!--{/if}-->
+                                关闭
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">日志开关</label>
+                    <div class="uk-form-controls uk-form-controls-text">
+                        <div class="uk-grid">
+                            <label>
+                                <!--if{$info.log}-->
+                                <input name="log" value="true" checked="checked" type="radio"  class="uk-radio" >
+                                <!--{else}-->
+                                <input name="log" value="true" type="radio"  class="uk-radio" >
+                                <!--{/if}-->
+                                开启
+                            </label>
+                            <label>
+                                <!--if{!$info.log}-->
+                                <input name="log" checked="checked" value="false" type="radio"  class="uk-radio" >
+                                <!--{else}-->
+                                <input name="log" value="false" type="radio"  class="uk-radio" >
+                                <!--{/if}-->
+                                关闭
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">浏览器调试</label>
+                    <div class="uk-form-controls uk-form-controls-text">
+                        <div class="uk-grid">
+                            <label>
+                                <!--if{$info.debug_browser}-->
+                                <input name="debug_browser" value="true" checked="checked" type="radio"  class="uk-radio" >
+                                <!--{else}-->
+                                <input name="debug_browser" value="true" type="radio"  class="uk-radio" >
+                                <!--{/if}-->
+                                开启
+                            </label>
+                            <label>
+                                <!--if{!$info.debug_browser}-->
+                                <input name="debug_browser" checked="checked" value="false" type="radio"  class="uk-radio" >
+                                <!--{else}-->
+                                <input name="debug_browser" value="false" type="radio"  class="uk-radio" >
+                                <!--{/if}-->
+                                关闭
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">加密码</label>
+                    <div class="uk-form-controls">
+                        <div class="uk-input-group">
+                        <input class="uk-input"  type="text" id="safe_key" name="safe_key" value="{$info.safe_key}" placeholder=""  required>
+                        <span class="uk-input-group-btn">
+                                            <button class="uk-button uk-button-default" type="button" data-target="#safe_key" data-dux="system-random">随机生成</button>
+                                        </span>
+                    </div>
+                        <div class="uk-form-help">系统内部加密密钥,根据需要更改设置</div>
+                    </div>
+                </div>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">会话前缀</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="text" name="cookie_pre" value="{$info.cookie_pre}"
+                               required>
+                        <div class="uk-form-help">cookie与session等会话前缀，修改避免冲突</div>
+                    </div>
+                </div>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">通讯码</label>
+                    <div class="uk-form-controls">
+                        <div class="uk-input-group">
+                            <input class="uk-input"  type="text" id="com_key" name="com_key" value="{$info.com_key}" placeholder=""  required>
+                            <span class="uk-input-group-btn">
+                                            <button class="uk-button uk-button-default" type="button" data-target="#com_key" data-dux="system-random">随机生成</button>
+                                        </span>
+                    </div>
+                        <div class="uk-form-help">外部API之间通讯使用的安全码</div>
+                </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">授权码</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="text" name="service_key" value="{$info.service_key}"
+                               required>
+                        <div class="uk-form-help">系统云服务授权KEY</div>
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">模板缓存</label>
+                    <div class="uk-form-controls">
+                        <select class="uk-select" data-placeholder="选择类型" name="tpl_cache" data-dux="form-select">
+                            <!--loop{$cacheList as $key => $vo}-->
+                            <option value="{$key}" <!--if{$key == $info.tpl_cache}--> selected <!--{/loop}--> >{$key}</option>
+                            <!--{/loop}-->
+                        </select>
+                        <div class="uk-form-help">非持久化缓存数据</div>
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">会话存储</label>
+                    <div class="uk-form-controls">
+                        <select class="uk-select" data-placeholder="选择类型" name="session_cache" data-dux="form-select">
+                            <!--loop{$storageList as $key => $vo}-->
+                            <option value="{$key}" <!--if{$key == $info.session_cache}--> selected <!--{/loop}--> >{$key}</option>
+                            <!--{/loop}-->
+                        </select>
+                        <div class="uk-form-help">持久化会话存储，用于cookie、session等长期存储</div>
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">数据存储</label>
+                    <div class="uk-form-controls">
+                        <select class="uk-select" data-placeholder="选择类型" name="data_cache" data-dux="form-select">
+                            <!--loop{$storageList as $key => $vo}-->
+                            <option value="{$key}" <!--if{$key == $info.data_cache}--> selected <!--{/loop}--> >{$key}</option>
+                            <!--{/loop}-->
+                        </select>
+                        <div class="uk-form-help">持久化数据存储，用于统计等长期数据</div>
+                    </div>
+                </div>
+                <div class="uk-form-group">
+                    <div class="uk-form-controls">
+                        <button class="uk-button uk-button-primary" type="submit">保存</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

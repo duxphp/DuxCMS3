@@ -1,0 +1,34 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>{$sysInfo.title}</title>
+    {load_js('jquery')}
+    {load_ui($sysPublic, false)}
+    <link rel="stylesheet" href="{$sysPublic}/system/css/style.css">
+    <script type="text/javascript" src="{$sysPublic}/system/js/lib.js"></script>
+</head>
+<style>
+    body,html {
+        background: #fff;
+        height: auto;
+    }
+    body {
+        padding-bottom:60px;
+    }
+    .dux-form {
+        padding: 1rem;
+    }
+</style>
+<body>
+{$layout}
+</body>
+<script>
+    Do('base', function () {
+        base.frame();
+    });
+</script>
+</html>

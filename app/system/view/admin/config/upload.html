@@ -1,0 +1,237 @@
+<div class="uk-card uk-card-small uk-card-default dux-panel">
+    <div class="uk-card-body">
+        <form class="dux-form uk-form  uk-form-horizontal  " method="post" action="{url()}"
+              data-dux="form-bind">
+            <fieldset>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">上传驱动</label>
+                    <div class="uk-form-controls">
+                        <select class="uk-select" data-placeholder="选择类型" name="upload_driver" >
+                            <!--loop{$driverList as $key => $vo}-->
+                            <option value="{$key}" <!--if{$key == $info.upload_driver}--> selected <!--{/loop}--> >{$key}</option>
+                            <!--{/loop}-->
+                        </select>
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">上传大小</label>
+
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="text" name="upload_size" value="{$info.upload_size}"
+                               required>
+
+                        <div class="uk-form-help">单位：M</div>
+                    </div>
+                </div>
+
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">上传文件格式</label>
+
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="text" name="upload_exts" value="{$info.upload_exts}"
+                               required>
+
+                        <div class="uk-form-help">用英文逗号分割，部分格式如无法上传请检查服务器</div>
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">图片处理驱动</label>
+                    <div class="uk-form-controls">
+                        <select class="uk-select" data-placeholder="选择类型" name="image_driver" >
+                            <!--loop{$imageList as $key => $vo}-->
+                            <option value="{$key}" <!--if{$key == $info.image_driver}--> selected <!--{/loop}--> >{$key}</option>
+                            <!--{/loop}-->
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">缩图开关</label>
+
+                    <div class="uk-form-controls uk-form-controls-text">
+                        <div class="uk-grid">
+                            <label>
+                                <!--if{$info['thumb_status']}-->
+                                <input name="thumb_status" value="1" checked="checked" type="radio"  class="uk-radio" >
+                                <!--{else}-->
+                                <input name="thumb_status" value="1" type="radio"  class="uk-radio" >
+                                <!--{/if}-->
+                                开启
+                            </label>
+
+                            <label>
+                                <!--if{!$info['thumb_status']}-->
+                                <input name="thumb_status" checked="checked" value="0" type="radio"  class="uk-radio" >
+                                <!--{else}-->
+                                <input name="thumb_status" value="0" type="radio"  class="uk-radio" >
+                                <!--{/if}-->
+                                关闭
+                            </label></div>
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">水印开关</label>
+
+                    <div class="uk-form-controls uk-form-controls-text">
+
+                        <div class="uk-grid">
+                            <label>
+                                <!--if{$info['water_status']}-->
+                                <input name="water_status" value="1" checked="checked" type="radio"  class="uk-radio" >
+                                <!--{else}-->
+                                <input name="water_status" value="1" type="radio"  class="uk-radio" >
+                                <!--{/if}-->
+                                开启
+                            </label>
+
+                            <label>
+                                <!--if{!$info['water_status']}-->
+                                <input name="water_status" checked="checked" value="0" type="radio"  class="uk-radio" >
+                                <!--{else}-->
+                                <input name="water_status" value="0" type="radio"  class="uk-radio" >
+                                <!--{/if}-->
+                                关闭
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">缩图方式</label>
+
+                    <div class="uk-form-controls">
+
+                        <select class="uk-select" type="text" name="thumb_type" id="thumb_type" data-dux="form-select">
+                            <!--if{$info['thumb_type'] == 1}-->
+                            <option value="1" selected>
+                                <!--{else}-->
+                            <option value="1">
+                                <!--{/if}-->
+                                等比例缩放
+                            </option>
+                            <!--if{$info['thumb_type'] == 2}-->
+                            <option value="2" selected>
+                                <!--{else}-->
+                            <option value="2">
+                                <!--{/if}-->
+                                居中缩放裁剪
+                            </option>
+                            <!--if{$info['thumb_type'] == 3}-->
+                            <option value="3" selected>
+                                <!--{else}-->
+                            <option value="3">
+                                <!--{/if}-->
+                                固定尺寸缩放
+                            </option>
+                        </select>
+
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">缩图大小</label>
+
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="text" name="thumb_width"
+                               value="{$info.thumb_width}" required>
+                        <br>
+                        <input class="uk-input" type="text" name="thumb_height"
+                               value="{$info.thumb_height}" required>
+                        <div class="uk-form-help">宽度 × 高度</div>
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">水印图片</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="text" name="water_image" value="{$info.water_image}"
+                               required>
+                        <div class="uk-form-help">public/watermark下的图片文件</div>
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">水印位置</label>
+
+                    <div class="uk-form-controls">
+                        <select class="uk-select" type="text" name="water_position" id="water_position" data-dux="form-select">
+                            <!--if{$info['water_position'] == 1}-->
+                            <option value="1" selected>
+                                <!--{else}-->
+                            <option value="1">
+                                <!--{/if}-->
+                                左上角水印
+                            </option>
+                            <!--if{$info['water_position'] == 2}-->
+                            <option value="2" selected>
+                                <!--{else}-->
+                            <option value="2">
+                                <!--{/if}-->
+                                上居中水印
+                            </option>
+                            <!--if{$info['water_position'] == 3}-->
+                            <option value="3" selected>
+                                <!--{else}-->
+                            <option value="3">
+                                <!--{/if}-->
+                                右上角水印
+                            </option>
+                            <!--if{$info['water_position'] == 4}-->
+                            <option value="4" selected>
+                                <!--{else}-->
+                            <option value="4">
+                                <!--{/if}-->
+                                左居中水印
+                            </option>
+                            <!--if{$info['water_position'] == 5}-->
+                            <option value="5" selected>
+                                <!--{else}-->
+                            <option value="5">
+                                <!--{/if}-->
+                                居中水印
+                            </option>
+                            <!--if{$info['water_position'] == 6}-->
+                            <option value="6" selected>
+                                <!--{else}-->
+                            <option value="6">
+                                <!--{/if}-->
+                                右居中水印
+                            </option>
+                            <!--if{$info['water_position'] == 7}-->
+                            <option value="7" selected>
+                                <!--{else}-->
+                            <option value="7">
+                                <!--{/if}-->
+                                左下角水印
+                            </option>
+                            <!--if{$info['water_position'] == 8}-->
+                            <option value="8" selected>
+                                <!--{else}-->
+                            <option value="8">
+                                <!--{/if}-->
+                                下居中水印
+                            </option>
+                            <!--if{$info['water_position'] == 9}-->
+                            <option value="9" selected>
+                                <!--{else}-->
+                            <option value="9">
+                                <!--{/if}-->
+                                右下角水印
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="uk-form-group">
+                    <div class="uk-form-controls">
+                        <button class="uk-button uk-button-primary" type="submit">保存</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

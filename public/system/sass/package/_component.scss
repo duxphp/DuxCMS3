@@ -1,0 +1,86 @@
+.dux-stats-card {
+  padding: 20px 30px;
+  background: $global-primary-background;
+  color: #fff;
+  position: relative;
+  border-radius: 3px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  margin-bottom: 20px;
+  overflow: hidden;
+
+  .card-body {
+    display: flex;
+    align-items: flex-start;
+    .icon {
+      i {
+        font-size: 45px;
+      }
+    }
+
+    .content {
+      flex: 1;
+      text-align: right;
+      padding-right: 30px;
+      p {
+        padding: 0;
+        margin: 0;
+        color: rgba(255,255,255, .8);
+      }
+
+      .title {
+        font-size: 20px;
+      }
+    }
+
+    .topic {
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-size: 100px;
+      opacity: 0.2;
+    }
+  }
+}
+
+
+
+.dux-stat-widget {
+  padding: 1.5rem;
+
+  .media-icon {
+    float: left;
+    height: 64px;
+    width: 64px;
+    line-height: 64px;
+    color: #fff;
+    text-align: center;
+    border-radius: 50%;
+  }
+
+  .media-body {
+    height: 64px;
+
+    h1 {
+      margin-bottom: 1rem;
+    }
+
+    text-align: right;
+
+    p {
+      margin: 0;
+    }
+  }
+}
+
+
+
+.dux-dialog-foot {
+  border-top: 1px solid #ddd;
+  padding: 10px;
+  text-align: right;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+}

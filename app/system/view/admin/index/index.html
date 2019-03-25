@@ -1,0 +1,146 @@
+<div class="uk-grid ">
+    <div class="uk-width-1-4@l uk-width-1-2@m">
+        <div class="dux-stats-card red uk-margin-remove-top uk-margin-bottom">
+            <div class="card-body">
+                <div class="content">
+                    <p>站点访问总量</p>
+                    <div class="title">{$siteViews}</div>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-cubes"></i>
+                </div>
+                <i class="topic fa fa-cubes"></i>
+            </div>
+
+        </div>
+    </div>
+    <div class="uk-width-1-4@l uk-width-1-2@m">
+        <div class="dux-stats-card green uk-margin-remove-top uk-margin-bottom">
+            <div class="card-body">
+                <div class="content">
+                    <p>API访问量</p>
+                    <div class="title">{$systemStatis.api ? $systemStatis.api : 0}</div>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-adn"></i>
+                </div>
+                <i class="topic fa fa-adn"></i>
+            </div>
+        </div>
+    </div>
+    <div class="uk-width-1-4@l uk-width-1-2@m">
+        <div class="dux-stats-card orange uk-margin-remove-top uk-margin-bottom">
+            <div class="card-body">
+                <div class="content">
+                    <p>电脑端访问量</p>
+                    <div class="title">{$systemStatis.web ? $systemStatis.web : 0}</div>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-desktop"></i>
+                </div>
+                <i class="topic fa fa-desktop"></i>
+            </div>
+
+        </div>
+    </div>
+    <div class="uk-width-1-4@l uk-width-1-2@m">
+        <div class="dux-stats-card uk-margin-remove-top uk-margin-bottom">
+            <div class="card-body">
+                <div class="content">
+                    <p>移动端访问量</p>
+                    <div class="title">{$systemStatis.mobile ? $systemStatis.mobile : 0}</div>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-mobile-phone"></i>
+                </div>
+                <i class="topic fa fa-mobile-phone"></i>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="uk-card uk-card-default uk-card-body uk-card-small">
+    <h3 class="uk-card-title">
+        访问趋势
+    </h3>
+
+    <div class="uk-card-body">
+        {$viewBarJs}
+    </div>
+</div>
+<br>
+<div class="uk-grid">
+    <div class="uk-width-1-2@m">
+        <div class="uk-card uk-card-default uk-card-body uk-card-small">
+            <h3 class="uk-card-title">
+                系统信息
+            </h3>
+            <div class="dux-avg-layout">
+                <ul class="uk-list uk-list-divider">
+                    <li class="uk-flex">
+                        <div class="uk-width-small">系统名称</div>
+                        <div class="uk-flex-1">{$sysInfo.title}</div>
+                    </li>
+                    <li class="uk-flex">
+                        <div class="uk-width-small">支持团队</div>
+                        <div class="uk-flex-1">{$sysInfo.team}</div>
+                    </li>
+                    <li class="uk-flex">
+                        <div class="uk-width-small">团队主页</div>
+                        <div class="uk-flex-1">
+                            <a href="{$sysInfo.home}" target="_blank">{$sysInfo.home}</a>
+                        </div>
+                    </li>
+                    <li class="uk-flex">
+                        <div class="uk-width-small">技术支持</div>
+                        <div class="uk-flex-1">
+                            <a href="//www.duxphp.com" target="_blank"><span class="uk-label uk-label-warning">DuxPHP</span></a>
+                            <a href="//github.com/duxphp/DuxCMS3" target="_blank"><span class="uk-label">github</span></a>
+                            <a href="//shang.qq.com/wpa/qunwpa?idkey=658c2efa6fefcb45c44ddb55e62929e9eff8c2324a6a4c28345b9a1728b22fd7" target="_blank"><span class="uk-label uk-label-success">qq群</span></a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="uk-width-1-2@m">
+        <div class="uk-card uk-card-default uk-card-body uk-card-small">
+            <h3 class="uk-card-title">
+                授权信息
+            </h3>
+            <div class="dux-avg-layout">
+                <ul class="uk-list uk-list-divider">
+                    <li class="uk-flex">
+                        <div class="uk-width-small">系统版本</div>
+                        <div class="uk-flex-1">v3.5.0</div>
+                    </li>
+                    <li class="uk-flex">
+                        <div class="uk-width-small">授权域名</div>
+                        <div class="uk-flex-1 uk-text-danger">暂未获得授权 <a href="http://www.duxphp.com" target="_blank">[立即申请]</a></div>
+                    </li>
+                    <li class="uk-flex">
+                        <div class="uk-width-small">授权公司</div>
+                        <div class="uk-flex-1">无</div>
+                    </li>
+                    <!-- <li class="uk-flex">
+                        <div class="uk-width-small">授权域名</div>
+                        <div class="uk-flex-1 uk-text-danger">www.duxphp.com</div>
+                    </li>
+                    <li class="uk-flex">
+                        <div class="uk-width-small">授权公司</div>
+                        <div class="uk-flex-1">湖南聚匠有限公司</div>
+                    </li> -->
+                    <li class="uk-flex">
+                        <div class="uk-width-small">系统更新</div>
+                        <div class="uk-flex-1">
+                            <!-- 发现新版本 <a href="">[立即更新]</a> <a href="">[补丁日志]</a> -->
+                            系统已是最新版本
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

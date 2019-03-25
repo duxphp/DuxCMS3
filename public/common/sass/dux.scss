@@ -1,0 +1,11 @@
+$global-font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSans,Arimo,"Droid Sans","wenquanyi micro hei","Hiragino Sans GB","Hiragino Sans GB W3",FontAwesome,sans-serif;
+
+@import "../uikit/variables-theme.scss";
+
+
+@import "../uikit/mixins-theme.scss";
+@import "common/uikit-fix.scss";
+@mixin hook-card() { color: #000; }
+@import "../uikit/uikit-theme.scss";
+@import "common/component.scss";
+@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css";

@@ -1,0 +1,51 @@
+<div class="uk-card uk-card-small uk-card-default dux-panel">
+    <div class="uk-card-header">站点设置</div>
+    <div class="uk-card-body">
+        <form class="dux-form uk-form  uk-form-horizontal  " method="post" action="{url()}" data-dux="form-bind">
+            <fieldset>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">站点开关</label>
+                    <div class="uk-form-controls uk-form-controls-text">
+                        <div class="uk-grid">
+                            <label>
+                                <!--if{$info['site_status']}-->
+                                <input name="site_status" value="1" checked="checked" type="radio"  class="uk-radio" >
+                                <!--{else}-->
+                                <input name="site_status" value="1" type="radio"  class="uk-radio" >
+                                <!--{/if}-->
+                                开启
+                            </label>
+
+                            <label>
+                                <!--if{!$info['site_status']}-->
+                                <input name="site_status" checked="checked" value="0" type="radio"  class="uk-radio" >
+                                <!--{else}-->
+                                <input name="site_status" value="0" type="radio"  class="uk-radio" >
+                                <!--{/if}-->
+                                关闭
+                            </label></div>
+                    </div>
+                </div>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">关闭说明</label>
+                    <div class="uk-form-controls">
+                        <textarea class="uk-textarea" name="site_error" maxlength="200">{$info.site_error}</textarea>
+                        <div class="uk-form-help">站点关闭说明</div>
+                    </div>
+                </div>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">WAP域名</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="text" name="site_wap" value="{$info.site_wap}">
+                        <div class="uk-form-help">完整wap端绑定域名，包含http或https</div>
+                    </div>
+                </div>
+                <div class="uk-form-group">
+                    <div class="uk-form-controls">
+                        <button class="uk-button uk-button-primary" type="submit">保存</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

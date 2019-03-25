@@ -1,0 +1,120 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>{$sysInfo.title}</title>
+    {load_js('jquery')}
+    <script>if (typeof module === 'object') {window.jQuery = window.$ = module.exports;};</script>
+    {load_ui($sysPublic, false)}
+    <link rel="stylesheet" href="{$sysPublic}/system/css/style.css">
+    <script type="text/javascript" src="{$sysPublic}/system/js/lib.js"></script>
+</head>
+
+<body>
+<aside class="dux-layout-aside">
+    <div class="aside-main">
+        <div class="main-top">
+            <a href="{url('system/index/index')}" class="team-logo">{$sysInfo.name}
+                <div><small>管理系统</small></div>
+            </a>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <!--loop{$sysNav as $k=> $vo}-->
+                <li>
+                    <a class="{$vo.cur ? 'active' : ''}" href="{$vo.url}"><i class="fa fa-{$vo.icon}"></i>
+                        {$vo.name}</a>
+                </li>
+                <!--{/loop}-->
+            </ul>
+        </nav>
+
+    </div>
+    <!--if{$sysAside.menu}-->
+    <div class="aside-sub">
+        <div class="nav-layout">
+            <div class="sub-top">
+                {$sysAside.name}中心
+            </div>
+            <nav class="sub-nav">
+                <!--loop{$sysAside.menu as $vo}-->
+                <div class="nav-name">{$vo.name}</div>
+                <ul>
+                    <!--loop{$vo.menu as $v}-->
+                    <li>
+                        <a class="{$v.cur ? 'active' : ''}" href="{$v.url}">{$v.name}</a>
+                    </li>
+                    <!--{/loop}-->
+                </ul>
+                <!--{/loop}-->
+            </nav>
+        </div>
+    </div>
+    <!--{/if}-->
+</aside>
+
+<div class="dux-layout-top uk-flex {$sysAside.menu ? '' : 'dux-empty-sub'}">
+
+    <div class="uk-flex-1">
+        <!--if{$hookMenu || $hookHtml}-->
+        <ul class="top-menu uk-clearfix uk-tab" id="tab-menu">
+            <!--if{$hookMenu}-->
+            <!--loop{$hookMenu as $vo}-->
+            <li class="{$vo.cur ? 'uk-active' : ''}">
+                <a href="{$vo.url}">{$vo.name}</a>
+            </li>
+            <!--{/loop}-->
+            <!--{/if}-->
+            <!--if{$hookHtml}-->
+            <!--loop{$hookHtml as $vo}-->
+            <li class="{$vo.cur ? 'uk-active' : ''}">
+                <a href="{$vo.url}">{$vo.name}</a>
+            </li>
+            <!--{/loop}-->
+            <!--{/if}-->
+        </ul>
+        <!--{else}-->
+        <div class="top-name">
+            {$infoModule.info.name}
+            <small>
+                {$infoModule.info.description}
+            </small>
+        </div>
+        <!--{/if}-->
+    </div>
+    <div class="top-action">
+        <a href="{url('system/index/index')}"><i class="fa fa-home"></i></a>
+        <a href="javascript:;" data-logout><i class="fa fa-power-off"></i></a>
+    </div>
+</div>
+
+<main class="dux-layout-main {$sysAside.menu ? '' : 'dux-empty-sub'}">
+    {$layout}
+    <div class="uk-text-center uk-padding">©CopyRight 2013~{date('Y')} {$sysInfo.name}, All Rights
+        Reserved. <?php echo \dux\Dux::runTime(); ?>s
+    </div>
+</main>
+
+</body>
+<script>
+    Do('base', function () {
+        base.frame();
+        $('[data-logout]').on('click', function () {
+            UIkit.modal.confirm('确认退出本系统？', {
+                labels: {
+                    ok: '确认',
+                    cancel: '取消'
+                }
+            }).then(function () {
+                window.location.href = '{url("system/Login/logout")}'
+            }, function () {
+            });
+        });
+    });
+</script>
+</html>

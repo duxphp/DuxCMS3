@@ -1,0 +1,97 @@
+<style>
+    .uk-table .checkbox {
+        display: inline-block;
+        width: 150px;
+        white-space: nowrap;
+    }
+    .uk-table {
+        border: 1px solid #ddd;
+    }
+    .control-group {
+    }
+</style>
+
+<div class="uk-margin-top">
+    <div class="uk-card uk-card-default uk-card-small dux-panel">
+        <div class="uk-card-header">{$assignName}角色</div>
+        <div class="uk-card-body">
+            <form class="dux-form uk-form  uk-form-horizontal  " data-dux="form-bind" method="post">
+                <fieldset class="uk-fieldset">
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">角色名</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="name" value="{$info.name}" placeholder="请输入角色名" minlength="1" required>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">角色描述</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="description" value="{$info.description}" placeholder="角色描述信息" minlength="3" required>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">角色权限</label>
+                        <div class="uk-form-controls">
+                            <!--loop{$systemPurvew as $key => $app}-->
+                            <table class="uk-table    uk-table-hover uk-table-middle dux-table">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2"><label><input class="uk-checkbox" type="checkbox"> {$app.name}</label></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="control-group">
+                                <!--loop{$app['auth'] as $listMode => $list}-->
+                                <tr>
+                                    <td width="120">
+                                        <div class="checkbox"><label><input class="row" type="checkbox">
+                                            {$list.name}</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <!--loop{$list['auth'] as $action => $vo}-->
+                                        <div class="checkbox"><label>
+                                            <!--if{ in_array($key.'.'.$listMode.'.'.$action,(array)$systemPurvewArray) }-->
+                                            <input class="uk-checkbox" name="purview[]" value="{$key}.{$listMode}.{$action}" type="checkbox" checked="checked">
+                                            <!--{else}-->
+                                            <input class="uk-checkbox" name="purview[]" value="{$key}.{$listMode}.{$action}" type="checkbox">
+                                            <!--{/if}-->
+                                            {$vo}</label></div>
+                                        <!--{/loop}-->
+                                    </td>
+                                </tr>
+                                <!--{/loop}-->
+                                </tbody>
+                            </table>
+                            <!--{/loop}-->
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <div class="uk-form-controls">
+                            <input type="hidden" name="role_id" value="{$info.role_id}">
+                            <button class="uk-button uk-button-primary" type="submit" disabled>保存</button>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $('table').find('thead input[type=checkbox]').change(function () {
+            if ($(this).prop('checked')) {
+                $(this).parents('table').find("[type='checkbox']").prop("checked", true);
+            } else {
+                $(this).parents('table').find("[type='checkbox']").prop("checked", false);
+            }
+        });
+        $('table').find('.row').change(function () {
+            if ($(this).prop('checked')) {
+                $(this).parents('tr').find("[type='checkbox']").prop("checked", true);
+            } else {
+                $(this).parents('tr').find("[type='checkbox']").prop("checked", false);
+            }
+        });
+    });
+</script>

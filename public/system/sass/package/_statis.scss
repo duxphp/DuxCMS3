@@ -1,0 +1,143 @@
+.dux-avg-layout {
+  position: relative;
+  overflow: hidden;
+  margin-right: -1px;
+  margin-bottom: -1px;
+}
+
+.dux-avg-box {
+  li {}
+}
+
+.dux-general-item {
+  display: flex;
+  padding: 20px;
+
+  .icon {
+    padding-right: 30px;
+    padding-top: 20px;
+
+    i {
+      color: #fff;
+      border-radius: 50%;
+      text-align: center;
+      display: block;
+      line-height: 45px;
+      width: 45px;
+      height: 45px;
+
+      &:before {
+        text-align: center;
+        font-size: 2rem;
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+
+  .info {
+    flex: 1;
+
+    .info-title {
+      font-size: 3rem;
+      color: #333;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: #999;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+
+.dux-total-item {
+  padding: 20px;
+
+  .title {
+    margin-bottom: 10px;
+  }
+
+  .body {
+    color: #999;
+  }
+}
+
+.dux-quick-item {
+  display: block;
+  padding: 20px;
+
+  i {
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    margin-right: 10px;
+
+    &:before {
+      text-align: center;
+      font-size: 2rem;
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+.dux-stats-item {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #333;
+
+  p {
+    color: #999;
+    font-size: 1.4rem;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.dux-stats-card {
+  padding: 30px;
+  background: $global-primary-background;
+  color: #fff;
+  position: relative;
+  border-radius: 3px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  margin-top: 20px;
+
+  .card-body {
+    display: flex;
+    align-items: flex-start;
+    .icon {
+      i {
+        font-size: 45px;
+      }
+    }
+
+    .content {
+      flex: 1;
+      text-align: right;
+      padding-right: 30px;
+      p {
+        padding: 0;
+        margin: 0;
+      }
+
+      .title {
+        font-size: 20px;
+      }
+    }
+
+    .topic {
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-size: 130px;
+      opacity: 0.2;
+    }
+  }
+}

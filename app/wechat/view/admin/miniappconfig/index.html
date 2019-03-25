@@ -1,0 +1,41 @@
+<div data-dux="table-bind" class="dux-table-layout">
+    <div class="dux-page-header uk-clearfix">
+        <div class="page-title">
+        </div>
+        <div class="page-action">
+            <a class="uk-button uk-button-primary" href="{url('add')}">添加</a>
+        </div>
+    </div>
+    <div class="dux-page-table">
+        <table class="uk-table  uk-table-hover uk-table-middle dux-table" data-table>
+            <thead>
+            <tr>
+                <th>小程序</th>
+                <th>应用</th>
+                <th>APPID</th>
+                <th class="uk-text-center" width="120">管理</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--loop{$list as $vo}-->
+            <tr>
+                <td>{$vo.name}</td>
+                <td>
+                    {$vo.label}
+                </td>
+                <td>
+                    {$vo.appid}
+                </td>
+                <td class="uk-text-center">
+                    <a class="uk-button uk-button-primary uk-button-small" href="{url('edit', ['id'=>$vo[$pri]])}" title="编辑"><i class="fa fa-pencil"></i></a>
+                    <a class="uk-button uk-button-danger uk-button-small" href="javascript:;" data-url="{url('del')}" data-id="{$vo[$pri]}" title="删除" data-del><i class=" fa fa-trash"></i></a>
+                </td>
+            </tr>
+            <!--{/loop}-->
+            </tbody>
+        </table>
+    </div>
+    <div class="dux-page-foot uk-clearfix">
+        {$page}
+    </div>
+</div>

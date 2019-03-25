@@ -1,0 +1,230 @@
+.dux-main {
+  margin-left: $aside-width;
+  padding-top: $header-height + $nav-height + 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.dux-body {
+  padding: 0;
+  margin-top: 2rem;
+}
+
+.dux-profile-widget {
+  text-align: center;
+}
+
+.dux-profile-widget .profile-bg {
+
+  height: 80px;
+}
+
+.dux-profile-widget .profile-avatar {
+  margin-top: -42px;
+  height: 90px;
+  width: 90px;
+  border-radius: 50%;
+  background-color: #fff;
+  border: 5px solid #fff;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+.dux-profile-widget .profile-title {
+  color: #505458;
+  margin: 10px 0;
+  font-size: 2rem;
+
+}
+
+.dux-profile-widget .profile-text {
+  padding-bottom: 20px;
+  color: #98a6ad;
+  margin: 0;
+
+}
+
+.dux-list-media {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  li {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+  .media-img {
+    float: left;
+    width: 80px;
+    text-align: center;
+    padding-top: 3px;
+    i {
+      color: #fff;
+      text-align: center;
+      width: 40px;
+      height: 40px;
+      font-size: 24px;
+      line-height: 40px;
+      border-radius: 50%;
+    }
+
+  }
+  .media-body {
+    padding-left: 80px;
+    h3 {
+      font-weight: normal;
+      font-size: 1.4rem;
+      margin: 0;
+    }
+    p {
+      font-size: 1.2rem;
+      margin: 0;
+      color: #999;
+    }
+
+  }
+}
+
+.dux-page-header {
+  display: flex;
+  margin-bottom: 15px;
+  .page-title {
+    flex: 1;
+    .dux-form {
+      margin-top: 0;
+    }
+    .uk-form-group {
+      margin-bottom: 0;
+    }
+    h3 {
+      font-weight: normal;
+      display: inline-block;
+      padding: 0;
+      margin: 0;
+      font-size: 2rem;
+      color: $global-primary-background;
+      line-height: 30px;
+    }
+  }
+  .page-action {
+    float: right;
+  }
+}
+
+.dux-page-table {
+  .dux-table {
+    background: #fff;
+    margin-bottom: 20px;
+  }
+}
+
+.dux-page-foot, .dux-page-header {
+  padding: 0;
+}
+
+.dux-page-foot {
+  margin-top: 2rem;
+  clear: both;
+  .foot-batch {
+    float: left;
+  }
+
+  .foot-pages {
+    float: right;
+    display: flex;
+    align-items: center;
+    font-size:1.4rem;
+    form {
+      display: flex;
+      align-items: center;
+    }
+    a, span, input {
+      color: #666;
+      display: block;
+      padding: .5em 1em;
+      text-decoration: none;
+      line-height: 1.2;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 0;
+      margin-bottom: 5px;
+      margin-right: 5px;
+    }
+    input {
+      width: 50px;
+      line-height: 18px;
+    }
+    .current {
+      z-index: 2;
+      color: #fff;
+      background-color: $global-primary-background;
+      border-color: $global-primary-background;
+      cursor: default;
+    }
+  }
+
+}
+
+.dux-panel {
+  border: none;
+  margin-bottom: 2rem;
+  > .am-panel-hd {
+    background: #e7e8ea;
+    border: none;
+    padding: 10px 10px;
+    line-height: 1.6;
+  }
+}
+
+.dux-form {
+  padding-top: 10px;
+  &.am-form-inline > .am-form-group, > .am-form-group:last-child {
+    margin-bottom: 0;
+  }
+  label {
+    font-weight: normal;
+  }
+  .am-form-group {
+    margin-bottom: 2rem;
+  }
+}
+
+.dux-box {
+  display: flex;
+  flex-wrap: nowrap;
+  @media screen and (max-width: $min-width) {
+    display: block;
+  }
+  .box-side {
+    width: 250px;
+    @media screen and (max-width: $min-width) {
+      display: block;
+      width: auto;
+    }
+  }
+  .box-body {
+    flex:1;
+    padding-left: 20px;
+    @media screen and (max-width: $min-width) {
+      flex: auto;
+      display: block;
+      width: auto;
+      padding: 0;
+    }
+  }
+}
+
+.dux-code {
+  background: color('amber', 'lighten-4');
+  border: 1px dashed color('amber', 'lighten-1');
+  padding: 20px;
+  display: block;
+}
+.dux-tips {
+
+}

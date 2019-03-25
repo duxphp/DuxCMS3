@@ -1,0 +1,110 @@
+<div class="dux-page-header uk-clearfix">
+    <div class="page-title">
+        <a class="uk-button uk-button-primary" href="{url('index')}"> 推送记录</a>
+    </div>
+    <div class="page-action">
+        <a class="uk-button uk-button-danger" href="javascript:location.reload();"><i class="fa fa-refresh"></i></a>
+    </div>
+</div>
+<div class="uk-margin-top">
+    <div class="uk-card uk-card-small uk-card-default dux-panel">
+        <div class="uk-card-header">推送详情</div>
+        <div class="uk-card-body">
+            <form class="dux-form uk-form  uk-form-horizontal  " data-dux="form-bind" method="post">
+                <fieldset>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">推送类型: </label>
+                        <div class="uk-form-controls">
+                            <div class="-content">{$typeList[$info['type']]['name']}</div>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">接收账户: </label>
+                        <div class="uk-form-controls">
+                            <div class="-content">
+                                {$info.receive}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">推送标题: </label>
+                        <div class="uk-form-controls">
+                            <div class="-content">
+                                {$info.title}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">推送内容: </label>
+                        <div class="uk-form-controls">
+                            <div class="-content">
+                                <textarea class="uk-textarea" disabled rows="10">{$info.content}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">附加参数: </label>
+                        <div class="uk-form-controls">
+                            <div class="-content">
+                                <!--if{empty($paramList)}-->
+                                无
+                                <!--{/if}-->
+                                <!--loop{(array)$paramList as $key => $val}-->
+                                {$key} : {$val} <br>
+                                <!--{/if}-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">推送时间: </label>
+                        <div class="uk-form-controls">
+                            <div class="-content">
+                                {date('Y-m-d H:i:s', $info.start_time)}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">结束时间: </label>
+                        <div class="uk-form-controls">
+                            <div class="-content">
+                                <!--if{$info.stop_time}-->
+                                {date('Y-m-d H:i:s', $info.stop_time)}
+                                <!--{else}-->
+                                未推送
+                                <!--{/if}-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">推送状态: </label>
+                        <div class="uk-form-controls">
+                            <div class="-content">
+                                <!--if{$info.status == 1}-->
+                                <span class="uk-text-success">已发送</span>
+                                <!--{/if}-->
+                                <!--if{$info.status == 2}-->
+                                <span class="uk-text-danger">发送失败</span>
+                                <!--{/if}-->
+                                <!--if{!$info.status}-->
+                                <span class="uk-text-warning">未发送</span>
+                                <!--{/if}-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">推送备注: </label>
+                        <div class="uk-form-controls">
+                            <div class="-content">
+                                <!--if{$info.remark}-->
+                                {$info.remark}
+                                <!--{else}-->
+                                无
+                                <!--{/if}-->
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

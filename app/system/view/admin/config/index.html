@@ -1,0 +1,69 @@
+<div class="uk-card uk-card-small uk-card-default dux-panel">
+    <div class="uk-card-body">
+        <form class="dux-form uk-form  uk-form-horizontal  " method="post" action="{url()}"
+              data-dux="form-bind">
+            <fieldset>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">系统名称</label>
+
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="text" name="name" value="{$info.name}"
+                               required>
+                        <div class="uk-form-help">左上角LOGO位置与登录界面</div>
+                    </div>
+                </div>
+
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">标题名称</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="text" name="title" value="{$info.title}"
+                               required>
+                        <div class="uk-form-help">系统头部标题后显示的信息</div>
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">支持团队</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="text" name="team" value="{$info.team}"
+                               required>
+                        <div class="uk-form-help">技术支持团队或公司</div>
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">支持网站</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="text" name="home" value="{$info.home}"
+                               required>
+                        <div class="uk-form-help">技术支持网站地址</div>
+                    </div>
+                </div>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">支持电话</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="text" name="tel" value="{$info.tel}"
+                               required>
+                        <div class="uk-form-help">技术支持联系电话</div>
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">服务QQ</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="text" name="qq" value="{$info.qq}"
+                               required>
+                        <div class="uk-form-help">客户服务联系QQ</div>
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <div class="uk-form-controls">
+                        <button class="uk-button uk-button-primary" type="submit">保存</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

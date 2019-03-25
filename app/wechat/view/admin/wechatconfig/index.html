@@ -1,0 +1,52 @@
+<div>
+    <div class="dux-alert-list">
+        <p>设置公众号接口URL可使用消息，自定义菜单功能</p>
+        http://<?php  echo $_SERVER['HTTP_HOST']; ?>{url('api/wechat/Wechat/index')}
+    </div>
+    <br>
+    <div class="uk-card uk-card-default uk-card-small dux-panel">
+        <div class="uk-card-body">
+            <form class="dux-form uk-form   uk-form-horizontal " method="post" action="{url()}" data-dux="form-bind">
+                <fieldset>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">AppID</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="appid" placeholder="公众号应用ID" value="{$info.appid}" required>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">AppSecret</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="secret" placeholder="公众号密钥" value="{$info.secret}">
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">Token</label>
+                        <div class="uk-form-controls">
+                            <div class="uk-input-group">
+                                <input class="uk-input"  type="text" id="token" name="token" value="{$info.token}" placeholder="安全验证码">
+                                <span class="uk-input-group-btn">
+                                            <button class="uk-button uk-button-default" type="button" data-target="#token" data-dux="system-random">随机生成</button>
+                                        </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">EncodingAESKey</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="aeskey" placeholder="安全模式下填写" value="{$info.aeskey}">
+                        </div>
+                    </div>
+                    <div class="uk-form-group uk-margin-remove-bottom">
+                        <div class="uk-form-controls">
+                            <button class="uk-button uk-button-primary" type="submit">保存</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+
+
+</div>

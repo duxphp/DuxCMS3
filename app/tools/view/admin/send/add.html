@@ -1,0 +1,119 @@
+<div class="dux-page-header uk-clearfix">
+    <div class="page-title">
+        <a class="uk-button uk-button-primary" href="{url('index')}"> 发送列表</a>
+    </div>
+    <div class="page-action">
+        <a class="uk-button uk-button-danger" href="javascript:location.reload();"><i class="fa fa-refresh"></i></a>
+    </div>
+</div>
+<div class="uk-margin-top">
+    <div class="uk-card uk-card-small uk-card-default dux-panel">
+        <div class="uk-card-header">{$assignName}用户</div>
+        <div class="uk-card-body">
+            <form class="dux-form uk-form  uk-form-horizontal  " data-dux="form-bind" method="post">
+                <fieldset>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">推送类型</label>
+                        <div class="uk-form-controls">
+                            <select class="uk-select" name="class" data-dux="form-select">
+                                <!--loop{(array)$classList as $key => $vo}-->
+                                <option value="{$key}">
+                                    {$vo.name}</option>
+                                <!--{/loop}-->
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">接收账户</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="receive" placeholder="接收方用户、账户等" required>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">选择模板</label>
+                        <div class="uk-form-controls">
+                            <select class="uk-select" id="tpl" data-dux="form-select">
+                                <option value="0">==您可以选择发送模板==</option>
+                                <!--loop{(array)$tplList as $key => $vo}-->
+                                <option value="{$vo.tpl_id}">{$vo.title}</option>
+                                <!--{/loop}-->
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">发送标题</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="title" id="title" placeholder="接收方用户、账户等" required>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">发送内容(HTML)</label>
+                        <div class="uk-form-controls">
+                            <textarea class="uk-textarea" name="content" id="content" placeholder="推送内容" required></textarea>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">附加参数</label>
+                        <div class="uk-form-controls">
+                            <button class="uk-button uk-button-primary" type="button" id="param-add" disabled>增加参数</button>
+                        </div>
+                    </div>
+
+
+                    <div id="param" style="padding-bottom: 20px"></div>
+
+                    <div class="uk-form-group">
+                        <div class="uk-form-controls">
+                            <button class="uk-button uk-button-primary" type="submit" disabled>增加</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="param-html">
+    <div class="uk-form-group">
+        <div class="uk-form-controls">
+            <div class="uk-grid">
+            <div>
+            <input class="uk-input" type="text" name="param_key[]" placeholder="参数名" required>
+            </div>
+            <div>
+            <input class="uk-input" type="text" name="param_val[]" placeholder="参数值" required>
+                </div>
+            <div>
+            <button class="uk-button uk-button-danger js-del" type=button>删除</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script>
+    Do.ready(function () {
+        $('#param-add').click(function () {
+            var html = $('#param-html').html();
+            $('#param').append(html);
+        });
+        $('#param').on('click','.js-del', function () {
+            $(this).parents('.uk-form-group').remove();
+        });
+        $('#tpl').change(function () {
+
+            app.ajax({
+                url : "{url('tools/SendTpl/getTpl')}",
+                type : 'post',
+                data : {id:$(this).val()},
+                success: function(info) {
+                    $('#title').val(info.title);
+                    $('#content').val(info.content);
+                }
+            });
+        });
+    });
+</script>

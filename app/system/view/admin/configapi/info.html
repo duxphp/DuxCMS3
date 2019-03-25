@@ -1,0 +1,101 @@
+<div class="dux-page-header uk-clearfix">
+    <div class="page-title">
+        <a class="uk-button uk-button-primary" href="{url('system/ConfigApi/index')}"> 接口列表</a>
+    </div>
+    <div class="page-action">
+        <a class="uk-button uk-button-danger" href="javascript:location.reload();"><i class="fa fa-refresh"></i></a>
+    </div>
+</div>
+
+<div class="uk-margin-top">
+    <div class="uk-card uk-card-default uk-card-small dux-panel">
+        <div class="uk-card-header">基本信息</div>
+        <div class="uk-card-body">
+            <form class="dux-form uk-form  uk-form-horizontal  " data-dux="form-bind" method="post">
+                <fieldset class="uk-fieldset">
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">接口描述</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input"  type="text" name="name" value="{$info.name}" placeholder="请输入接口描述" required>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">接口密钥</label>
+                        <div class="uk-form-controls">
+                            <div class="uk-input-group">
+                                <input class="uk-input"  type="text" id="key" name="key" value="{$info.key}" placeholder="接口通讯密钥"  required>
+                                <span class="uk-input-group-btn">
+                                            <button class="uk-button uk-button-default" type="button" data-target="#key" data-dux="system-random">随机生成</button>
+                                        </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">接口权限</label>
+                        <div class="uk-form-controls">
+                            <!--loop{$apiList as $app => $api}-->
+                            <table class="uk-table    uk-table-hover uk-table-middle dux-table">
+                                <thead>
+                                <tr>
+                                    <th colspan="2"><label><input class="uk-checkbox" type="checkbox"> {$app}</label></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <!--loop{$api as $method => $action}-->
+                                <tr>
+                                    <td width="180">
+                                        <div class="checkbox"><label><input class="uk-checkbox row" type="checkbox">
+                                            {$method}</label>
+                                        </div>
+                                    </td>
+                                    <td class="uk-grid">
+                                        <!--loop{$action as $vo}-->
+                                        <label style="min-width: 120px">
+                                            <!--if{ in_array($app.'.'.$method.'.'.$vo,(array)$info.rule) }-->
+                                            <input  class="uk-checkbox"  name="rule[]" value="{$app}.{$method}.{$vo}" type="checkbox" checked="checked">
+                                            <!--{else}-->
+                                            <input  class="uk-checkbox"  name="rule[]" value="{$app}.{$method}.{$vo}" type="checkbox">
+                                            <!--{/if}-->
+                                            {$vo}</label>
+                                        <!--{/loop}-->
+                                    </td>
+                                </tr>
+                                <!--{/loop}-->
+                                </tbody>
+                            </table>
+                            <!--{/loop}-->
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <div class="uk-form-controls">
+                            <input type="hidden" name="label" value="{$label}">
+                            <button class="uk-button uk-button-primary" type="submit">保存</button>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('table').find('thead input[type=checkbox]').change(function () {
+            if ($(this).prop('checked')) {
+                $(this).parents('table').find("[type='checkbox']").prop("checked", true);
+            } else {
+                $(this).parents('table').find("[type='checkbox']").prop("checked", false);
+            }
+        });
+        $('table').find('.row').change(function () {
+            if ($(this).prop('checked')) {
+                $(this).parents('tr').find("[type='checkbox']").prop("checked", true);
+            } else {
+                $(this).parents('tr').find("[type='checkbox']").prop("checked", false);
+            }
+        });
+    });
+</script>

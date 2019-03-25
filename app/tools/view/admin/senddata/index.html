@@ -1,0 +1,186 @@
+<div>
+    <div class="dux-box">
+        <div class="box-side">
+            <div class="uk-card uk-card-default uk-card-small dux-panel">
+                <ul class="dux-menu">
+                    <!--loop{$dataType as $key => $vo}-->
+                    <li class="{$type == $vo.value ? 'active' : ''}"><a href="{url('index', ['type' => $vo.value])}">{$vo.name}</a></li>
+                    <!--{/loop}-->
+                </ul>
+            </div>
+        </div>
+        <div class="box-body">
+            <form class="dux-form uk-form   uk-form-horizontal " method="post" action="{url()}" data-dux="form-bind">
+                <input type="hidden" name="type" value="{$type}">
+                <!--loop{$dataList as $label => $info}-->
+                <div class="uk-card uk-card-default uk-card-small dux-panel">
+                    <div class="uk-card-header">{$info.name}</div>
+                    <div class="uk-card-body">
+                        <fieldset>
+                            <div class="uk-form-group">
+                                <label class=" uk-form-label">通知开关</label>
+                                <div class="uk-form-controls uk-form-controls-text"><div class="uk-grid">
+                                    <label>
+                                        <input class="uk-radio" type="radio" name="{$label}_status" {$data[$label]['status'] ? 'checked' : ''}   value="1">
+                                        开启
+                                    </label>
+                                    <label>
+                                        <input class="uk-radio" type="radio" name="{$label}_status" {$data[$label]['status'] == 0 ? 'checked' : ''} value="0">
+                                        关闭
+                                    </label>
+                                </div>
+                            </div>
+                            </div><div class="uk-form-group">
+                                <label class=" uk-form-label">通知方式(多选)</label>
+                                <div class="uk-form-controls">
+                                    <select name="{$label}_class[]" class="uk-select" data-dux="form-select" multiple>
+                                        <!--loop{$classList as $key => $vo}-->
+                                        <option value="{$key}"
+                                        <!--if{in_array($key, (array)$data[$label]['class']) }--> selected <!--{/if}-->
+                                        >{$vo.name}</option>
+                                        <!--{/loop}-->
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="uk-form-group">
+                                <label class=" uk-form-label"></label>
+                                <div class="uk-form-controls">
+                                    <input class="uk-input" type="text" name="{$label}_title" value="{$data[$label]['title']}">
+                                    <div class="uk-form-help">通知标题，短信等无标题</div>
+                                </div>
+                            </div>
+
+                            <div class="uk-form-group">
+                                <label class=" uk-form-label"></label>
+                                <div class="uk-form-controls">
+                                    <select class="uk-select" name="{$label}_url">
+                                        <optgroup label="通用">
+                                            <option {$data[$label]['url'] == 'empty' ? 'selected' : ''} value="empty">无</option>
+                                            <option {$data[$label]['url'] == 'mobile' ? 'selected' : ''} value="mobile">网页端</option>
+                                        </optgroup>
+                                        <optgroup label="微信小程序">
+                                            <!--loop{$appList as $vo}-->
+                                            <option {$data[$label]['url'] == 'mini_'.$vo['id'] ? 'selected' : ''} value="mini_{$vo.id}">{$vo.name}</option>
+                                            <!--{/loop}-->
+                                        </optgroup>
+                                    </select>
+                                    <div class="uk-form-help">通知链接(微信通知)</div>
+                                </div>
+                            </div>
+
+                            <!--loop{$classList as $key => $vo}-->
+                            <div class="uk-form-group">
+                                <label class=" uk-form-label">{$vo.name}</label>
+                                <div class="uk-form-controls">
+                                    <!--if{$vo.var}-->
+                                    <?php $data[$label]['data'][$key] = (array)$data[$label]['data'][$key]; ?>
+                                    <input class="uk-input" type="text" name="{$label}_data[{$key}][id]" value="{$data[$label]['data'][$key]['id']}" placeholder="模板ID" >
+                                    <div class="uk-form-help"> {$info.remark}</div>
+                                    <button style="margin-top: 1rem;" class="uk-button uk-button-success js-add" type="button" data-key="{$label}_data[{$key}][data]">增加自定义</button>
+                                    <table class="uk-table    uk-table-hover uk-table-small dux-table" style="border: 1px solid #ddd">
+                                        <thead>
+                                        <tr>
+                                            <th>变量内容</th>
+                                            <th>变量名</th>
+                                            <th width="120">操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        <!--if{!empty($data[$label]['data'][$key]['data'])}-->
+
+                                        <!--loop{$data[$label]['data'][$key]['data'] as $k => $v}-->
+                                        <tr>
+                                            <td>
+                                                <input class="uk-input" type="text" name="{$label}_data[{$key}][data][key][]" value="{$v.key}" ></td>
+                                            <td>
+                                                <input class="uk-input" type="text" name="{$label}_data[{$key}][data][val][]" value="{$v.val}">
+                                            </td>
+                                            <td>
+                                                <button class="uk-button uk-button-danger uk-button-sm js-del" type="button">删除</button>
+                                            </td>
+                                        </tr>
+                                        <!--{/loop}-->
+                                        <!--{else}-->
+                                        <!--loop{$info.var as $k => $v}-->
+                                            <tr>
+                                                <td>
+                                                    <input class="uk-input" type="text" name="{$label}_data[{$key}][data][key][]" value="{$v}" ></td>
+                                                <td>
+                                                    <input class="uk-input" type="text" name="{$label}_data[{$key}][data][val][]" value="">
+                                                </td>
+                                                <td>
+                                                    <button class="uk-button uk-button-danger js-del" type="button">删除</button>
+                                                </td>
+                                            </tr>
+                                        <!--{/loop}-->
+                                        <!--{/if}-->
+                                        </tbody>
+                                    </table>
+                                    <div class="uk-form-help">变量内容使用:
+                                        <!--loop{$info.var as $v}-->
+                                        [{$v}]
+                                        <!--{/loop}-->
+                                        时将会自动转换为对应内容，如没有预设变量将显示设置内容
+                                    </div>
+                                    <!--{else}-->
+                                    <!--if{$vo.editor}-->
+                                    <textarea data-dux="form-editor" name="{$label}_data[{$key}]">{html_out($data[$label]['data'][$key])}</textarea>
+                                    <!--{else}-->
+                                    <textarea class="uk-textarea" name="{$label}_data[{$key}]" rows="6">{$data[$label]['data'][$key]}</textarea>
+                                    <!--{/if}-->
+                                    <div class="uk-form-help">内容，模板变量:
+                                        <!--loop{$info.var as $v}-->
+                                        [{$v}]
+                                        <!--{/loop}-->
+                                    </div>
+                                    <!--{/if}-->
+                                </div>
+                            </div>
+                            <!--{/loop}-->
+                            <div class="uk-form-group">
+                                <div class="uk-form-controls">
+                                    <button class="uk-button uk-button-primary" type="submit">保存</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <!--{/loop}-->
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tpl-attr">
+    <tr>
+        <td>
+            <input class="uk-input" type="text" name="{{d.key}}[key][]" value=""></td>
+        <td>
+            <input class="uk-input" type="text" name="{{d.key}}[val][]" value="">
+        </td>
+        <td>
+            <button class="uk-button uk-button-danger js-del" type="button">删除</button>
+        </td>
+    </tr>
+</script>
+
+<script>
+    Do('base', 'tpl', function () {
+        function addAttr(obj){
+            var tpl = $('#tpl-attr').html();
+            laytpl(tpl).render({
+                key : $(obj).data('key')
+            }, function(html){
+                $(obj).next('table').find('tbody').append(html);
+            });
+        }
+        $('.js-add').on('click', function() {
+            addAttr(this);
+        });
+        $('form').on('click', '.js-del', function(){
+            $(this).parents('tr').remove();
+        });
+    });
+</script>

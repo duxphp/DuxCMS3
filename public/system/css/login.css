@@ -1,0 +1,96 @@
+body, html {
+}
+html {
+    font-size: 10px;
+}
+body {
+    font-size: 1.4rem;
+}
+
+.dux-copyright {
+    background-color: #fff;
+    background-image: url("../images/background.jpg");
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    align-items:center;
+    color: #fff;
+}
+.dux-copyright .copyright {
+    width: 100%;
+
+}
+.dux-copyright a{
+    color: #fff;
+}
+.dux-copyright h2 {
+    font-size: 4rem;
+    text-align: center;
+    display: block;
+    color: #fff;
+}
+
+.dux-copyright p {
+    font-size: 1.6rem;
+}
+
+.dux-login {
+    min-height: 100vh;
+    display: flex;
+    align-items:center;
+    background: #fff;
+
+}
+
+.dux-login .login-body {
+    width: 100%;
+
+}
+
+.dux-login .hide {
+    display: none;
+}
+
+.dux-login .login-head {
+
+}
+
+.dux-login .login-head h1 {
+    font-weight: bold;
+    font-size:4rem;
+    margin-bottom: 10px;
+}
+
+.dux-login .login-head p {
+    margin-top: 0;
+    color: #6c757d;
+    font-size: 1.4rem;
+}
+
+.dux-login .login-form {
+
+}
+
+.dux-login button {
+    font-size: 1.6rem;
+    padding: .875rem 2.25rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    box-shadow: 0 0.125rem 0.75rem rgba(4,65,134,.25);
+}
+
+.dux-login .uk-input,.dux-login .uk-input:-webkit-autofill {
+    border-color: #f4f6fa !important;
+    background-color: #f4f6fa !important;
+    padding: 1.8rem 1rem !important;
+    font-size: 1.6rem !important;
+    line-height: 1.5 !important;
+    border-radius: .3rem !important;
+
+}
+
+@media screen and (max-width:1200px){
+    .dux-copyright {
+        display: none;
+    }
+}

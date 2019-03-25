@@ -1,0 +1,38 @@
+body, html {
+  height: 100%;
+  background: #efefef;
+  color: #666;
+}
+
+html {
+  overflow-x:hidden;
+  font-size: 10px;
+}
+body {
+  font-size:1.4rem;
+}
+.uk-navbar-item {
+  font-size: 1.6rem;
+}
+
+.uk-grid {
+  padding-bottom: 2rem;
+}
+
+.dux-logo {
+  font-size: 1.8rem;
+  color: #fff !important;
+  svg {
+    width: 48px;
+  }
+}
+
+.dux-content {
+  margin-top: 1rem;
+  line-height: 2;
+  font-size: 1.4rem;
+  p {
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+}

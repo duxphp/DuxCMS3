@@ -1,0 +1,63 @@
+<div data-dux="table-bind" class="dux-table-layout">
+    <div class="dux-page-header uk-clearfix">
+        <div class="page-title">
+            <form class="dux-form uk-form  uk-form-inline" method="get" action="{url()}">
+                <div class="uk-form-group">
+                    <input type=text name="keyword" class="uk-input" value="{$pageMaps.keyword}" placeholder="搜索">
+                </div>
+                <div class="uk-form-group">
+                    <button type="submit" class="uk-button uk-button-primary"><i class="fa fa-search"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="dux-page-table">
+        <table class="uk-table uk-table-hover uk-table-middle dux-table" data-table>
+            <thead>
+            <tr>
+                <th>日志文件</th>
+                <th class="uk-text-center" width="120">管理</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--loop{$list as $vo}-->
+            <tr>
+                <td>
+                    {$vo.name}
+                </td>
+                <td class="uk-text-center">
+                    <a class="uk-button uk-button-primary uk-button-small" href="javascript:;" title="查看" data-view  data-url="{url('info', ['name'=>$vo.name])}"><i class=" fa fa-eye"></i></a>
+                    <a class="uk-button uk-button-danger uk-button-small" href="javascript:;" data-url="{url('del')}" data-id="{$vo[$pri]}" title="删除" data-del><i class=" fa fa-trash"></i></a>
+                </td>
+            </tr>
+            <!--{/loop}-->
+            </tbody>
+        </table>
+    </div>
+    <div class="dux-page-foot uk-clearfix">
+        {$page}
+    </div>
+</div>
+
+<div id="modal" class="uk-modal-container" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <h2 class="uk-modal-title">日志详情</h2>
+        <div data-modal-content></div>
+    </div>
+</div>
+
+<script>
+    Do('base', function () {
+        $('[data-view]').on('click', function () {
+            app.ajax({
+                url: $(this).data('url'),
+                loading: true,
+                success: function (html) {
+                    $('[data-modal-content]').html(html);
+                    UIkit.modal('#modal').show();
+                }
+            });
+        });
+    });
+</script>

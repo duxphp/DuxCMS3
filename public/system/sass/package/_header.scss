@@ -1,0 +1,72 @@
+.dux-system-nav {
+  position: fixed;
+  width: 100%;
+  border: none;
+  z-index: 100;
+  top: 0;
+  font-size:1.4rem;
+  .navbar {
+    position: relative;
+    height: $header-height;
+    padding: 0;
+    background: #333;
+    display: flex;
+    .brand{
+      font-size: 1.8rem;
+      background: $global-primary-background;
+      width: $aside-width;
+      text-align: center;
+      color: #fff;
+      height: $header-height;
+      line-height: $header-height;
+    }
+
+    .collapse {
+      flex: 1;
+      display: flex;
+      li {
+        margin: 0;
+        padding: 0;
+        a {
+          display: block;
+          line-height: $header-height;
+          color: #ccc;
+          padding: 0 15px;
+          text-decoration: none;
+          &:hover {
+            background-color: rgba(0,0,0,0.5);
+          }
+        }
+        &.active {
+          a {
+            background-color: rgba(0,0,0,0.5);
+          }
+        }
+
+      }
+      .menu {
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+
+
+      }
+      .tools {
+        display: flex;
+        flex-direction: row;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+
+      }
+    }
+
+  }
+
+
+
+}
+

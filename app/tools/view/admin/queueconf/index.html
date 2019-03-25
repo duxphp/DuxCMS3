@@ -1,0 +1,78 @@
+<div>
+    <div class="dux-alert-list">
+        <p>请设置服务器自动访问地址,间隔为1~5秒每次</p>
+        http://<?php  echo $_SERVER['HTTP_HOST']; ?>{url('api/tools/Queue/index')}
+    </div>
+    <br>
+    <div class="uk-card uk-card-small uk-card-default dux-panel">
+        <div class="uk-card-header">队列设置</div>
+        <div class="uk-card-body">
+            <form class="dux-form uk-form  uk-form-horizontal  " data-dux="form-bind" method="post">
+                <fieldset>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">超时锁时间</label>
+                        <div class="uk-form-controls">
+                            <input  class="uk-input"type="text" name="lock_time" value="{$info.lock_time}" required>
+                            <div class="uk-form-help">当队列执行时超过指定时间是停止本次处理，单位:秒</div>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">单次处理数量</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="every_num" value="{$info.every_num}" required>
+                            <div class="uk-form-help">单次访问每次处理请求数量</div>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">任务重试次数</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="retry_num" value="{$info.retry_num}" required>
+                            <div class="uk-form-help">单个任务返回失败重试次数</div>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">删除成功任务</label>
+                        <div class="uk-form-controls uk-form-controls-text">
+                            <div class="uk-grid">
+                                <label>
+                                    <input type="radio" class="uk-radio" name="del_status" {$info.del_status ? 'checked'
+                                    : ''} value="1">
+                                    开启
+                                </label>
+                                <label>
+                                    <input type="radio" class="uk-radio" name="del_status" {$info.del_status== 0 ?
+                                    'checked' : ''} value="0">
+                                    关闭
+                                </label>
+                            </div>
+                            <div class="uk-form-help">自动删除运行完成任务</div>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">队列开关</label>
+                        <div class="uk-form-controls uk-form-controls-text">
+                            <div class="uk-grid">
+                                <label>
+                                    <input type="radio" class="uk-radio" name="status" {$info.status ? 'checked' : ''}
+                                    value="1">
+                                    开启
+                                </label>
+                                <label>
+                                    <input type="radio" class="uk-radio" name="status" {$info.status== 0 ? 'checked' :
+                                    ''} value="0">
+                                    关闭
+                                </label>
+                            </div>
+                            <div class="uk-form-help">队列运行总开关</div>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <div class="uk-form-controls">
+                            <button class="uk-button uk-button-primary" type="submit" disabled>保存</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

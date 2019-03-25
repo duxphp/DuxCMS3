@@ -1,0 +1,77 @@
+<div class="dux-page-header uk-clearfix uk-margin-remove-bottom">
+    <div class="page-title ">
+        <form class="dux-form uk-form  uk-form-inline" method="get" action="{url()}">
+            <div class="uk-form-group">
+                <input type="date" name="start_time" class="uk-input" value="{$pageMaps.start_time}"
+                       placeholder="开始时间">
+            </div>
+            <div class="uk-form-group">
+                <input type="date" name="stop_time" class="uk-input" value="{$pageMaps.stop_time}"
+                       placeholder="结束时间">
+            </div>
+            <div class="uk-form-group">
+                <button type="submit" class="uk-button uk-button-primary"><i class="fa fa-search"></i></button>
+            </div>
+            <div class="uk-form-group" style="padding-top: 10px;">
+                <a href="{url('index', $dateParams[0])}">今天</a>
+                <a href="{url('index', $dateParams[1])}">近7天</a>
+                <a href="{url('index', $dateParams[2])}">近15天</a>
+                <a href="{url('index', $dateParams[3])}">近30天</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="uk-grid">
+    <div class="uk-width-1-2@m">
+        <div class="dux-stats-card red">
+            <div class="card-body">
+                <div class="content">
+                    <p>站点浏览量</p>
+                    <div class="title">{$siteViews}</div>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-cubes"></i>
+                </div>
+                <i class="topic fa fa-cubes"></i>
+            </div>
+
+        </div>
+    </div>
+    <div class="uk-width-1-2@m">
+        <div class="dux-stats-card green">
+            <div class="card-body">
+                <div class="content">
+                    <p>站点会员访客</p>
+                    <div class="title">{$sitePeople}</div>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-user-circle-o"></i>
+                </div>
+                <i class="topic fa fa-user-circle-o"></i>
+            </div>
+        </div>
+    </div>
+    
+</div>
+<br>
+
+
+    <div class="am-g">
+        <div class="am-u-sm-12">
+            <div class="uk-card uk-card-default uk-card-small dux-panel">
+                <div class="uk-card-header uk-clearfix">
+                    <div class="uk-float-left">
+                        站点浏览趋势
+                    </div>
+                    <div class="uk-float-right">
+
+                    </div>
+                </div>
+                <div class="uk-card-body">
+                    {$siteViewsJs}
+                </div>
+            </div>
+        </div>
+    </div>

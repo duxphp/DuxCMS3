@@ -1,0 +1,31 @@
+<div data-dux="table-bind" class="dux-table-layout">
+    <div class="dux-page-table">
+        <table class="uk-table    uk-table-hover uk-table-middle dux-table" data-table>
+            <thead>
+            <tr>
+                <th width="*">名称</th>
+                <th width="*">驱动</th>
+                <th class="uk-text-center" width="120">管理</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--loop{$list as $key => $vo}-->
+            <tr>
+                <td>{$name[$key]}</td>
+                <td>{$vo.driver}</td>
+                <td class="uk-text-center">
+                    <!--if{'local' == $key}-->
+                    无
+                    <!--{else}-->
+                    <a class="uk-button uk-button-primary uk-button-small" href="{url('setting',array('type'=>$key))}" title="设置"><i class="fa fa-cog"></i></a>
+                    <!--{/if}-->
+                </td>
+            </tr>
+            <!--{/loop}-->
+            </tbody>
+        </table>
+    </div>
+    <div class="dux-page-foot uk-clearfix">
+        {$page}
+    </div>
+</div>

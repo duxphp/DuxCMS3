@@ -1,0 +1,90 @@
+<div data-dux="table-bind" class="dux-table-layout">
+    <div class="dux-page-table">
+        <!--if{!empty($list)}-->
+        <table class="uk-table    uk-table-hover uk-table-middle dux-table" data-table>
+            <thead>
+            <tr>
+                <th width="200">应用</th>
+                <th>描述</th>
+                <th class="uk-text-center" width="150">管理</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--loop{$list as $key => $vo}-->
+            <!--if{!$vo['app.system']}-->
+            <tr>
+                <td>{$vo['app.name']} ({$key})</td>
+                <td>{$vo['app.desc']}</td>
+                <td class="uk-text-center">
+                    <!--if{$vo['app.install']}-->
+                        <!--if{$vo['app.state']}-->
+                            <a class="uk-button uk-button-warning uk-button-small off" data-app="{$key}" href="javascript:;">关闭</a>
+                        <!--{else}-->
+                            <a class="uk-button uk-button-primary uk-button-small on" data-app="{$key}"  href="javascript:;">开启</a>
+                        <!--{/if}-->
+                        <a class="uk-button uk-button-danger uk-button-small uninstall" data-app="{$key}"  href="javascript:;">卸载</a>
+                    <!--{else}-->
+                        <a class="uk-button uk-button-primary uk-button-small install" data-app="{$key}"  href="javascript:;">安装</a>
+                    <!--{/if}-->
+                </td>
+            </tr>
+            <!--{/if}-->
+            <!--{/loop}-->
+            </tbody>
+        </table>
+        <!--{else}-->
+        <div class="uk-card uk-card-small dux-panel">
+            <div class="uk-card-body uk-text-center">暂无扩展应用</div>
+        </div>
+        <!--{/if}-->
+    </div>
+    <div class="dux-page-foot uk-clearfix">
+        {$page}
+    </div>
+</div>
+<script>
+    Do('base', 'dialog', function () {
+
+        $('.on').on('click', function() {
+            ajaxApp('{url("status")}', {
+                app : $(this).data('app'),
+                status : 1
+            });
+        });
+        $('.off').on('click', function() {
+            ajaxApp('{url("status")}', {
+                app : $(this).data('app'),
+                status : 0
+            });
+        });
+        $('.uninstall').on('click', function() {
+            ajaxApp('{url("uninstall")}', {
+                app : $(this).data('app')
+            });
+        });
+        $('.install').on('click', function() {
+            ajaxApp('{url("install")}', {
+                app : $(this).data('app')
+            });
+        });
+
+        var ajaxApp = function(url, data) {
+            app.ajax({
+                url : url,
+                type : 'post',
+                data : data,
+                success : function(info) {
+                    layer.alert(info, function () {
+                        location.reload();
+                    });
+                },
+                error : function(info) {
+                    layer.alert(info, function () {
+                        location.reload();
+                    });
+                }
+            });
+
+        }
+    });
+</script>

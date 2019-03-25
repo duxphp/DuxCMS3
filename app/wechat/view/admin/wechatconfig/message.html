@@ -1,0 +1,29 @@
+<div>
+    <div class="uk-card uk-card-default uk-card-small dux-panel">
+        <div class="uk-card-body">
+            <form class="dux-form uk-form   uk-form-horizontal " method="post" action="{url()}" data-dux="form-bind">
+                <fieldset>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">主体名称</label>
+                        <div class="uk-form-controls">
+                            <input type="text" class="uk-input" name="message_name" value="{$info.message_name}" />
+                            <div class="uk-form-help">发送消息主体名称</div>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">默认关注消息</label>
+                        <div class="uk-form-controls">
+                            <textarea class="uk-textarea" name="message_focus">{$info.message_focus}</textarea>
+                            <div class="uk-form-help">用户关注默认发送消息</div>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <div class="uk-form-controls">
+                            <button class="uk-button uk-button-primary" type="submit">保存</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

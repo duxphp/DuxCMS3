@@ -1,0 +1,45 @@
+
+
+<div class="uk-margin-top">
+    <div class="uk-card uk-card-small uk-card-default dux-panel">
+        <div class="uk-card-header">设置推送种类默认类型</div>
+        <div class="uk-card-body">
+            <form class="dux-form uk-form  uk-form-horizontal  " data-dux="form-bind" method="post">
+                <fieldset>
+                    <!--loop{$classList as $key => $vo}-->
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">{$vo.name}</label>
+                        <div class="uk-form-controls">
+                            <select class="uk-select" name="{$key}" data-dux="form-select" >
+                                <!--loop{$list as $k => $v}-->
+                                    <!--if{$v.class == $key}-->
+                                    <option value="{$k}" {$vo.default == $k ? 'selected' : ''}>{$v.name}</option>
+                                    <!--{/if}-->
+                                <!--{/loop}-->
+                            </select>
+                        </div>
+                    </div>
+                    <!--if{$vo.common}-->
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">{$vo.name}模板</label>
+                        <div class="uk-form-controls">
+                            <!--if{$vo.common=='html'}-->
+                            <textarea data-dux="form-editor" id="{$key}_tpl" name="{$key}_tpl">{html_out($vo['tpl'])}</textarea>
+                            <!--{else}-->
+                            <textarea class="uk-textarea" name="{$key}_tpl" rows="6">{$vo['tpl']}</textarea>
+                            <!--{/if}-->
+                            <div class="uk-form-help">内容，模板变量: <span>[内容区域]</span> [网站名称] [网址] [版权信息] [站点邮箱] [站点电话]</div>
+                        </div>
+                    </div>
+                    <!--{/if}-->
+                    <!--{/loop}-->
+                    <div class="uk-form-group">
+                        <div class="uk-form-controls">
+                            <button class="uk-button uk-button-primary" type="submit" disabled>保存</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

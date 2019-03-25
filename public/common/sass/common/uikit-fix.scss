@@ -1,0 +1,176 @@
+@mixin hook-card() { color: #000; }
+
+@mixin hook-base-body() {
+
+}
+
+//common
+@mixin hook-base-link() {
+  text-decoration: none;
+}
+@mixin hook-base-link-hover() {
+  text-decoration: none;
+}
+
+@mixin hook-base-heading() {
+  color: inherit;
+}
+
+@mixin hook-text-large() {
+  font-size: 1.8rem;
+}
+
+@mixin hook-tab-item() {
+  font-size: 1.4rem;
+  padding: 8px 10px;
+}
+
+@mixin hook-dropdown-nav() {
+  font-size: 1.4rem;
+}
+
+*, :after, :before {
+  box-sizing: border-box;
+}
+
+//notification
+@mixin hook-notification-message-success() {
+  background: $global-success-background;
+  color: #fff;
+}
+@mixin hook-notification-warning-success() {
+  background: $global-warning-background;
+  color: #fff;
+}
+@mixin hook-notification-danger-success() {
+  background: $global-danger-background;
+  color: #fff;
+}
+@mixin hook-notification-close() {
+  color: #fff;
+}
+
+//form
+.uk-form-inline {
+  display: flex;
+  flex-wrap: wrap;
+  .uk-form-group {
+    margin-right: 1rem;
+    margin-bottom: 0 !important;
+  }
+}
+
+.uk-form {
+  .uk-form-group {
+    margin-bottom: 1.5rem;
+  }
+  .uk-form-help {
+    margin-top: .5rem;
+    color: #999;
+  }
+}
+
+@mixin hook-form-label() {
+  font-size: 1.4rem;
+}
+
+
+.uk-input-group {
+  display: flex;
+        position: relative;
+        width: 100%;
+        & > * {
+            border: 1px solid #e5e5e5 !important;
+            border-right: 0 !important;
+            &:last-child {
+                border-right: 1px solid #e5e5e5 !important;
+            }
+        }
+        .uk-input {
+            flex: 1;
+            &:focus,&:active,&:hover {
+                border-color: #e5e5e5;
+            }
+        }
+        .uk-input-group-label {
+            margin: 0;
+            border-radius: 0;
+            overflow: visible;
+            font: inherit;
+            text-transform: none;
+            box-sizing: border-box;
+            padding: 0 15px;
+            vertical-align: middle;
+            font-size: 1.4rem;
+            line-height: 38px;
+            text-align: center;
+            text-decoration: none;
+            background-color: transparent;
+            color: #333;
+            white-space : nowrap;
+
+        }
+        .uk-input-group-btn {
+            position: relative;
+            white-space : nowrap;
+            display: flex;
+            .uk-button {
+                position: relative;
+                border: none;
+                &:focus,&:active,&:hover {
+                    border-color: #e5e5e5;
+                }
+            }
+
+        }
+}
+
+@mixin hook-button-default() {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+}
+@mixin hook-button-disabled() {
+  background-color: #f5f5f5;
+  border: 1px solid #dddddd;
+  color: rgba($button-disabled-color, .8);
+}
+
+@mixin hook-button-large() {
+  font-size: 1.6rem;
+}
+
+@mixin hook-button() {
+  font-size: 1.4rem;
+}
+
+@media print {
+  .uk-print-hide {
+    display: none !important
+  }
+}
+.uk-form {
+  fieldset {
+    border: none;
+  }
+}
+
+.uk-button.uk-button-success {
+  background: $global-success-background;
+  color: #fff;
+  border: 1px solid transparent;
+}
+
+.uk-button-success:hover,
+.uk-button-success:focus {
+  background-color: darken($global-success-background, 5%);
+}
+
+.uk-button-success:active,
+.uk-button-success.uk-active {
+  background-color: darken($global-success-background, 10%);
+}
+
+.uk-button-block {
+  display: block;
+  width: 100%;
+}

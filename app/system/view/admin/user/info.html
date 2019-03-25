@@ -1,0 +1,79 @@
+<div class="dux-page-header uk-clearfix">
+    <div class="page-title">
+        <a class="uk-button uk-button-primary" href="{url('index')}"> 用户列表</a>
+    </div>
+    <div class="page-action">
+        <a class="uk-button uk-button-danger" href="javascript:location.reload();"><i class="fa fa-refresh"></i></a>
+    </div>
+</div>
+<div class="uk-margin-top">
+    <div class="uk-card uk-card-default uk-card-small dux-panel">
+        <div class="uk-card-header">{$assignName}用户</div>
+        <div class="uk-card-body">
+            <form class="dux-form uk-form  uk-form-horizontal  " data-dux="form-bind" method="post">
+                <fieldset class="uk-fieldset">
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">角色</label>
+                        <div class="uk-form-controls">
+                            <select name="role_id" class="uk-select" data-dux="form-select" required>
+                                <!--loop{$roleList as $vo}-->
+                                <option value="{$vo.role_id}"
+                                <!--if{ $vo['role_id'] == $info['role_id'] }--> selected <!--{/if}-->
+                                >{$vo.name}</option>
+                                <!--{/loop}-->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">副角色</label>
+                        <div class="uk-form-controls">
+                            <select name="role_ext[]" class="uk-select" data-dux="form-select" multiple>
+                                <!--loop{$roleList as $vo}-->
+                                <option value="{$vo.role_id}"
+                                <!--if{in_array($vo.role_id, (array)$roleArray)}--> selected <!--{/if}-->
+                                >{$vo.name}</option>
+                                <!--{/loop}-->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">用户名</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input"  type="text" name="username" value="{$info.username}" placeholder="请输入用户名" minlength="3" maxlength="20" required>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">昵称</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input"  type="text" name="nickname" value="{$info.nickname}" placeholder="请输入昵称" minlength="2" maxlength="20" required>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">密码</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="password" name="password" placeholder="不修改密码请留空" >
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">状态</label>
+                        <div class="uk-form-controls">
+                            <?php if(!isset($info['status'])) $info[ 'status']=1 ; ?>
+                            <div>
+                                <select class="uk-select" name="status" data-dux="form-select" required>
+                                    <option value="1" <!--if{$info['status']}--> selected <!--{/id}--> >正常</option>
+                                    <option value="0" <!--if{!$info['status']}--> selected <!--{/id}--> >禁用</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <div class="uk-form-controls">
+                            <input class="uk-input"  type="hidden" name="user_id" value="{$info.user_id}">
+                            <button class="uk-button uk-button-primary" type="submit" disabled>保存</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

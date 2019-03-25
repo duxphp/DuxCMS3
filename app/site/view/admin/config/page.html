@@ -1,0 +1,23 @@
+<div class="uk-card uk-card-small uk-card-default dux-panel">
+    <div class="uk-card-header">页面设置</div>
+    <div class="uk-card-body">
+        <form class="dux-form uk-form  uk-form-horizontal  " method="post" action="{url()}" data-dux="form-bind">
+            <fieldset>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">模板目录</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="text" name="page_theme" value="{$info.page_theme}" required>
+                        <div class="uk-form-help">位于"theme"目录下的模板目录名称</div>
+                    </div>
+                </div>
+                
+                <div class="uk-form-group">
+                    <div class="uk-form-controls">
+                        <button class="uk-button uk-button-primary" type="submit">保存</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+{$configHtml}

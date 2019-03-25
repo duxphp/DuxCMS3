@@ -1,0 +1,142 @@
+<div class="uk-grid">
+    <div class="uk-width-1-2@l">
+        <table class="uk-table    uk-table-hover uk-table-middle dux-table">
+            <thead>
+            <tr>
+                <th>运行环境</th>
+                <th>服务器IP</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><?php echo $_SERVER['SERVER_SOFTWARE']; ?> / PHP {phpversion()}
+                    / <?php echo php_sapi_name(); ?></td>
+                <td>{$_SERVER.SERVER_ADDR}:{$_SERVER.SERVER_PORT}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="uk-width-1-2@l">
+        <table class="uk-table    uk-table-hover uk-table-middle dux-table">
+            <thead>
+            <tr>
+                <th>系统版本</th>
+                <th>版本时间</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{$verInfo.ver}</td>
+                <td>{$verInfo.date}</td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<br>
+    <div class="uk-card uk-card-default uk-card-small dux-panel">
+        <div class="uk-card-header">服务器版本</div>
+        <div class="uk-card-body" data-update-body>
+
+            <div class="uk-padding-small uk-text-center">
+                <i class="fa fa-spinner fa fa-pulse"></i>
+                授权信息获取中...
+            </div>
+
+        </div>
+    </div>
+
+
+<script type="text/html" id="update-tpl">
+    <table class="uk-table    uk-table-hover uk-table-middle dux-table">
+        <tbody>
+        {{# if(d.domain){ }}
+        <tr>
+            <td width="200">授权域名</td>
+            <td>{{ d.domain }}</td>
+        </tr>
+        <tr>
+            <td width="200">授权信息</td>
+            <td>{{d.type_name}} - {{ d.name }} - {{ d.tel }}</td>
+        </tr>
+        <tr>
+            <td width="200">到期时间</td>
+            <td>{{ d.date }}</td>
+        </tr>
+        {{# }else{ }}
+        <tr>
+            <td>获取授权</td>
+            <td>{{d.message}}</td>
+        </tr>
+        {{# } }}
+        <tr>
+            <td width="200">服务器版本</td>
+            <td>{{d.ver}}</td>
+        </tr>
+        <tr>
+            <td width="200">发布时间</td>
+            <td>{{d.ver_date}}</td>
+        </tr>
+        <tr>
+            <td width="200">更新内容</td>
+            <td>{{d.ver_log}}</td>
+        </tr>
+        <tr>
+            <td width="200">更新状态</td>
+            <td data-status>
+                {{# if(d.ver_status){ }}
+                待更新
+                {{# }else{ }}
+                无更新
+                {{# } }}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    {{# if(d.ver_status){ }}
+    <button class="uk-button uk-button-primary" data-updare type="button">马上更新</button>
+    {{# } }}
+</script>
+<script>
+    Do.ready('base', 'tpl', 'dialog', function () {
+        var $updateBody = $('[data-update-body]'), licence;
+
+        app.ajax({
+            url: '{url("system/index/licence")}',
+            type: 'get',
+            success: function (data) {
+                licence = data;
+                var tpl = $('#update-tpl').html();
+                laytpl(tpl).render(data, function (html) {
+                    $updateBody.html(html);
+                });
+            },
+            error: function (msg) {
+                var html = '<div class="uk-padding uk-text-center uk-text-danger">' + msg + '</div>';
+                $updateBody.html(html);
+            }
+        });
+
+        $updateBody.on('click', '[data-updare]', function () {
+            $(this).attr('disabled', true).text('更新中');
+            $updateBody.find('[data-status]').text('更新中,请稍等,请勿关闭本窗口');
+            app.ajax({
+                url: '{url("update")}',
+                type: 'post',
+                data : {file : licence.ver_file},
+                success: function (data) {
+                    dialog.alert({
+                        title: data,
+                        callback: function () {
+                            location.reload();
+                        }
+                    });
+                },
+                error: function (msg) {
+                    $updateBody.find('[data-status]').text('升级失败: ' + msg);
+                }
+            });
+
+        });
+    });
+</script>

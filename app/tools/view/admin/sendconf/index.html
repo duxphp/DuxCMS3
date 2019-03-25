@@ -1,0 +1,31 @@
+<div data-dux="table-bind" class="dux-table-layout">
+    <div class="dux-page-table">
+        <table class="uk-table    uk-table-hover uk-table-middle dux-table" data-table>
+            <thead>
+            <tr>
+                <th width="*">接口名</th>
+                <th width="*">标识</th>
+                <th width="*">类别</th>
+                <th class="uk-text-center" width="120">管理</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--loop{$list as $key => $vo}-->
+            <tr>
+                <td>{$vo.name}</td>
+                <td>{$key}</td>
+                <td>
+                    {$classList[$vo['class']]['name']}
+                </td>
+                <td class="uk-text-center">
+                    <a class="uk-button uk-button-primary uk-button-small" href="{url('setting',array('type'=>$key))}" title="设置"><i class="fa fa-cog"></i></a>
+                </td>
+            </tr>
+            <!--{/loop}-->
+            </tbody>
+        </table>
+    </div>
+    <div class="dux-page-foot uk-clearfix">
+        {$page}
+    </div>
+</div>

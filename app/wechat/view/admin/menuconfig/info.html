@@ -1,0 +1,387 @@
+<script src="https://cdn.bootcss.com/masonry/4.2.2/masonry.pkgd.min.js"></script>
+    <div class="uk-card uk-card-default uk-card-small dux-panel">
+        <div class="uk-card-header">{$assignName}菜单</div>
+        <div class="uk-card-body">
+            <form class="dux-form uk-form   uk-form-horizontal " data-dux="form-bind" method="post">
+                <fieldset>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">上级菜单</label>
+                        <div class="uk-form-controls">
+                            <select data-dux="form-select" name="parent_id" style="width: 100%" required>
+                                <option value="0">==顶级菜单==</option>
+                                <!--loop{(array)$menuList as $vo}-->
+                                <option <!--if{$vo.menu_id == $info.parent_id}--> selected <!--{/if}-->
+                                value="{$vo.menu_id}">{$vo.cname}</option>
+                                <!--{/loop}-->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">菜单名称</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="name" value="{$info.name}" placeholder="请输入菜单名称" required>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">菜单顺序</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="number" name="sort" value="{$info.sort}" placeholder="顺序由小->大排列">
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">菜单类型</label>
+                        <div class="uk-form-controls uk-form-controls-text">
+                            <div class="uk-grid">
+                                <label dux-loop="$type as $key => $vo">
+                                    <input data-type name="type" value="{$key}" dux-attr="$info.type == $key ? 'checked' : ''" type="radio"> {$vo.name}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-form-group" style="display:none;" data-type-content="media">
+                        <label class=" uk-form-label">回复内容</label>
+                        <div class="uk-form-controls uk-form-controls-text">
+                            <div>
+                                <a class="menu-box" href="javascript:;" data-news>
+                                    图文
+                                </a>
+                                <a class="menu-box" href="javascript:;" data-image>
+                                    图片
+                                </a>
+                            </div>
+                            <div data-media-content style="width: 260px; margin-top: 20px;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group" style="display:none;" data-type-content="url">
+                        <label class=" uk-form-label">页面链接</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="url" value="{$info.data.url}" placeholder="请输入页面链接" >
+                        </div>
+                    </div>
+
+                    <div style="display:none;" data-type-content="miniapp">
+                        <div class="uk-form-group">
+                            <label class=" uk-form-label">小程序APPID</label>
+                            <div class="uk-form-controls">
+                                <input class="uk-input" type="text" name="appid" value="{$info.data.appid}" placeholder="请输入小程序ID"
+                                       >
+                            </div>
+                        </div>
+                        <div class="uk-form-group">
+                            <label class=" uk-form-label">小程序页面</label>
+                            <div class="uk-form-controls">
+                                <input class="uk-input" type="text" name="pagepath" value="{$info.data.pagepath}" placeholder="小程序跳转页面"
+                                       >
+                            </div>
+                        </div>
+                        <div class="uk-form-group">
+                            <label class=" uk-form-label">跳转URL</label>
+                            <div class="uk-form-controls">
+                                <input class="uk-input" type="text" name="app_url" value="{$info.data.url}" placeholder="老版本客户端打开URL">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <div class="uk-form-controls">
+                            <input type="hidden" name="menu_id" value="{$info.menu_id}">
+                            <button class="uk-button uk-button-primary" type="submit" disabled>保存</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+
+<script>
+    Do('base', function () {
+        var typeSelect = function () {
+            $('[data-type-content]').hide();
+            var type = $('[data-type]:checked').val();
+            if (type == 1) {
+                $("[data-type-content='media']").show();
+            }
+            if (type == 2) {
+                $("[data-type-content='url']").show();
+            }
+            if (type == 3) {
+                $("[data-type-content='miniapp']").show();
+            }
+        };
+        $('[data-type]').on('change', function () {
+            typeSelect();
+        });
+        typeSelect();
+    });
+</script>
+
+<style type="text/scss" dux-auto>
+    .menu-box {
+        color: #666;
+        border: 1px solid #ddd;
+        background: #f8f8f8;
+        padding: 10px 30px;
+        margin-right: 20px;
+        display: inline-block;
+    }
+
+    .menu-box:hover {
+        background: #f5f5f5;
+    }
+
+    .modal-media {
+        margin: 0 auto;
+
+        .item {
+            padding: 10px;
+            width: 260px;
+        }
+    }
+
+    .media-image {
+        border: 1px solid #ddd;
+        padding: 10px;
+        background: #fff;
+
+    }
+
+    .media-news {
+        border: 1px solid #ddd;
+        padding: 10px;
+        background: #fff;
+
+        .news-top {
+            position: relative;
+
+            .img {
+                height: 150px;
+                overflow: hidden;
+
+                img {
+                    width: 100%;
+                }
+            }
+
+            .title {
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                padding: 5px 10px;
+                background: rgba(0, 0, 0, .5);
+                color: #fff;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+
+        .news-list {
+            margin: 0;
+            padding: 0;
+
+            li {
+                border-top: 1px solid #ddd;
+                padding: 10px 0;
+                display: flex;
+
+                .title {
+                    flex: 1;
+                }
+
+                .img {
+                    margin-left: 20px;
+                    width: 60px;
+                    height: 60px;
+                    background-color: #fff;
+                    background-size: cover;
+                    background-position: 50% 50%;
+                    background-repeat: no-repeat;
+                }
+            }
+        }
+
+        .news-action {
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+            text-align: right;
+        }
+    }
+</style>
+
+<div id="modal-news" class="uk-modal-container" uk-modal>
+    <div class="uk-modal-dialog">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <div class="uk-modal-header">
+            <h2 class="uk-modal-title">图文消息</h2>
+        </div>
+        <div class="uk-modal-body" style="height: 600px; overflow-y: auto">
+            <div class="modal-media modal-news-list">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="modal-image" class="uk-modal-container" uk-modal>
+    <div class="uk-modal-dialog">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <div class="uk-modal-header">
+            <h2 class="uk-modal-title">图片消息</h2>
+        </div>
+        <div class="uk-modal-body" style="height: 600px; overflow-y: auto">
+            <div class="modal-media modal-image-list">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/html" data-news-tpl>
+    {{# for(var i in d){ }}
+    <div class="item">
+        <div class="media-news">
+            <div class="news-top">
+                <div class="img">
+                    <img class="" src="{{d[i].content.news_item[0].image}}" alt="">
+                </div>
+                <div class="title ">{{d[i].content.news_item[0].title}}</div>
+            </div>
+            <ul class="news-list">
+                {{# for(var x = 1; x < d[i].content.news_item.length; x++){ }}
+                <li>
+                    <div class="title">{{d[i].content.news_item[x].title}}</div>
+                    <div class="img" style='background-image: url("{{d[i].content.news_item[x].image}}");'></div>
+                </li>
+                {{# } }}
+            </ul>
+            {{# if(d[i].hide != true){ }}
+            <div class="news-action">
+                <a href="javascript:;" class="uk-button uk-button-primary uk-button-small uk-button-block"
+                   data-select="{{i}}">选择</a>
+            </div>
+            {{# } }}
+        </div>
+    </div>
+    {{# } }}
+</script>
+
+<script type="text/html" data-image-tpl>
+    {{# for(var i in d){ }}
+    <div class="item">
+        <div class="media-news">
+            <div class="news-top">
+                <div class="img">
+                    <img src="{{d[i].image}}">
+                </div>
+                <div class="title ">{{d[i].name}}</div>
+            </div>
+            {{# if(d[i].hide != true){ }}
+            <div class="news-action">
+                <a href="javascript:;" class="uk-button uk-button-primary uk-button-small uk-button-block"
+                   data-select="{{i}}">选择</a>
+            </div>
+            {{# } }}
+        </div>
+    </div>
+    {{# } }}
+</script>
+
+<script>
+    Do('base', 'tpl', function () {
+        var $gridNews = $('.modal-news-list').masonry({
+            itemSelector: '.item',
+            fitWidth: true
+        });
+        var $gridImage = $('.modal-image-list').masonry({
+            itemSelector: '.item',
+            fitWidth: true
+        });
+        var mediaNews = [];
+        var mediaImages = [];
+        $('[data-news]').on('click', function () {
+            $('.modal-news-list').html('');
+            app.ajax({
+                url: '{url("wechat/MaterialNews/data")}',
+                type: 'post',
+                loading: true,
+                success: function (data) {
+                    mediaNews = data;
+                    UIkit.modal('#modal-news').show();
+                    var tpl = $('[data-news-tpl]').html();
+                    laytpl(tpl).render(data, function (html) {
+                        var $html = $(html);
+                        $gridNews.append($html).masonry('reloadItems');
+                    });
+                }
+            });
+        });
+
+        $('.modal-news-list').on('click', '[data-select]', function () {
+            var key = $(this).data('select');
+            var info = mediaNews[key];
+            UIkit.modal('#modal-news').hide();
+            info.hide = true;
+            var data = [info];
+            var tpl = $('[data-news-tpl]').html();
+            laytpl(tpl).render(data, function (html) {
+                html += '<input type="hidden" name="media_type" value="view_limited" /><input type="hidden" name="media_id" value="' + info.media_id + '" />';
+                $('[data-media-content]').html(html);
+            });
+        });
+
+        $('[data-image]').on('click', function () {
+            $('.modal-image-list').html('');
+            app.ajax({
+                url: '{url("wechat/MaterialImage/data")}',
+                type: 'post',
+                loading: true,
+                success: function (data) {
+                    mediaImages = data;
+                    UIkit.modal('#modal-image').show();
+                    var tpl = $('[data-image-tpl]').html();
+                    laytpl(tpl).render(data, function (html) {
+                        var $html = $(html);
+                        $gridImage.append($html).masonry('reloadItems');
+                    });
+                }
+            });
+        });
+
+        $('.modal-image-list').on('click', '[data-select]', function () {
+            var key = $(this).data('select');
+            var info = mediaImages[key];
+            UIkit.modal('#modal-image').hide();
+            info.hide = true;
+            var data = [info];
+            var tpl = $('[data-image-tpl]').html();
+            laytpl(tpl).render(data, function (html) {
+                html += '<input type="hidden" name="media_type" value="media_id" /><input type="hidden" name="media_id" value="' + info.media_id + '" />';
+                $('[data-media-content]').html(html);
+            });
+        });
+
+    });
+</script>
+
+
+<!--if{$info.type == 1}-->
+<script>
+    Do('base', 'tpl', function () {
+        var mediaData = {json_encode($mediaInfo)};
+        if (mediaData.length > 0) {
+            var tpl = $('[data-news-tpl]').html();
+            laytpl(tpl).render([{content: mediaData, hide: true}], function (html) {
+                $('[data-media-content]').html(html);
+            });
+        }
+    });
+
+</script>
+<!--{/if}-->

@@ -1,0 +1,90 @@
+<div class="uk-card uk-card-small uk-card-default dux-panel">
+    <div class="uk-card-header">基础颜色设置</div>
+    <div class="uk-card-body">
+        <form class="dux-form uk-form  uk-form-horizontal  " method="post" action="{url()}" data-dux="form-bind">
+            <fieldset>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">风格主色调</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="color" data-dux="form-color" name="style_primary" value="{$info.style_primary}" required>
+                        <div class="uk-form-help">应用主色调</div>
+                    </div>
+                </div>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">风格辅色调</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="color" data-dux="form-color" name="style_secondary" value="{$info.style_secondary}" required>
+                        <div class="uk-form-help">应用辅色调</div>
+                    </div>
+                </div>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">成功色调</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="color" data-dux="form-color" name="style_success" value="{$info.style_success}" required>
+                        <div class="uk-form-help">按钮、文字等成功色调</div>
+                    </div>
+                </div>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">警告色调</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="color" data-dux="form-color" name="style_warning" value="{$info.style_warning}" required>
+                        <div class="uk-form-help">按钮、文字等警告色调</div>
+                    </div>
+                </div>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">危险色调</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="color" data-dux="form-color" name="style_danger" value="{$info.style_danger}" required>
+                        <div class="uk-form-help">按钮、文字等危险色调</div>
+                    </div>
+                </div>
+                <div class="uk-form-group">
+                    <div class="uk-form-controls">
+                        <button class="uk-button uk-button-primary" type="submit">保存</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+<div class="uk-card uk-card-small uk-card-default dux-panel">
+    <div class="uk-card-header">导航菜单设置</div>
+    <div class="uk-card-body">
+        <form class="dux-form uk-form  uk-form-horizontal" method="post" action="{url()}" data-dux="form-bind">
+            <fieldset>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">图标选中色</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="color" data-dux="form-color" name="style_nav_icon_selected" value="{$info.style_nav_icon_selected}" required>
+                    </div>
+                </div>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">文字选中色</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="color" data-dux="form-color" name="style_nav_text" value="{$info.style_nav_text}" required>
+                    </div>
+                </div>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">图标默认色</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="color" data-dux="form-color" name="style_nav_icon" value="{$info.style_nav_icon}" required>
+                    </div>
+                </div>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">文字默认色</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="color" data-dux="form-color" name="style_nav_text_selected" value="{$info.style_nav_text_selected}" required>
+                    </div>
+                </div>
+                <div class="uk-form-group">
+                    <div class="uk-form-controls">
+                        <button class="uk-button uk-button-primary" type="submit">保存</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+{$configHtml}

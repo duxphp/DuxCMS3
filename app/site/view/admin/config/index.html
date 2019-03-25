@@ -1,0 +1,80 @@
+<div class="uk-card uk-card-small uk-card-default dux-panel">
+    <div class="uk-card-header">站点信息</div>
+    <div class="uk-card-body">
+        <form class="dux-form uk-form  uk-form-horizontal  " method="post" action="{url()}" data-dux="form-bind">
+            <fieldset>
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">站点标题</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="text" name="info_title" value="{$info.info_title}" placeholder="" required>
+                        <div class="uk-form-help">站点头部显示标题</div>
+                    </div>
+                </div>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">站点关键词</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="text" name="info_keyword" value="{$info.info_keyword}" placeholder="">
+                        <div class="uk-form-help">针对搜索引擎设置的关键词</div>
+                    </div>
+                </div>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">站点描述</label>
+                    <div class="uk-form-controls">
+                        <textarea class="uk-textarea" name="info_desc" maxlength="200">{$info.info_desc}</textarea>
+                        <div class="uk-form-help">针对搜索引擎设置的站点描述,最多200个字符</div>
+                    </div>
+                </div>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">站点名称</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="text" name="info_name" value="{$info.info_name}" placeholder="" required>
+                        <div class="uk-form-help">站点LOGO位置显示名称</div>
+                    </div>
+                </div>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">站点图标</label>
+                    <div class="uk-form-controls">
+                        <div class="uk-input-group">
+                            <input class="uk-input" type="text" name="info_logo" id="info_logo" value="{$info.info_logo}"
+                                   placeholder="上传站点图标">
+                            <span class="uk-input-group-btn">
+                                            <button class="uk-button uk-button-default" type="button" data-type="image" data-dux="system-attach"
+                                                    data-target="#info_logo"><i class="fa fa-upload"></i></button>
+                                        </span>
+                        </div>
+                        <div class="uk-form-help">
+                            建议上传512*512等比例图片
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">版权信息</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="text" name="info_copyright" value="{$info.info_copyright}" placeholder="">
+                        <div class="uk-form-help">站点底部版权信息</div>
+                    </div>
+                </div>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">站点邮箱</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="text" name="info_email" value="{$info.info_email}" placeholder="">
+                        <div class="uk-form-help">站点联系邮箱</div>
+                    </div>
+                </div>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">站点电话</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="text" name="info_tel" value="{$info.info_tel}" placeholder=""d>
+                        <div class="uk-form-help">站点服务联系电话</div>
+                    </div>
+                </div>
+                <div class="uk-form-group">
+                    <div class="uk-form-controls">
+                        <button class="uk-button uk-button-primary" type="submit">保存</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

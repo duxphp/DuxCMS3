@@ -1,0 +1,34 @@
+<div class="dux-page-header uk-clearfix">
+    <div class="page-title">
+        <a class="uk-button uk-button-primary" href="{url('index')}"> 接口列表</a>
+    </div>
+    <div class="page-action">
+        <a class="uk-button uk-button-danger" href="javascript:location.reload();"><i class="fa fa-refresh"></i></a>
+    </div>
+</div>
+<div class="uk-margin-top">
+    <div class="uk-card uk-card-small uk-card-default dux-panel">
+        <div class="uk-card-header">{$typeInfo.name}设置</div>
+        <div class="uk-card-body">
+            <form class="dux-form uk-form  uk-form-horizontal  " data-dux="form-bind" method="post">
+                <fieldset>
+                    <!--loop{$ruleList as $key => $vo}-->
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">{$vo}</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="{$key}" value="{$settingInfo[$key]}" required>
+                        </div>
+                    </div>
+                    <!--{/loop}-->
+                    <div class="uk-form-group">
+                        <div class="uk-form-controls">
+                            <input type="hidden" name="config_id" value="{$info.config_id}">
+                            <input type="hidden" name="type" value="{$type}">
+                            <button class="uk-button uk-button-primary" type="submit" disabled>保存</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

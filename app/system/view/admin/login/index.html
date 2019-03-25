@@ -1,0 +1,103 @@
+<!doctype html>
+<html class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>{$sysInfo.title} - 登录</title>
+    {load_js('jquery')}
+    {load_ui(ROOT_URL . '/public')}
+    <link rel="stylesheet" href="<?php echo ROOT_URL; ?>/public/system/css/login.css">
+</head>
+
+<body>
+
+    <div class="uk-grid">
+        <div class="uk-width-1-2@l dux-login">
+            <div class="login-body">
+                <div class="login-head uk-text-center">
+                    <h1>{$sysInfo.name}</h1>
+                    <p class="uk-text-middle">管理登录</p>
+                </div>
+                <div class="login-form uk-width-1-2 uk-margin-auto">
+                    <form action="" class="uk-margin-medium-top dux-form uk-form  uk-form-stacked">
+                        <div class="uk-form-group">
+                            <input type="text" name="username" class="uk-input" placeholder="用户名">
+                        </div>
+                        <div class="uk-form-group">
+                            <input type="password" name="password" class="uk-input" placeholder="密码">
+                        </div>
+
+                        <div class="uk-form-group">
+                            <div class="uk-inline" style="display: block">
+                                <input class="uk-input" name="val_code" placeholder="验证码">
+                                <a class="uk-form-icon uk-form-icon-flip" style="width:80px; padding-right: 5px;"
+                                    href="javascript:;" data-image><img style="width:80px; height:35px; "
+                                        src="data:image/png;base64,{$valImage.image}" alt="验证码"></a>
+                                <input type="hidden" name="val_token" value="{$valImage.token}">
+                                <input type="hidden" name="val_time" value="{$valImage.time}">
+                            </div>
+                        </div>
+
+                        <div class="uk-form-group">
+                            <div class="alert uk-alert uk-alert-danger hide"></div>
+                        </div>
+                        <div class="uk-form-group uk-margin-medium-top">
+                            <button class="uk-button uk-button-primary uk-button-block">
+                                <span uk-icon="sign-in"></span>
+                                登 录
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="uk-width-1-2@l dux-copyright ">
+            <div class="copyright uk-text-center">
+                <h2>欢迎使用{$sysInfo.title}</h2>
+                <p>Copyright © 2013 ~ {date('Y')} <a href="{$sysInfo.home}" target="_blank">{$sysInfo.team}</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript" src="<?php echo ROOT_URL; ?>/public/system/js/lib.js"></script>
+<script>
+    $(function () {
+        Do('base', function () {
+            $('form').submit(function (e) {
+                e.preventDefault();
+                app.ajax({
+                    url: '{url()}',
+                    type: 'post',
+                    data: $('form').serialize(),
+                    tip: false,
+                    success: function (msg) {
+                        $('.alert').addClass('hide');
+                        window.location.href = '{url("system/Index/index")}';
+                    },
+                    error: function (msg) {
+                        $('.alert').removeClass('hide').text(msg);
+                    }
+                });
+            });
+            $('[data-image]').on('click', function() {
+                app.ajax({
+                    url: '{url("imgCode")}',
+                    type: 'post',
+                    success: function (data) {
+                        $('[data-image]').find('img').attr('src', 'data:image/png;base64,' + data.image);
+                        $('input[name="val_token"]').val(data.token);
+                        $('input[name="val_time"]').val(data.time);
+                    },
+                });
+            });
+        });
+    });
+</script>
+
+</html>

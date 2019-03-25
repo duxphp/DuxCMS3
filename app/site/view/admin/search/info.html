@@ -1,0 +1,66 @@
+<div class="dux-page-header uk-clearfix">
+    <div class="page-title">
+        <a class="uk-button uk-button-primary" href="{url('index')}"> 返回列表</a>
+    </div>
+    <div class="page-action">
+        <a class="uk-button uk-button-danger" href="javascript:location.reload();"><i class="fa fa-refresh"></i></a>
+    </div>
+</div>
+
+<div class="uk-margin-top">
+    <div class="uk-card uk-card-small uk-card-default dux-panel">
+        <div class="uk-card-header">{$assignName}关键词</div>
+        <div class="uk-card-body">
+            <form class="dux-form uk-form  uk-form-horizontal  " data-dux="form-bind" method="post">
+                <fieldset>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">类型</label>
+                        <div class="uk-form-controls">
+                            <select name="app" id="app" class="uk-select" required>
+                                <!--loop{$typeList as $type => $vo}-->
+                                <option value="{$type}" {$info.app ==$type ? 'selected' : ''}>{$vo.name}</option>
+                                <!--{/loop}-->
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">关键词</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="keyword" value="{$info.keyword}" placeholder="请输入广告位名称" required>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">搜索次数</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="num" value="{$info.num}" placeholder="" required>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">创建时间</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" data-dux="form-date" name="create_time"  data-type="datetime" readonly value="{$info.create_time ? date('Y-m-d H:i:s', $info.create_time) : date('Y-m-d H:i:s')}" required>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">更新时间</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" data-dux="form-date" name="update_time"  data-type="datetime" readonly value="{$info.update_time ? date('Y-m-d H:i:s', $info.update_time) : date('Y-m-d H:i:s')}" required>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <div class="uk-form-controls">
+                            <input type="hidden" name="search_id" value="{$info.search_id}">
+                            <button class="uk-button uk-button-primary" type="submit" disabled>保存</button>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
