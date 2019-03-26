@@ -111,11 +111,10 @@ class IndexController extends \dux\kernel\Controller {
     public function install() {
         $this->assign('msgLog', $this->msgLog);
         $this->assign('error', $this->error);
-        header('Cache-Control: no-cache');
+        ob_end_clean();
+        ob_implicit_flush();
         header('X-Accel-Buffering: no');
         $this->display();
-        ob_end_flush();
-        ob_implicit_flush(1);
         //检测信息
         $data = request('post');
         if (!$data['host']) {
@@ -223,46 +222,6 @@ class IndexController extends \dux\kernel\Controller {
             $this->stop();
         }
         file_put_contents($this->lock, time());
-
-        if($data['demo']) {
-            $this->msg('开始读取演示数据...');
-            $class = json_decode(json_encode(simplexml_load_string(file_get_contents(ROOT_PATH . '/app/install/data/class.xml'), 'SimpleXMLElement', LIBXML_NOCDATA)), true);
-            $content = json_decode(json_encode(simplexml_load_string(file_get_contents(ROOT_PATH . '/app/install/data/content.xml'), 'SimpleXMLElement', LIBXML_NOCDATA)), true);
-            $this->msg('演示数据读取完毕，导入数据中...');
-
-            foreach ($class['item'] as $key => $vo) {
-                $_POST = [
-                    'name' => $vo['title']
-                ];
-                $classId = target('article/ArticleClass')->saveData('add');
-                if(!$classId) {
-                    echo target('article/ArticleClass')->getError();
-                    exit;
-                }
-                $class['item'][$key]['class_id'] = $classId;
-            }
-            $this->msg('栏目数据导入完毕，导入内容数据中...');
-
-            foreach ($content['item'] as $key => $vo) {
-                $_POST = [
-                    'title' => $vo['title'],
-                    'class_id' => $class['item'][$vo['class']]['class_id'],
-                    'image' => $vo['image'],
-                    'keyword' => $vo['keywords'],
-                    'content' => $vo['content'],
-                    'description' => substr($vo['content'],0,100),
-                    'create_time' => $vo['time'],
-                    'status' => 1
-                ];
-                $status = target('article/Article')->saveData('add');
-                if(!$status) {
-                    echo target('article/Article')->getError();
-                    exit;
-                }
-            }
-            $this->msg('内容数据导入完毕...');
-        }
-
 
         $this->complete('安装程序执行完毕！请删除install应用');
         $this->stop();
