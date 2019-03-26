@@ -1,0 +1,131 @@
+<div class="dux-page-header uk-clearfix">
+    <div class="page-title">
+        <a class="uk-button uk-button-primary" href="{url('index')}"> 页面列表</a>
+    </div>
+    <div class="page-action">
+        <a class="uk-button uk-button-danger" href="javascript:location.reload();"><i class="fa fa-refresh"></i></a>
+    </div>
+</div>
+
+<div class="uk-margin-top">
+    <div class="uk-card uk-card-small uk-card-default dux-panel">
+        <div class="uk-card-header">{$assignName}页面</div>
+        <div class="uk-card-body">
+            <form class="dux-form uk-form  uk-form-horizontal  " data-dux="form-bind" method="post">
+                <fieldset>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">上级页面</label>
+                        <div class="uk-form-controls">
+                            <select data-dux="form-select" name="parent_id" required>
+                                <option value="0">==顶级页面==</option>
+                                <!--loop{(array)$classList as $vo}-->
+                                <option <!--if{$vo.page_id == $info.parent_id}--> selected <!--{/if}-->
+                                value="{$vo.page_id}">{$vo.cname}</option>
+                                <!--{/loop}-->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">页面名称</label>
+                        <div class="uk-form-controls">
+                            <input type="text" name="name" value="{$info.name}" placeholder="请输入页面名称" required>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">页面标识</label>
+                        <div class="uk-form-controls">
+                            <input type="text" name="label" value="{$info.label}" placeholder="请输入页面标识" required>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">页面顺序</label>
+                        <div class="uk-form-controls">
+                            <input type="number" name="sort" value="{$info.sort}" placeholder="请输入顺序">
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">副页面名称</label>
+                        <div class="uk-form-controls">
+                            <input type="text" name="subname" value="{$info.subname}" placeholder="请输入页面名称">
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">封面图</label>
+                        <div class="uk-form-controls">
+                            <!--if{$info.image}-->
+                            <div class="" style="">
+                                <img src="{$info.image}" width="200" />
+                            </div>
+                            <!--{/if}-->
+                            <div class="uk-input-group">
+                                <input type="text"  class="uk-form-field" name="image" id="image" value="{$info.image}"
+                                       placeholder="可选,上传导航封面图">
+                                <span class="uk-input-group-btn">
+                                            <button class="uk-button uk-button-default" type="button" data-dux="form-upload"
+                                                    data-target="#image" data-type="jpg,png,bmp,gif"><i
+                                                    class="fa fa-upload"></i></button>
+                                        </span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">跳转地址</label>
+                        <div class="uk-form-controls">
+                            <input type="text" name="url" value="{$info.url}" placeholder="可选,栏目跳转到外部地址">
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">正文内容</label>
+                        <div class="uk-form-controls">
+                            <textarea data-dux="form-editor" name="content"
+                                      style="height: 400px">{$info.content}</textarea>
+                        </div>
+                    </div>
+
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">页面关键词</label>
+                        <div class="uk-form-controls">
+                            <input type="text" name="keyword" value="{$info.keyword}" placeholder="可选,请输入关键词">
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">页面描述</label>
+                        <div class="uk-form-controls">
+                            <textarea name="description" placeholder="可选,页面描述信息">{$info.description}</textarea>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">页面模板</label>
+                        <div class="uk-form-controls">
+                            <div class="uk-input-group">
+                                <span class="uk-input-group-label">page_</span>
+                                <input class="uk-form-field" type="text" name="tpl" value="{$info.tpl}" placeholder="指定页面模板">
+                                <span class="uk-input-group-label">.html</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="uk-form-group">
+                        <div class="uk-form-controls">
+                            <input type="hidden" name="category_id" value="{$info.category_id}">
+                            <input type="hidden" name="page_id" value="{$info.page_id}">
+                            <input type="hidden" name="model_id" value="{$modelId}">
+                            <button class="uk-button uk-button-primary" type="submit" disabled>保存</button>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

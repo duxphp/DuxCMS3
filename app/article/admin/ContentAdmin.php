@@ -63,12 +63,12 @@ class ContentAdmin extends \app\system\admin\SystemExtendAdmin {
                     'cur' => !isset($pageMaps['status']),
                 ],
                 [
-                    'name' => '已发布',
+                    'name' => '发布',
                     'url' => url('index', ['status' => 1]),
                     'cur' => isset($pageMaps['status']) && $pageMaps['status'] == 1,
                 ],
                 [
-                    'name' => '未发布',
+                    'name' => '草稿',
                     'url' => url('index', ['status' => 0]),
                     'cur' => isset($pageMaps['status']) && $pageMaps['status'] == 0,
                 ],

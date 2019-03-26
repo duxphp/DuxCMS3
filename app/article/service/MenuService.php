@@ -16,7 +16,6 @@ class MenuService {
                 'menu' => array(
                     array(
                         'name' => '文章',
-                        'icon' => 'language',
                         'order' => 0,
                         'menu' => array(
                             array(

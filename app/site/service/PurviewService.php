@@ -17,7 +17,6 @@ class PurviewService {
                     'tpl' => '模板设置',
                 ],
             ],
-            
             'Search' => [
                 'name' => '搜索管理',
                 'auth' => [
@@ -27,17 +26,17 @@ class PurviewService {
                     'del' => '删除',
                 ],
             ],
-            'Tpl' => [
-                'name' => '模板管理',
+            'Fragment' => [
+                'name' => '站点碎片',
                 'auth' => [
                     'index' => '列表',
                     'add' => '添加',
                     'edit' => '编辑',
+                    'status' => '状态',
                     'del' => '删除',
                 ],
             ],
         ];
     }
-
 
 }

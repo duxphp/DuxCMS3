@@ -1,0 +1,70 @@
+
+    <div class="uk-card uk-card-small uk-card-default dux-panel">
+        <div class="uk-card-header">{$assignName}碎片</div>
+        <div class="uk-card-body">
+            <form class="dux-form uk-form  uk-form-horizontal  " data-dux="form-bind" method="post">
+                <fieldset>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">碎片描述</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="title" value="{$info.title}" placeholder="请输入碎片描述" required>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">编辑器</label>
+                        <?php if(!isset($info['editor'])) $info[ 'editor']=1 ; ?>
+                        <div class="uk-form-controls uk-form-controls-text">
+                            <div class="uk-grid">
+                                <label>
+                                    <!--if{$info['editor']}-->
+                                    <input name="editor" value="1" checked="checked" type="radio"  class="uk-radio editor" >
+                                    <!--{else}-->
+                                    <input name="editor" value="1" type="radio"  class="uk-radio editor" >
+                                    <!--{/if}-->
+                                    使用
+                                </label>
+
+                                <label>
+                                    <!--if{!$info['editor']}-->
+                                    <input name="editor" checked="checked" value="0" type="radio"  class="uk-radio editor" >
+                                    <!--{else}-->
+                                    <input name="editor" value="0" type="radio"  class="uk-radio editor" >
+                                    <!--{/if}-->
+                                    不使用
+                                </label></div>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">碎片内容</label>
+                        <div class="uk-form-controls">
+                            <textarea class="uk-textarea" id="content" name="content" style="height: 300px">{$info.content}</textarea>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <div class="uk-form-controls">
+                            <input type="hidden" name="fragment_id" value="{$info.fragment_id}">
+                            <button class="uk-button uk-button-primary" type="submit" disabled>保存</button>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+        </div>
+    </div>
+<script>
+    Do('base', 'editor', function() {
+        $('.editor').on('click', function() {
+            editor($(this).val());
+        });
+        var editor = function(status) {
+            if(status == 1) {
+                form.editor($('#content')[0]);
+            }else {
+                tinymce.activeEditor.destroy();
+            }
+        };
+        editor({intval($info.editor)});
+    });
+</script>

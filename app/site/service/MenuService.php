@@ -24,8 +24,14 @@ class MenuService {
                             [
                                 'name' => '搜索管理',
                                 'url' => url('site/Search/index'),
-                                'order' => 0,
+                                'order' => 1,
                             ],
+                            array(
+                                'name' => '碎片管理',
+                                'icon' => 'bars',
+                                'url' => url('site/Fragment/index'),
+                                'order' => 2
+                            ),
                         ],
                     ],
                 ],

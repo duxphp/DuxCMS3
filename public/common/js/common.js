@@ -339,7 +339,6 @@ window.initStats = 0;
         };
         config = $.extend(defaultConfig, config);
         Do('editor', function () {
-            console.log('xxx');
             tinymce.init({
                 target: $($el)[0],
                 images_upload_handler: function (blobInfo, success, failure) {
@@ -387,14 +386,14 @@ window.initStats = 0;
                                 multiple: true,
                                 callback: function (file) {
                                     var editor = tinymce.activeEditor;
-                                    switch(file.ext) {
+                                    switch (file.ext) {
                                         case 'jpg':
                                         case 'png':
                                         case 'bmp':
                                         case 'jpeg':
                                         case 'gif':
-                                        editor.insertContent('<img src="' + file.url + '" alt="' + file.title + '" />');
-                                        break;
+                                            editor.insertContent('<img src="' + file.url + '" alt="' + file.title + '" />');
+                                            break;
                                         case 'wmv':
                                         case 'mp4':
                                         case 'flv':
@@ -403,10 +402,10 @@ window.initStats = 0;
                                         case 'mpg':
                                         case 'mp3':
                                         case 'wav':
-                                        editor.insertContent('<video src="' + file.url + '" controls="controls">' + file.title + '</video>');
-                                        break;
+                                            editor.insertContent('<video src="' + file.url + '" controls="controls">' + file.title + '</video>');
+                                            break;
                                         default:
-                                        editor.insertContent('<a href="' + file.url + '">' + file.title + '</a>');
+                                            editor.insertContent('<a href="' + file.url + '">' + file.title + '</a>');
                                     }
                                 }
                             });
@@ -581,18 +580,18 @@ window.initStats = 0;
                     dialog.find('.dux-attach-box').html('');
                     if (data.length <= 0) {
                         dialog.find('.dux-attach-box').html('<div class="uk-padding uk-text-center" style="width: 100%">没有该类型文件</div>');
-                        return;
-                    }
-                    for (var i in data) {
-                        var itemObj = $(item);
-                        itemObj.find('.item-image img').attr('src', data[i].src);
-                        itemObj.find('.item-image img').data('url', data[i].url);
-                        itemObj.find('.item-image img').data('ext', data[i].ext);
-                        itemObj.find('.item-image img').attr('title', data[i].title + '.' + data[i].ext);
-                        itemObj.find('.item-title').text(data[i].title + '.' + data[i].ext);
-                        itemObj.find('.item-title').attr('title', data[i].title + '.' + data[i].ext);
-                        itemObj.find('.item-title').data('title', data[i].title);
-                        dialog.find('.dux-attach-box').append(itemObj);
+                    } else {
+                        for (var i in data) {
+                            var itemObj = $(item);
+                            itemObj.find('.item-image img').attr('src', data[i].src);
+                            itemObj.find('.item-image img').data('url', data[i].url);
+                            itemObj.find('.item-image img').data('ext', data[i].ext);
+                            itemObj.find('.item-image img').attr('title', data[i].title + '.' + data[i].ext);
+                            itemObj.find('.item-title').text(data[i].title + '.' + data[i].ext);
+                            itemObj.find('.item-title').attr('title', data[i].title + '.' + data[i].ext);
+                            itemObj.find('.item-title').data('title', data[i].title);
+                            dialog.find('.dux-attach-box').append(itemObj);
+                        }
                     }
                     if (callback) {
                         callback();

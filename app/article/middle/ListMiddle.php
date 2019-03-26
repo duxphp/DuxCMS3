@@ -19,6 +19,28 @@ class ListMiddle extends \app\base\middle\BaseMiddle {
         parent::__construct();
     }
 
+    protected function meta($title = '', $name = '', $url = '') {
+        $classId = $this->params['classId'];
+        if ($classId) {
+            $this->crumb = $this->getCrumb();
+            $this->classInfo = $this->getClass();
+            $this->setMeta($this->classInfo['name'], $this->classInfo['keyword'], $this->classInfo['description']);
+            $this->setCrumb($this->crumb);
+        } else {
+            $this->setName($name ? $name : '新闻资讯');
+            $this->setMeta($title ? $title : '新闻资讯');
+            $this->setCrumb([
+                [
+                    'name' => $title,
+                    'url' => $url ? $url : url()
+                ]
+            ]);
+        }
+        return $this->run([
+            'pageInfo' => $this->pageInfo
+        ]);
+    }
+
     private function getClass() {
         if ($this->classInfo) {
             return $this->classInfo;

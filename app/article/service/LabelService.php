@@ -33,13 +33,13 @@ class LabelService {
         $where = [];
         //指定栏目内容
         if (!empty($data['class_id'])) {
-            $classWhere = 'C.class_id in (' . $data['class_id'] . ')';
+            $classWhere = 'B.class_id in (' . $data['class_id'] . ')';
         }
         //指定栏目下子栏目内容
         if ($data['sub'] && !empty($data['class_id'])) {
             $classIds = target('article/ArticleClass')->getSubClassId($data['class_id']);
             if (!empty($classIds)) {
-                $classWhere = "C.class_id in ({$classIds})";
+                $classWhere = "B.class_id in ({$classIds})";
             }
         }
         if (!empty($classWhere)) {
@@ -67,7 +67,7 @@ class LabelService {
         }
         //内容排序
         if (empty($data['order'])) {
-            $data['order'] = 'A.sort asc, A.create_time desc, B.article_id desc';
+            $data['order'] = 'A.sort asc, A.create_time desc, A.article_id desc';
         }
         //模型调用
         $data['model_id'] = intval($data['model_id']);

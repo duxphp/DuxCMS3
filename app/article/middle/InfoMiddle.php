@@ -18,6 +18,18 @@ class InfoMiddle extends \app\base\middle\BaseMiddle {
         $this->tpl = $this->siteConfig['tpl_content'];
     }
 
+    protected function meta() {
+        $this->info = $this->getInfo();
+        $this->classInfo = $this->getClass();
+        $this->crumb = $this->getCrumb();
+        $this->setMeta($this->info['title'] . ' - ' . $this->classInfo['name']);
+        $this->setName($this->classInfo['name']);
+        $this->setCrumb($this->crumb);
+        return $this->run([
+            'pageInfo' => $this->pageInfo
+        ]);
+    }
+
     private function getInfo() {
         if($this->info) {
             return $this->info;
@@ -53,18 +65,6 @@ class InfoMiddle extends \app\base\middle\BaseMiddle {
         }
         $this->classInfo = target('article/ArticleClass')->getInfo($classId);
         return $this->classInfo;
-    }
-
-    protected function meta() {
-        $this->info = $this->getInfo();
-        $this->classInfo = $this->getClass();
-        $this->crumb = $this->getCrumb();
-        $this->setMeta($this->info['title'] . ' - ' . $this->classInfo['name']);
-        $this->setName($this->classInfo['name']);
-        $this->setCrumb($this->crumb);
-        return $this->run([
-            'pageInfo' => $this->pageInfo
-        ]);
     }
 
     protected function classInfo() {

@@ -3,33 +3,39 @@
 
     <div class="uk-card uk-card-small uk-card-default dux-panel">
 
-        <div class="uk-card-header">{$assignName}文章</div>
+        <div class="uk-card-header">{$assignName}页面</div>
         <div class="uk-card-body">
             <fieldset>
                 <div class="uk-flex">
                     <div class="uk-flex-1">
                         <div class="uk-form-group">
-                            <label class="uk-form-label">文章分类</label>
+                            <label class="uk-form-label">上级页面</label>
                             <div class="uk-form-controls">
-                                <select class="uk-select" data-dux="form-select" name="class_id" required>
+                                <select data-dux="form-select" name="parent_id" class="uk-select" required>
+                                    <option value="0">==顶级页面==</option>
                                     <!--loop{(array)$classList as $vo}-->
-                                    <option <!--if{$vo.class_id == $classId}--> selected <!--{/if}-->
-                                    value="{$vo.class_id}">{$vo.cname}</option>
+                                    <option <!--if{$vo.page_id == $info.parent_id}--> selected <!--{/if}-->
+                                    value="{$vo.page_id}">{$vo.cname}</option>
                                     <!--{/loop}-->
                                 </select>
                             </div>
                         </div>
                         <div class="uk-form-group">
-                            <label class="uk-form-label">文章标题</label>
+                            <label class="uk-form-label">页面标题</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input" type="text" name="title" value="{$info.title}" placeholder="请输入文章标题"
+                                <input class="uk-input" type="text" name="name" value="{$info.name}" placeholder="请输入页面标题"
                                        required>
                             </div>
                         </div>
                         <div class="uk-form-group">
-                            <label class="uk-form-label">副标题</label>
+                            <label class="uk-form-label">页面信息</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input" type="text" name="keyword" value="{$info.keyword}" placeholder="可选,文章副标题">
+                                <div class="uk-grid">
+                                    <div class="uk-width-1-2"><input class="uk-input" type="number" name="sort" value="{$info.sort}"
+                                                                     placeholder="页面顺序"></div>
+                                    <div class="uk-width-1-2"><input class="uk-input" type="number" name="virtual_view" value="{$info.virtual_view}"
+                                                                     placeholder="虚拟浏览量"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -44,19 +50,7 @@
                     </div>
                 </div>
 
-                <div class="uk-form-group">
-                    <label class="uk-form-label">文章信息</label>
-                    <div class="uk-form-controls">
-                        <div class="uk-grid">
-                            <div class="uk-width-1-3"><input class="uk-input" type="text" name="auth" value="{$info.auth}"
-                                                             placeholder="文章作者"></div>
-                            <div class="uk-width-1-3"><input class="uk-input" type="number" name="sort" value="{$info.sort}"
-                                                             placeholder="文章顺序"></div>
-                            <div class="uk-width-1-3"><input class="uk-input" type="number" name="virtual_view" value="{$info.virtual_view}"
-                                                             placeholder="虚拟浏览量"></div>
-                        </div>
-                    </div>
-                </div>
+                
 
                 <div class="uk-form-group">
                     <label class="uk-form-label">正文内容</label>
@@ -67,17 +61,17 @@
                 <div class="uk-form-group">
                     <label class="uk-form-label">关键词</label>
                     <div class="uk-form-controls">
-                        <input class="uk-input" type="text" name="keyword" value="{$info.keyword}" data-dux="form-tags" placeholder="可选,文章关键词">
+                        <input class="uk-input" type="text" name="keyword" value="{$info.keyword}" data-dux="form-tags" placeholder="可选,页面关键词">
                     </div>
                 </div>
                 <div class="uk-form-group">
-                    <label class="uk-form-label">文章描述</label>
+                    <label class="uk-form-label">页面描述</label>
                     <div class="uk-form-controls">
-                        <textarea class="uk-textarea" name="description" placeholder="可选,文章描述">{$info.description}</textarea>
+                        <textarea class="uk-textarea" name="description" placeholder="可选,页面描述">{$info.description}</textarea>
                     </div>
                 </div>
                 <div class="uk-form-group">
-                    <label class=" uk-form-label">文章状态</label>
+                    <label class=" uk-form-label">页面状态</label>
                     <div class="uk-form-controls uk-form-controls-text">
                         <?php $info['status'] = isset($info['status']) ? $info['status'] : 1;  ?>
                         <div class="uk-grid">

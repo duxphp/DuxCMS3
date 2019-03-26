@@ -2,70 +2,37 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>{$pageInfo.title}</title>
-    <meta name="keywords" content="{$pageInfo.keyword}"/>
-    <meta name="description" content="{$pageInfo.description}"/>
+    <meta name="keywords" content="{$pageInfo.keyword}" />
+    <meta name="description" content="{$pageInfo.description}" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="renderer" content="webkit">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="DuxCms"/>
+    <meta name="apple-mobile-web-app-title" content="DuxCms" />
     <meta name="msapplication-TileColor" content="#e1652f">
     <link rel="shortcut icon" href="__PUBLIC__/images/favicon.ico">
     {load_js('jquery')}
     {load_ui('/theme/default')}
     <link rel="stylesheet" href="css/style.css?t={time()}">
-
-
 </head>
+
 <body>
-<nav class="uk-section-primary uk-dark">
+
     <div class="uk-container uk-navbar">
         <div class="uk-navbar-left">
-            <a href="__ROOT__/" class="uk-navbar-item uk-logo dux-logo"><img uk-svg="" src="images/logo.svg" class="uk-margin-small-right" hidden="true"> DUX<small>&</small>CMS 内容管理系统</a>
+            <a href="__ROOT__/" class="uk-navbar-item uk-logo dux-logo"><img src="/public/images/logo.png"
+                    class="uk-margin-small-right"> DUX<small>&</small>CMS 内容管理系统</a>
         </div>
         <div class="uk-navbar-right">
-            <div class="uk-navbar-item">
-                <form class="uk-search uk-search-navbar" action="{url('article/Search/index')}">
-                    <span uk-search-icon></span>
-                    <input class="uk-search-input" type="search" name="keyword" value="{$_GET['keyword']}" placeholder="站内搜索...">
-                </form>
-            </div>
-        </div>
-    </div>
-</nav>
-
-<nav class="uk-section-muted">
-    <div class="uk-container uk-navbar">
-        <div class="nav-overlay uk-navbar-left">
             <ul class="uk-navbar-nav">
-                <li class="uk-active"><a href="__ROOT__/">首页</a></li>
+                <li class="uk-active"><a href="index.html">首页</a></li>
+                <!--list{app="page" label="pageList" limit=10 parent_id=0}-->
+                <li><a href="{url('page/index/index', ['id' => $list.page_id])}">{$list.name}</a></li>
+                <!--{/list}-->
                 <!--list{app="article" label="classList" limit=10 parent_id=0}-->
-                <!--assign{list="subList" app="article" label="classList" limit=10 parent_id=$list.class_id}-->
-                <!--if{$subList}-->
-                <li>
-                    <a href="{$list.url}">{$list.name}</a>
-                    <div class="uk-navbar-dropdown">
-                        <ul class="uk-nav uk-navbar-dropdown-nav">
-                            <!--loop{$subList as $vo}-->
-                            <li><a href="{$vo.url}">{$vo.name}</a></li>
-                            <!--{/loop}-->
-                        </ul>
-                    </div>
-                </li>
-                <!--{else}-->
-                <li><a href="{$list.url}">{$list.name}</a></li>
-                <!--{/if}-->
+                <li><a href="{url('article/index/index', ['id' => $list.page_id])}">{$list.name}</a></li>
                 <!--{/list}-->
             </ul>
         </div>
-
-        <div class="uk-navbar-right">
-            <div class="uk-navbar-item">
-                <div><a href="#">帮助中心</a></div>
-            </div>
-        </div>
     </div>
-</nav>
-
-
