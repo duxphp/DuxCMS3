@@ -40,6 +40,10 @@ class BaseController extends \dux\kernel\Controller {
             require_once $functionFile;
         }
 
+        target('statis/Views', 'service')->statis([
+            'species' => 'site',
+            'type' => 'web'
+        ]);
     }
 
 }

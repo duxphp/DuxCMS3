@@ -76,6 +76,11 @@ class InfoMiddle extends \app\base\middle\BaseMiddle {
         }
         $topPageInfo = $crumb[0];
 
+        target('statis/Views', 'service')->statis([
+            'has_id' => $this->info['page_id'],
+            'species' => 'page',
+        ]);
+
         return $this->run([
             'info' => $info,
             'parentPageInfo' => $parentPageInfo,

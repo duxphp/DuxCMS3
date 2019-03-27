@@ -120,7 +120,7 @@
      * 图表
      */
     Do.add('echarts', {
-        path: 'https://cdn.bootcss.com/echarts/4.2.0-rc.2/echarts.min.js',
+        path: 'https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js',
         type: 'js'
     });
 

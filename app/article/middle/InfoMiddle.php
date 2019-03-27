@@ -110,6 +110,10 @@ class InfoMiddle extends \app\base\middle\BaseMiddle {
         }
         $this->info['content'] = html_out($this->info['content']);
 
+        target('statis/Views', 'service')->statis([
+            'has_id' => $this->info['article_id'],
+            'species' => 'article',
+        ]);
 
         return $this->run([
             'info' => $this->info,
