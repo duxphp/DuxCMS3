@@ -27,6 +27,7 @@
                 <tr>
                     <th width="100">#</th>
                     <th>描述</th>
+                    <th>顺序</th>
                     <th class="uk-text-center" width="120">管理</th>
                 </tr>
             </thead>
@@ -35,6 +36,7 @@
                 <tr>
                     <td>{$vo.data_id}</td>
                     <td>{$vo.title}</td>
+                    <td>{$vo.sort}</td>
                     <td class="uk-text-center">
                         <a class="uk-button uk-button-primary uk-button-small" href="{url('edit', ['id'=>$vo[$pri]])}"
                             title="编辑"><i class="fa fa-pencil"></i></a>

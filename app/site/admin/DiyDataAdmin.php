@@ -38,7 +38,7 @@ class DiyDataAdmin extends \app\system\admin\SystemExtendAdmin {
     }
 
     public function _indexOrder() {
-        return 'data_id asc';
+        return 'sort asc, data_id asc';
     }
 
     public function _indexAssign() {
