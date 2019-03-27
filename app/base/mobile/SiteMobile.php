@@ -10,7 +10,6 @@ class SiteMobile extends \app\base\controller\BaseController {
 
     protected $action = '';
     protected $siteConfig = [];
-    protected $city = [];
 
     protected $userInfo = [];
     protected $noLogin = false;
@@ -26,210 +25,27 @@ class SiteMobile extends \app\base\controller\BaseController {
         if (!$this->siteConfig['site_status']) {
             \dux\Dux::errorPage('站点维护', $this->siteConfig['site_error']);
         }
-        $this->citySwitch();
-        $this->initLogin();
-        if (isWechat()) {
-            @$this->wechatInit();
+        if(!$this->siteConfig['page_mobile']) {
+            $this->error404();
         }
         $this->action = request('get', 'action');
         if ($this->action) {
             $this->assign('action', $this->action);
         }
-        $this->getTake();
-        if (isWechat()) {
-            @$this->initShare();
-        }
-    }
-
-    private function citySwitch() {
-        $getCity = request('get', 'city');
-        $time = 31536000;
-        if ($getCity) {
-            $city = $getCity;
-        } else {
-            $city = \dux\Dux::cookie()->get('city');
-        }
-        if (empty($city)) {
-            $str = \dux\lib\Http::doGet('http://ip.taobao.com/service/getIpInfo.php?ip=' . \dux\lib\Client::getUserIp());
-            $data = json_decode($str, true);
-            $city = $data['data']['city'];
-        }
-        $cityInfo = target('city/City')->getWhereInfo(['label[~]' => $city]);
-        if (empty($cityInfo)) {
-            $cityInfo = target('city/City')->getWhereInfo(['status' => 1]);
-        }
-        \dux\Dux::cookie()->set('city', $cityInfo['label'], $time);
-        if (!defined('CITY_ID')) define('CITY_ID', $cityInfo['city_id']);
-        $this->city = $cityInfo;
-
-        target('statis/Views', 'service')->statis([
-            'city_id' => CITY_ID,
-            'species' => 'city',
-        ]);
-    }
-
-    /**
-     * 初始化登录状态
-     */
-    protected function initLogin() {
-        $userInfo = $this->getLogin();
-        if (!$userInfo) {
-            $uid = request('get', 'uid', 0, 'intval');
-            $token = request('get', 'token');
-            if ($uid && $token) {
-                $login = [
-                    'uid' => $uid,
-                    'token' => $token,
-                ];
-                \dux\Dux::cookie()->set('user_login', $login);
-                if (!isAjax()) {
-                    $this->redirect(url('', array_merge(request('get'), ['uid' => '', 'token' => ''])));
-                } else {
-                    $this->error('登录成功，请刷新页面!', url('', ['uid' => '', 'token' => '']));
-                }
-            }
-        }
-        if (!$this->noLogin && !$userInfo) {
-            if (!isAjax()) {
-                $this->redirect(url('member/Login/index', ['action' => URL]));
-            } else {
-                $this->error('您尚未登录,请先登录进行操作!', url('member/Login/index'), 401);
-            }
-        }
-        $this->userInfo = $userInfo;
-        define('USER_ID', $userInfo['user_id']);
-        $this->assign('userInfo', $this->userInfo);
-
-        target('statis/Views', 'service')->statis([
-            'city_id' => CITY_ID,
-            'user_id' => USER_ID,
-            'species' => 'city_user',
-        ]);
-
-    }
-
-    private function wechatInit() {
-        //微信基本配置
-        $target = target('wechat/Wechat', 'service')->init();
-        $jsConfig = $target->jssdk->buildConfig(['openLocation', 'getLocation', 'onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone'], false);
-        //微信分享配置
-        $share = [];
-        $share['title'] = $this->city['share_title'];
-        $share['desc'] = $this->city['share_desc'];
-        $share['image'] = $this->city['share_image'];
-        if (empty($share['image'])) {
-            $share['image'] = DOMAIN_HTTP . '/theme/default_mobile/images/logo.jpg';
-        }
-        $saleUser = target('base/Base')->table('group_recommend(A)')
-            ->join('group_user(B)', ['A.user_id', 'B.user_id'])
-            ->where([
-                'A.user_id' => $this->userInfo['user_id'],
-                'B.status' => 1,
-            ])->find();
-        if ($saleUser) {
-            $saleCode = $saleUser['code'];
-        } else {
-            $saleCode = request('sale_code');
-        }
-        $url = DOMAIN;
-        if (strpos($url, '?') === false) {
-            $url = $url . '?city=' . $this->city['label'] . '&sale_code=' . $saleCode;
-        } else {
-            $url = $url . '&city=' . $this->city['label'] . '&sale_code=' . $saleCode;
-        }
-        $share['url'] = $url;
-        $jsContent = "<script src=\"https://res.wx.qq.com/open/js/jweixin-1.0.0.js\" type=\"text/javascript\" charset=\"utf-8\"></script><script type=\"text/javascript\" charset=\"utf-8\">wx.config({$jsConfig});wx.ready(function () {var share = {title: '{$share['title']}',desc: '{$share['desc']}',link: '{$share['url']}',imgUrl: '{$share['image']}' };wx.onMenuShareTimeline(share);wx.onMenuShareAppMessage(share);wx.onMenuShareQQ(share);wx.onMenuShareWeibo(share);wx.onMenuShareQZone(share);});</script>";
-        $this->assign('wechatJs', $jsContent);
-
-
-    }
-
-    private function initShare() {
-        $share = [];
-        $share['title'] = $this->city['share_title'];
-        $share['desc'] = $this->city['share_desc'];
-        $share['image'] = $this->city['share_image'];
-        if (empty($share['image'])) {
-            $share['image'] = DOMAIN_HTTP . '/theme/default_mobile/images/logo.jpg';
-        }
-        $saleUser = target('group/GroupRecommend')->getWhereInfo([
-            'A.user_id' => $this->userInfo['user_id'],
-        ]);
-        $saleGroup = target('group/GroupUser')->getWhereInfo([
-            'A.user_id' => $this->userInfo['user_id'],
-            'A.status' => 1,
-        ]);
-        if ($saleUser && $saleGroup) {
-            $saleCode = $saleUser['code'];
-        } else {
-            $saleCode = request('sale_code');
-        }
-        $url = DOMAIN;
-        if (strpos($url, '?') === false) {
-            $url = $url . '?city=' . $this->city['label'] . '&sale_code=' . $saleCode;
-        } else {
-            $url = $url . '&city=' . $this->city['label'] . '&sale_code=' . $saleCode;
-        }
-        $share['url'] = $url;
-
-        $jsConfig = '';
-        $target = target('wechat/Wechat', 'service');
-        $target->init();
-        $jsConfig = $target->wechat()->jssdk->buildConfig(['openLocation', 'getLocation', 'onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone'], false);
-
-        $this->assign('shareInfo', $share);
-        $this->assign('shareConfigJs', $jsConfig);
-    }
-
-    protected function getTake() {
-        $data = target('group/Take', 'middle')->setParams([
-            'lat' => \dux\Dux::cookie()->get('pos_lat'),
-            'lng' => \dux\Dux::cookie()->get('pos_lng'),
-            'take_id' => \dux\Dux::cookie()->get('take'),
-            'sale_code' => request('', 'sale_code'),
-            'cityInfo' => $this->city,
-            'user_id' => $this->userInfo['user_id'],
-        ])->data()->export(function ($data) {
-            return $data;
-        });
-        $takeInfo = $data['takeList'][0];
-        $this->take = $takeInfo;
-        $this->assign('take', $takeInfo);
-    }
-
-
-    /**
-     * 获取登录信息
-     * @return bool
-     */
-    protected function getLogin() {
-        $login = \dux\Dux::cookie()->get('user_login');
-        if (empty($login)) {
-            return false;
-        }
-        if (!target('member/MemberUser')->checkUser($login['uid'], $login['token'])) {
-            return false;
-        }
-        $info = target('member/MemberUser')->getUser($login['uid'], $this->city['city_id']);
-        if (!$info) {
-            $this->error(target('member/MemberUser')->getError());
-        }
-        target('member/MemberUserLogin')->increase($login['uid'], $this->city['city_id']);
-        return $info;
     }
 
     protected function mobileDisplay($tpl = '') {
         $this->assign('city', $this->city);
         $this->assign('sysPublic', $this->publicUrl);
-        $this->siteConfig['tpl_name'] = $this->siteConfig['tpl_name'] . '_mobile';
+        $this->siteConfig['page_theme'] = $this->siteConfig['page_theme'] . '_mobile';
         $moduleName = MODULE_NAME == 'Index' ? '' : '_' . MODULE_NAME;
         $actionName = ACTION_NAME == 'index' ? '' : '_' . ACTION_NAME;
-        $tpl = 'theme/' . $this->siteConfig['tpl_name'] . '/' . APP_NAME . strtolower($tpl ? '_' . $tpl : $moduleName . $actionName);
+        $tpl = 'theme/' . $this->siteConfig['page_theme'] . '/' . APP_NAME . strtolower($tpl ? '_' . $tpl : $moduleName . $actionName);
         $this->_getView()->addTag(function () {
             return [
                 '/<!--#include\s*(.*)-->/' => [$this, 'includeFile'],
                 '/<(.*?)(src=|href=|value=|background=)[\"|\'](images\/|img\/|css\/|js\/|style\/)(.*?)[\"|\'](.*?)>/' => [$this, 'parseLoad'],
-                '/__TPL__/' => ROOT_URL . '/theme/' . $this->siteConfig['tpl_name'],
+                '/__TPL__/' => ROOT_URL . '/theme/' . $this->siteConfig['page_theme'],
                 '/__ROOT__/' => ROOT_URL,
             ];
         });
@@ -259,13 +75,13 @@ class SiteMobile extends \app\base\controller\BaseController {
             }
         }
         $params = implode(',', $params);
-        $html = "<?php \$__Template->render(\"" . 'theme/' . $this->siteConfig['tpl_name'] . "/" . $file . "\", [" . $params . "]); ?>";
+        $html = "<?php \$__Template->render(\"" . 'theme/' . $this->siteConfig['page_theme'] . "/" . $file . "\", [" . $params . "]); ?>";
         return $html;
     }
 
     public function parseLoad($var) {
         $file = $var[3] . $var[4];
-        $url = 'theme' . '/' . $this->siteConfig['tpl_name'];
+        $url = 'theme' . '/' . $this->siteConfig['page_theme'];
         if (substr($url, 0, 1) == '.') {
             $url = substr($url, 1);
         }
