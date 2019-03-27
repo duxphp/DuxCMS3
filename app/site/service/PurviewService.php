@@ -36,6 +36,26 @@ class PurviewService {
                     'del' => '删除',
                 ],
             ],
+            'Diy' => [
+                'name' => '自定义列表',
+                'auth' => [
+                    'index' => '列表',
+                    'add' => '添加',
+                    'edit' => '编辑',
+                    'status' => '状态',
+                    'del' => '删除',
+                ],
+            ],
+            'DiyData' => [
+                'name' => '自定义列表内容',
+                'auth' => [
+                    'index' => '列表',
+                    'add' => '添加',
+                    'edit' => '编辑',
+                    'status' => '状态',
+                    'del' => '删除',
+                ],
+            ],
         ];
     }
 

@@ -1,0 +1,130 @@
+<div class="uk-card uk-card-small uk-card-default dux-panel">
+    <div class="uk-card-header">{$assignName}内容</div>
+    <div class="uk-card-body">
+        <form class="dux-form uk-form  uk-form-horizontal  " data-dux="form-bind" method="post">
+            <fieldset>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">标题</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="text" name="title" value="{$info.title}" placeholder="请输入内容标题"
+                            required>
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">封面图</label>
+                    <div class="uk-form-controls">
+                        <div class="uk-input-group">
+                            <input type="text" class="uk-input" name="image" id="image" value="{$info.image}"
+                                placeholder="可选,上传导航封面图">
+                            <span class="uk-input-group-btn">
+                                <button class="uk-button uk-button-default" type="button" data-dux="form-upload"
+                                    data-target="#image" data-type="jpg,png,bmp"><i class="fa fa-upload"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">编辑器</label>
+                    <?php if(!isset($info['editor'])) $info[ 'editor']=1 ; ?>
+                    <div class="uk-form-controls uk-form-controls-text">
+                        <div class="uk-grid">
+                            <label>
+                                <!--if{$info['editor']}-->
+                                <input name="editor" value="1" checked="checked" type="radio" class="uk-radio editor">
+                                <!--{else}-->
+                                <input name="editor" value="1" type="radio" class="uk-radio editor">
+                                <!--{/if}-->
+                                使用
+                            </label>
+
+                            <label>
+                                <!--if{!$info['editor']}-->
+                                <input name="editor" checked="checked" value="0" type="radio" class="uk-radio editor">
+                                <!--{else}-->
+                                <input name="editor" value="0" type="radio" class="uk-radio editor">
+                                <!--{/if}-->
+                                不使用
+                            </label></div>
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">内容</label>
+                    <div class="uk-form-controls">
+                        <textarea class="uk-textarea" id="content" name="content"
+                            style="height: 300px">{$info.content}</textarea>
+                    </div>
+                </div>
+                <!--loop{$fieldsData as $vo}-->
+
+                <!--if{$vo.type == 'input'}-->
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">{$vo.title}</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="text" name="expend[{$vo.key}]" value="{$vo.value}">
+                    </div>
+                </div>
+                <!--{/if}-->
+
+                <!--if{$vo.type == 'upload'}-->
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">{$vo.title}</label>
+                    <div class="uk-form-controls">
+                        <div class="uk-input-group">
+                            <input type="text" class="uk-input" name="expend[{$vo.key}]" id="{$vo.key}" value="{$vo.value}">
+                            <span class="uk-input-group-btn">
+                                <button class="uk-button uk-button-default" type="button" data-dux="form-upload"
+                                    data-target="#{$vo.key}" data-type="*"><i class="fa fa-upload"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!--{/if}-->
+
+                <!--if{$vo.type == 'text'}-->
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">{$vo.title}</label>
+                    <div class="uk-form-controls">
+                        <textarea class="uk-textarea" name="expend[{$vo.key}]" style="height:100px">{$vo.value}</textarea>
+                    </div>
+                </div>
+                <!--{/if}-->
+
+                <!--if{$vo.type == 'editor'}-->
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">{$vo.title}</label>
+                    <div class="uk-form-controls">
+                        <textarea class="uk-textarea" data-dux="form-editor" name="expend[{$vo.key}]" style="height:400px">{$vo.value}</textarea>
+                    </div>
+                </div>
+                <!--{/if}-->
+
+                <!--{/loop}-->
+                <div class="uk-form-group">
+                    <div class="uk-form-controls">
+                        <input type="hidden" name="diy_id" value="{$diyId}">
+                        <input type="hidden" name="data_id" value="{$info.data_id}">
+                        <button class="uk-button uk-button-primary" type="submit" disabled>保存</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+<script>
+    Do('base', 'editor', function () {
+        $('.editor').on('click', function () {
+            editor($(this).val());
+        });
+        var editor = function (status) {
+            if (status == 1) {
+                form.editor($('#content')[0]);
+            } else {
+                tinymce.activeEditor.destroy();
+            }
+        };
+        editor({intval($info.editor)});
+        });
+</script>

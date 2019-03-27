@@ -1,0 +1,35 @@
+
+    <div class="uk-card uk-card-small uk-card-default dux-panel">
+        <div class="uk-card-header">{$assignName}列表</div>
+        <div class="uk-card-body">
+            <form class="dux-form uk-form  uk-form-horizontal  " data-dux="form-bind" method="post">
+                <fieldset>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">列表描述</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="name" value="{$info.name}" placeholder="请输入列表描述" required>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                            <label class=" uk-form-label">扩展字段</label>
+                            <div class="uk-form-controls">
+                                <textarea class="uk-textarea" id="fields" name="fields" style="height: 300px">{$info.fields}</textarea>
+                                <div class="uk-form-help">
+                                    针对默认字段除外提供的扩展字段，基本格式为"描述|字段名:字段类型"，每行一个字段，字段类型不填写为默认类型，类型支持input、upload、text、editor
+                                </div>
+                            </div>
+                        </div>
+
+                    
+                    <div class="uk-form-group">
+                        <div class="uk-form-controls">
+                            <input type="hidden" name="diy_id" value="{$info.diy_id}">
+                            <button class="uk-button uk-button-primary" type="submit" disabled>保存</button>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+        </div>
+    </div>

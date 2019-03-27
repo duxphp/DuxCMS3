@@ -26,14 +26,29 @@ class MenuService {
                                 'url' => url('site/Search/index'),
                                 'order' => 1,
                             ],
-                            array(
+                            [
                                 'name' => '碎片管理',
-                                'icon' => 'bars',
                                 'url' => url('site/Fragment/index'),
-                                'order' => 2
-                            ),
+                                'order' => 2,
+                            ],
                         ],
                     ],
+                    [
+                        'name' => '自定义列表',
+                        'order' => 1,
+                        'menu' => [
+                            [
+                                'name' => '列表管理',
+                                'url' => url('site/Diy/index'),
+                                'order' => 0,
+                            ],
+                            [
+                                'name' => '内容管理',
+                                'url' => url('site/DiyData/index'),
+                                'order' => 1,
+                            ],
+                        ],
+                    ]
                 ],
             ],
         ];
