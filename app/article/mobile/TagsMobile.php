@@ -1,36 +1,35 @@
 <?php
 
 /**
- * 文章搜索
+ * Tag文章
  */
 
-namespace app\article\controller;
+namespace app\article\mobile;
 
-class SearchController extends \app\base\controller\SiteController {
+class TagsMobile extends \app\base\mobile\SiteMobile {
 
     protected $_middle = 'article/List';
 
     protected $urlParams = [];
 
-    public function __construct() {
-        parent::__construct();
+    public function init() {
         $limit = request('get', 'limit');
-        $keyword = request('get', 'keyword', '', 'urldecode');
-        if(empty($keyword)) {
-            $this->error('请输入搜索关键词!');
+        $tag = request('get', 'name');
+        if(empty($tag)) {
+            $this->error('标签不存在!');
         }
         $this->urlParams = [
-            'keyword' => $keyword,
+            'tag' => $tag,
             'limit' => $limit,
         ];
     }
 
     public function index() {
-        target($this->_middle, 'middle')->setParams($this->urlParams)->meta($this->urlParams['keyword'] .' - 文章搜索', '文章搜索', url('index', ['keyword' => $this->urlParams['keyword']]))->data()->export(function ($data) {
+        target($this->_middle, 'middle')->setParams($this->urlParams)->meta($this->urlParams['tag'] .'相关文章', $this->urlParams['tag'], url('index', ['name' => $this->urlParams['tag']]))->data()->export(function ($data) {
             $this->assign($data);
             $this->assign('urlParams', $this->urlParams);
             $this->assign('page', $this->htmlPage($data['pageData']['raw'], $this->urlParams));
-            $this->siteDisplay();
+            $this->mobileDisplay();
         }, function ($message, $code, $url) {
             $this->errorCallback($message, $code, $url);
         });
@@ -41,7 +40,7 @@ class SearchController extends \app\base\controller\SiteController {
             if(!empty($data['pageList'])) {
                 $this->success([
                     'data' => $data['pageList'],
-                    'page' => $data['pageData']['page']
+                    'page' => $data['pageData']['page'],
                 ]);
             }else {
                 $this->error('暂无数据');

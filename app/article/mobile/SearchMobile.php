@@ -4,18 +4,17 @@
  * 文章搜索
  */
 
-namespace app\article\controller;
+namespace app\article\mobile;
 
-class SearchController extends \app\base\controller\SiteController {
+class SearchMobile extends \app\base\mobile\SiteMobile {
 
     protected $_middle = 'article/List';
 
     protected $urlParams = [];
 
-    public function __construct() {
-        parent::__construct();
+    public function init() {
         $limit = request('get', 'limit');
-        $keyword = request('get', 'keyword', '', 'urldecode');
+        $keyword = request('get', 'keyword');
         if(empty($keyword)) {
             $this->error('请输入搜索关键词!');
         }
@@ -23,14 +22,15 @@ class SearchController extends \app\base\controller\SiteController {
             'keyword' => $keyword,
             'limit' => $limit,
         ];
+
     }
 
     public function index() {
-        target($this->_middle, 'middle')->setParams($this->urlParams)->meta($this->urlParams['keyword'] .' - 文章搜索', '文章搜索', url('index', ['keyword' => $this->urlParams['keyword']]))->data()->export(function ($data) {
+        target($this->_middle, 'middle')->setParams($this->urlParams)->meta(urldecode($this->urlParams['keyword']) .' - 文章搜索', '文章搜索', url('index', ['keyword' => urldecode($this->urlParams['keyword'])]))->data()->export(function ($data) {
             $this->assign($data);
             $this->assign('urlParams', $this->urlParams);
             $this->assign('page', $this->htmlPage($data['pageData']['raw'], $this->urlParams));
-            $this->siteDisplay();
+            $this->mobileDisplay();
         }, function ($message, $code, $url) {
             $this->errorCallback($message, $code, $url);
         });

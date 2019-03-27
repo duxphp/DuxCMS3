@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<!--#include file="head.html"-->
+
+<div class="uk-container">
+<div class="dux-page-banner">
+    <div class="banner-inner">
+        <h2>
+            
+        </h2>
+    </div>
+</div>
+</div>
+
+<div class="uk-container">
+    <article class="uk-article dux-article">
+        <ul class="uk-breadcrumb">
+            <li><a href="__ROOT__/">首页</a></li>
+            <!--loop{$pageInfo.crumb as $vo}-->
+            <li><a href="{$vo.url}">{$vo.name}</a></li>
+            <!--{/loop}-->
+        </ul>
+        <h1 class="uk-text-center">{$info.title}</h1>
+        <p class="uk-text-center uk-article-meta">时间：{date('Y-m-d', $info.create_time)}   阅读：{$info.virtual_view + $info.view}</p>
+        <!--if{$info.image}-->
+        <p class="uk-text-lead">
+            <img src="{$info.image}" width="100%">
+        </p>
+        <!--{/if}-->
+        <div class="uk-text-middle article-content">
+            {html_out($info.content)}
+        </div>
+    </article>
+</div>
+
+<!--#include file="foot.html"-->
+</body>
+
+</html>

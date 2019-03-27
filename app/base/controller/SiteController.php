@@ -24,7 +24,7 @@ class SiteController extends \app\base\controller\BaseController {
         }
         $detect = new \dux\vendor\MobileDetect();
         $modules = \dux\Config::get('dux.module');
-        if (LAYER_NAME == 'controller' && ($detect->isMobile() || $detect->isTablet()) && $this->siteConfig['config_mobile_status'] && $this->mobileJump) {
+        if (LAYER_NAME == 'controller' && ($detect->isMobile() || $detect->isTablet()) && $this->siteConfig['page_mobile'] && $this->mobileJump) {
             $params = explode('/', $_SERVER["REQUEST_URI"], 3);
             if ($params[1] == $modules['controller']) {
                 $url = $modules['mobile'] . '/' . $params[2];

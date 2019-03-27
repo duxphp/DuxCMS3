@@ -72,6 +72,32 @@
                     </div>
 
                     <div class="uk-form-group">
+                        <label class="uk-form-label">列表模板</label>
+                        <div class="uk-form-controls">
+                            <div class="uk-input-group">
+                                <input type="text"  class="uk-input" name="tpl_class" id="tpl_class" value="{$info.tpl_class}"
+                                       placeholder="可选,针对传统内容模式设置模板">
+                                        <span class="uk-input-group-label">
+                                            .html
+                                        </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class="uk-form-label">内容模板</label>
+                        <div class="uk-form-controls">
+                            <div class="uk-input-group">
+                                <input type="text"  class="uk-input" name="tpl_content" id="tpl_content" value="{$info.tpl_content}"
+                                       placeholder="可选,针对传统内容模式设置模板">
+                                        <span class="uk-input-group-label">
+                                            .html
+                                        </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
                         <div class="uk-form-controls">
                             <input type="hidden" name="class_id" value="{$info.class_id}">
                             <button class="uk-button uk-button-primary" type="submit" disabled>保存</button>

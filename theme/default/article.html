@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html>
 <!--#include file="head.html"-->
@@ -10,29 +9,29 @@
             </h2>
         </div>
     </div>
-    </div>
-
+</div>
 
 <div class="uk-container">
-
-        <ul class="uk-breadcrumb">
-                <li><a href="__ROOT__/">首页</a></li>
-                <!--loop{$pageInfo.crumb as $vo}-->
-                <li><a href="{$vo.url}">{$vo.name}</a></li>
-                <!--{/loop}-->
-            </ul>
-
+    <ul class="uk-breadcrumb">
+        <li><a href="__ROOT__/">首页</a></li>
+        <!--loop{$pageInfo.crumb as $vo}-->
+        <li><a href="{$vo.url}">{$vo.name}</a></li>
+        <!--{/loop}-->
+    </ul>
     <div class="uk-padding-small">
-        
+
         <ul class="uk-list uk-list-divider  uk-list-large dux-list">
             <!--loop{$pageList as $list}-->
             <li>
-                <div class="uk-flex-middle uk-flex" >
-                        <div class=" uk-flex-first">
-                            <a href="{$list.url}"><img src="{$list.image}" width="250" alt="{$list.title}"></a>
-                        </div>
+                <div class="uk-flex-middle uk-flex">
+                    <div class=" uk-flex-first">
+                        <a href="{url('article/info/index', ['id' => $list.article_id])}"><img src="{$list.image}"
+                                width="250" alt="{$list.title}"></a>
+                    </div>
                     <div class="uk-flex-1 uk-margin-left">
-                        <a class="uk-link-reset" href="{$list.url}"><h3>{$list.title}</h3></a>
+                        <a class="uk-link-reset" href="{url('article/info/index', ['id' => $list.article_id])}">
+                            <h3>{$list.title}</h3>
+                        </a>
                         <p>{str_len($list.description, 100)}</p>
                         <div class="uk-text-meta">{date('Y-m-d H:i', $list.create_time)}</div>
                     </div>
@@ -51,4 +50,5 @@
 
 <!--#include file="foot.html"-->
 </body>
+
 </html>
