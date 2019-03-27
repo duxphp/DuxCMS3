@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.25)
 # Database: duxcms3
-# Generation Time: 2019-03-26 01:54:11 +0000
+# Generation Time: 2019-03-27 09:06:53 +0000
 # ************************************************************
 
 
@@ -46,6 +46,15 @@ CREATE TABLE `dux_article` (
   KEY `class_id` (`class_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+LOCK TABLES `dux_article` WRITE;
+/*!40000 ALTER TABLE `dux_article` DISABLE KEYS */;
+
+INSERT INTO `dux_article` (`article_id`, `class_id`, `title`, `keyword`, `description`, `image`, `auth`, `content`, `tags_id`, `create_time`, `update_time`, `virtual_view`, `view`, `status`, `sort`)
+VALUES
+	(1,1,'这是一篇默认的文章','','欢迎使用DuxCMS作为你的文章管理系统，请开始编写第一篇内容吧...','/theme/default/images/show1.webp','','&lt;p&gt;欢迎使用DuxCMS作为你的文章管理系统，请开始编写第一篇内容吧&lt;/p&gt;','',1553588391,0,0,45,1,0);
+
+/*!40000 ALTER TABLE `dux_article` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table dux_article_class
@@ -61,6 +70,8 @@ CREATE TABLE `dux_article_class` (
   `image` varchar(250) DEFAULT '',
   `keyword` varchar(250) DEFAULT '',
   `description` varchar(250) DEFAULT '',
+  `tpl_class` varchar(250) DEFAULT '',
+  `tpl_content` varchar(250) DEFAULT '',
   `status` tinyint(1) NOT NULL DEFAULT '1',
   `sort` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`class_id`),
@@ -70,9 +81,9 @@ CREATE TABLE `dux_article_class` (
 LOCK TABLES `dux_article_class` WRITE;
 /*!40000 ALTER TABLE `dux_article_class` DISABLE KEYS */;
 
-INSERT INTO `dux_article_class` (`class_id`, `parent_id`, `name`, `subname`, `image`, `keyword`, `description`, `status`, `sort`)
+INSERT INTO `dux_article_class` (`class_id`, `parent_id`, `name`, `subname`, `image`, `keyword`, `description`, `tpl_class`, `tpl_content`, `status`, `sort`)
 VALUES
-	(1,0,'默认分类','','','','',1,0);
+	(1,0,'默认分类','','','','','','',1,0);
 
 /*!40000 ALTER TABLE `dux_article_class` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -91,6 +102,7 @@ CREATE TABLE `dux_page` (
   `content` longtext,
   `keyword` varchar(250) DEFAULT '',
   `description` varchar(250) DEFAULT '',
+  `tpl` varchar(250) DEFAULT '',
   `create_time` int(10) NOT NULL DEFAULT '0',
   `update_time` int(10) NOT NULL DEFAULT '0',
   `virtual_view` int(10) NOT NULL DEFAULT '0',
@@ -121,13 +133,13 @@ LOCK TABLES `dux_site_config` WRITE;
 
 INSERT INTO `dux_site_config` (`config_id`, `name`, `content`, `description`)
 VALUES
-	(6,'info_title','DuxCMS','站点标题'),
+	(6,'info_title','DuxCMS内容管理系统','站点标题'),
 	(7,'info_keyword','DuxCMS,PHP,CMS,内容管理系统,PHP开源','站点关键词'),
-	(8,'info_desc','DuxCMS内容管理系统','站点描述'),
+	(8,'info_desc','DuxCMS内容管理系统是一款基于PHP+Mysql的简单内容管理框架','站点描述'),
 	(9,'info_copyright','Copyright@2016-2018 www.duxcms.com  All Rights Reserved.','版权信息'),
 	(10,'info_email','admin@duxphp.com','站点邮箱'),
 	(11,'info_tel','','站点电话'),
-	(16,'info_name','DuxCMS','站点名称'),
+	(16,'info_name','DuxCMS内容管理系统','站点名称'),
 	(17,'site_status','1','站点状态'),
 	(19,'site_error','站定维护中，本次维护预计需要4个小时，请谅解。','关闭说明'),
 	(21,'style_primary','#009944',''),
@@ -146,6 +158,88 @@ VALUES
 	(34,'page_theme','default','');
 
 /*!40000 ALTER TABLE `dux_site_config` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table dux_site_diy
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `dux_site_diy`;
+
+CREATE TABLE `dux_site_diy` (
+  `diy_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(250) DEFAULT '',
+  `fields` text,
+  PRIMARY KEY (`diy_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `dux_site_diy` WRITE;
+/*!40000 ALTER TABLE `dux_site_diy` DISABLE KEYS */;
+
+INSERT INTO `dux_site_diy` (`diy_id`, `name`, `fields`)
+VALUES
+	(1,'产品介绍','');
+
+/*!40000 ALTER TABLE `dux_site_diy` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table dux_site_diy_data
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `dux_site_diy_data`;
+
+CREATE TABLE `dux_site_diy_data` (
+  `data_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `diy_id` int(10) NOT NULL DEFAULT '0',
+  `title` varchar(250) DEFAULT '',
+  `image` varchar(250) DEFAULT '',
+  `content` text,
+  `editor` tinyint(1) NOT NULL DEFAULT '0',
+  `expend` text,
+  `sort` int(10) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`data_id`),
+  KEY `diy_id` (`diy_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `dux_site_diy_data` WRITE;
+/*!40000 ALTER TABLE `dux_site_diy_data` DISABLE KEYS */;
+
+INSERT INTO `dux_site_diy_data` (`data_id`, `diy_id`, `title`, `image`, `content`, `editor`, `expend`, `sort`)
+VALUES
+	(1,1,'简单','/theme/default/images/info-easy.svg','简单的开发模式与清晰的架构，让您快速上手',0,'',0),
+	(2,1,'易用','/theme/default/images/info-use.svg','基于人性化的UI设置，让您的操作得心应手',0,NULL,0),
+	(3,1,'强大','/theme/default/images/info-strong.svg','引入composer同时封装基础类库，让您随用随取',0,NULL,0),
+	(4,1,'开源','/theme/default/images/info-free.svg','遵循标准的Zlib开源协议，协议内可免费用于商业用途',0,NULL,0);
+
+/*!40000 ALTER TABLE `dux_site_diy_data` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table dux_site_fragment
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `dux_site_fragment`;
+
+CREATE TABLE `dux_site_fragment` (
+  `fragment_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `label` varchar(10) DEFAULT '',
+  `title` varchar(250) NOT NULL DEFAULT '' COMMENT '描述',
+  `content` text NOT NULL COMMENT '内容',
+  `editor` tinyint(1) NOT NULL DEFAULT '0' COMMENT '编辑器',
+  PRIMARY KEY (`fragment_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+LOCK TABLES `dux_site_fragment` WRITE;
+/*!40000 ALTER TABLE `dux_site_fragment` DISABLE KEYS */;
+
+INSERT INTO `dux_site_fragment` (`fragment_id`, `label`, `title`, `content`, `editor`)
+VALUES
+	(1,'','横幅标题','欢迎使用DuxCMS内容管理系统',0),
+	(2,'','横幅描述','这是一款面向开发者免费开源的管理框架',0),
+	(3,'','首页描述','DuxCMS 是一款基于 PHP + Mysql 构建的轻量级内容管理框架，致力于为开发者提供快速开发所需要的基本架构功能，产品遵循标准开源协议，让您的开发无后顾之忧',0);
+
+/*!40000 ALTER TABLE `dux_site_fragment` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
@@ -302,7 +396,7 @@ LOCK TABLES `dux_system_role` WRITE;
 
 INSERT INTO `dux_system_role` (`role_id`, `name`, `description`, `purview`)
 VALUES
-	(1,'管理员','系统后台管理员','a:234:{i:0;s:21:\"article.Content.index\";i:1;s:19:\"article.Content.add\";i:2;s:20:\"article.Content.edit\";i:3;s:22:\"article.Content.status\";i:4;s:19:\"article.Content.del\";i:5;s:19:\"article.Class.index\";i:6;s:17:\"article.Class.add\";i:7;s:18:\"article.Class.edit\";i:8;s:20:\"article.Class.status\";i:9;s:17:\"article.Class.del\";i:10;s:22:\"integral.Content.index\";i:11;s:20:\"integral.Content.add\";i:12;s:21:\"integral.Content.edit\";i:13;s:23:\"integral.Content.status\";i:14;s:20:\"integral.Content.del\";i:15;s:20:\"integral.Class.index\";i:16;s:18:\"integral.Class.add\";i:17;s:19:\"integral.Class.edit\";i:18;s:21:\"integral.Class.status\";i:19;s:18:\"integral.Class.del\";i:20;s:20:\"integral.Order.index\";i:21;s:19:\"integral.Order.info\";i:22;s:22:\"integral.Comment.index\";i:23;s:23:\"integral.Comment.status\";i:24;s:26:\"integral.OrderStatis.index\";i:25;s:18:\"mall.Content.index\";i:26;s:16:\"mall.Content.add\";i:27;s:17:\"mall.Content.edit\";i:28;s:19:\"mall.Content.status\";i:29;s:16:\"mall.Content.del\";i:30;s:16:\"mall.Class.index\";i:31;s:14:\"mall.Class.add\";i:32;s:15:\"mall.Class.edit\";i:33;s:17:\"mall.Class.status\";i:34;s:14:\"mall.Class.del\";i:35;s:16:\"mall.Order.index\";i:36;s:15:\"mall.Order.info\";i:37;s:18:\"mall.Comment.index\";i:38;s:19:\"mall.Comment.status\";i:39;s:22:\"mall.SellRanking.index\";i:40;s:19:\"mall.SellList.index\";i:41;s:22:\"marketing.Coupon.index\";i:42;s:20:\"marketing.Coupon.add\";i:43;s:21:\"marketing.Coupon.edit\";i:44;s:23:\"marketing.Coupon.status\";i:45;s:20:\"marketing.Coupon.del\";i:46;s:27:\"marketing.CouponClass.index\";i:47;s:25:\"marketing.CouponClass.add\";i:48;s:26:\"marketing.CouponClass.edit\";i:49;s:28:\"marketing.CouponClass.status\";i:50;s:25:\"marketing.CouponClass.del\";i:51;s:25:\"marketing.CouponLog.index\";i:52;s:23:\"marketing.CouponLog.del\";i:53;s:23:\"member.MemberUser.index\";i:54;s:21:\"member.MemberUser.add\";i:55;s:22:\"member.MemberUser.edit\";i:56;s:24:\"member.MemberUser.status\";i:57;s:21:\"member.MemberUser.del\";i:58;s:24:\"member.MemberGrade.index\";i:59;s:22:\"member.MemberGrade.add\";i:60;s:23:\"member.MemberGrade.edit\";i:61;s:25:\"member.MemberGrade.status\";i:62;s:22:\"member.MemberGrade.del\";i:63;s:23:\"member.MemberReal.index\";i:64;s:23:\"member.MemberReal.check\";i:65;s:23:\"member.MemberRole.index\";i:66;s:21:\"member.MemberRole.add\";i:67;s:22:\"member.MemberRole.edit\";i:68;s:21:\"member.MemberRole.del\";i:69;s:23:\"member.PayAccount.index\";i:70;s:19:\"member.PayLog.index\";i:71;s:20:\"member.PayCash.index\";i:72;s:20:\"member.PayCard.index\";i:73;s:18:\"member.PayCard.add\";i:74;s:19:\"member.PayCard.edit\";i:75;s:18:\"member.PayCard.del\";i:76;s:20:\"member.PayConf.index\";i:77;s:22:\"member.PayConf.setting\";i:78;s:20:\"member.PayBank.index\";i:79;s:18:\"member.PayBank.add\";i:80;s:19:\"member.PayBank.edit\";i:81;s:18:\"member.PayBank.del\";i:82;s:26:\"member.PointsAccount.index\";i:83;s:22:\"member.PointsLog.index\";i:84;s:25:\"member.MemberConfig.index\";i:85;s:23:\"member.MemberConfig.reg\";i:86;s:25:\"member.MemberVerify.index\";i:87;s:26:\"member.MemberVerify.status\";i:88;s:23:\"member.MemberVerify.del\";i:89;s:26:\"member.MemberRanking.index\";i:90;s:24:\"member.MemberTrend.index\";i:91;s:18:\"order.Config.index\";i:92;s:25:\"order.ConfigExpress.index\";i:93;s:25:\"order.ConfigPrinter.index\";i:94;s:23:\"order.ConfigPrinter.add\";i:95;s:24:\"order.ConfigPrinter.edit\";i:96;s:26:\"order.ConfigPrinter.status\";i:97;s:23:\"order.ConfigPrinter.del\";i:98;s:26:\"order.ConfigDelivery.index\";i:99;s:25:\"order.ConfigWaybill.index\";i:100;s:27:\"order.ConfigWaybill.setting\";i:101;s:18:\"order.Parcel.index\";i:102;s:18:\"order.Parcel.print\";i:103;s:19:\"order.Parcel.status\";i:104;s:16:\"order.Parcel.del\";i:105;s:20:\"order.Delivery.index\";i:106;s:20:\"order.Delivery.print\";i:107;s:21:\"order.Delivery.status\";i:108;s:18:\"order.Delivery.del\";i:109;s:19:\"order.Receipt.index\";i:110;s:20:\"order.Receipt.status\";i:111;s:17:\"order.Receipt.del\";i:112;s:19:\"order.Comment.index\";i:113;s:18:\"order.Refund.index\";i:114;s:17:\"order.Refund.info\";i:115;s:16:\"order.Take.index\";i:116;s:14:\"order.Take.add\";i:117;s:15:\"order.Take.edit\";i:118;s:17:\"order.Take.status\";i:119;s:14:\"order.Take.del\";i:120;s:19:\"order.Invoice.index\";i:121;s:20:\"order.Invoice.status\";i:122;s:17:\"order.Invoice.del\";i:123;s:24:\"order.InvoiceClass.index\";i:124;s:22:\"order.InvoiceClass.add\";i:125;s:23:\"order.InvoiceClass.edit\";i:126;s:25:\"order.InvoiceClass.status\";i:127;s:22:\"order.InvoiceClass.del\";i:128;s:23:\"order.OrderStatis.index\";i:129;s:17:\"sale.Config.index\";i:130;s:23:\"sale.ConfigNotice.index\";i:131;s:15:\"sale.User.index\";i:132;s:20:\"sale.UserApply.index\";i:133;s:20:\"sale.UserLevel.index\";i:134;s:16:\"sale.Order.index\";i:135;s:18:\"sale.Account.index\";i:136;s:21:\"sale.AccountLog.index\";i:137;s:22:\"sale.AccountCash.index\";i:138;s:22:\"sale.SaleRanking.index\";i:139;s:21:\"sale.SaleStatis.index\";i:140;s:20:\"sale.SaleTrend.index\";i:141;s:16:\"shop.Brand.index\";i:142;s:14:\"shop.Brand.add\";i:143;s:15:\"shop.Brand.edit\";i:144;s:17:\"shop.Brand.status\";i:145;s:14:\"shop.Brand.del\";i:146;s:21:\"shop.BrandApply.index\";i:147;s:19:\"shop.BrandApply.add\";i:148;s:20:\"shop.BrandApply.edit\";i:149;s:22:\"shop.BrandApply.status\";i:150;s:19:\"shop.BrandApply.del\";i:151;s:24:\"shop.BrandContract.index\";i:152;s:22:\"shop.BrandContract.add\";i:153;s:23:\"shop.BrandContract.edit\";i:154;s:25:\"shop.BrandContract.status\";i:155;s:22:\"shop.BrandContract.del\";i:156;s:15:\"shop.Spec.index\";i:157;s:13:\"shop.Spec.add\";i:158;s:14:\"shop.Spec.edit\";i:159;s:16:\"shop.Spec.status\";i:160;s:13:\"shop.Spec.del\";i:161;s:20:\"shop.SpecGroup.index\";i:162;s:18:\"shop.SpecGroup.add\";i:163;s:19:\"shop.SpecGroup.edit\";i:164;s:21:\"shop.SpecGroup.status\";i:165;s:18:\"shop.SpecGroup.del\";i:166;s:17:\"shop.Config.index\";i:167;s:17:\"site.Config.index\";i:168;s:15:\"site.Config.tpl\";i:169;s:17:\"site.Search.index\";i:170;s:15:\"site.Search.add\";i:171;s:16:\"site.Search.edit\";i:172;s:15:\"site.Search.del\";i:173;s:14:\"site.Tpl.index\";i:174;s:12:\"site.Tpl.add\";i:175;s:13:\"site.Tpl.edit\";i:176;s:12:\"site.Tpl.del\";i:177;s:22:\"statis.SiteViews.index\";i:178;s:18:\"system.Index.index\";i:179;s:21:\"system.Index.userData\";i:180;s:19:\"system.Notice.index\";i:181;s:17:\"system.Notice.del\";i:182;s:19:\"system.Update.index\";i:183;s:19:\"system.Config.index\";i:184;s:18:\"system.Config.user\";i:185;s:18:\"system.Config.info\";i:186;s:20:\"system.Config.upload\";i:187;s:25:\"system.ConfigManage.index\";i:188;s:23:\"system.ConfigManage.add\";i:189;s:24:\"system.ConfigManage.edit\";i:190;s:26:\"system.ConfigManage.status\";i:191;s:23:\"system.ConfigManage.del\";i:192;s:22:\"system.ConfigApi.index\";i:193;s:20:\"system.ConfigApi.add\";i:194;s:21:\"system.ConfigApi.edit\";i:195;s:23:\"system.ConfigApi.status\";i:196;s:20:\"system.ConfigApi.del\";i:197;s:25:\"system.ConfigUpload.index\";i:198;s:24:\"system.ConfigUpload.edit\";i:199;s:17:\"system.User.index\";i:200;s:15:\"system.User.add\";i:201;s:16:\"system.User.edit\";i:202;s:18:\"system.User.status\";i:203;s:15:\"system.User.del\";i:204;s:17:\"system.Role.index\";i:205;s:15:\"system.Role.add\";i:206;s:16:\"system.Role.edit\";i:207;s:15:\"system.Role.del\";i:208;s:18:\"system.Debug.index\";i:209;s:16:\"system.Debug.del\";i:210;s:22:\"system.SystemLog.index\";i:211;s:20:\"system.SystemLog.del\";i:212;s:24:\"system.Application.index\";i:213;s:22:\"system.Application.add\";i:214;s:23:\"system.Application.edit\";i:215;s:22:\"system.Application.del\";i:216;s:20:\"tools.SendData.index\";i:217;s:16:\"tools.Send.index\";i:218;s:14:\"tools.Send.add\";i:219;s:15:\"tools.Send.info\";i:220;s:20:\"tools.SendConf.index\";i:221;s:22:\"tools.SendConf.setting\";i:222;s:19:\"tools.SendTpl.index\";i:223;s:17:\"tools.SendTpl.add\";i:224;s:18:\"tools.SendTpl.edit\";i:225;s:17:\"tools.SendTpl.del\";i:226;s:23:\"tools.SendDefault.index\";i:227;s:17:\"tools.Label.index\";i:228;s:17:\"tools.Queue.index\";i:229;s:21:\"tools.QueueConf.index\";i:230;s:25:\"wechat.WechatConfig.index\";i:231;s:23:\"wechat.MenuConfig.index\";i:232;s:26:\"wechat.MiniappConfig.index\";i:233;s:22:\"wechat.AppConfig.index\";}');
+	(1,'管理员','系统后台管理员','a:93:{i:0;s:21:\"article.Content.index\";i:1;s:19:\"article.Content.add\";i:2;s:20:\"article.Content.edit\";i:3;s:22:\"article.Content.status\";i:4;s:19:\"article.Content.del\";i:5;s:19:\"article.Class.index\";i:6;s:17:\"article.Class.add\";i:7;s:18:\"article.Class.edit\";i:8;s:20:\"article.Class.status\";i:9;s:17:\"article.Class.del\";i:10;s:15:\"page.Page.index\";i:11;s:13:\"page.Page.add\";i:12;s:14:\"page.Page.edit\";i:13;s:16:\"page.Page.status\";i:14;s:13:\"page.Page.del\";i:15;s:17:\"site.Config.index\";i:16;s:15:\"site.Config.tpl\";i:17;s:17:\"site.Search.index\";i:18;s:15:\"site.Search.add\";i:19;s:16:\"site.Search.edit\";i:20;s:15:\"site.Search.del\";i:21;s:19:\"site.Fragment.index\";i:22;s:17:\"site.Fragment.add\";i:23;s:18:\"site.Fragment.edit\";i:24;s:20:\"site.Fragment.status\";i:25;s:17:\"site.Fragment.del\";i:26;s:14:\"site.Diy.index\";i:27;s:12:\"site.Diy.add\";i:28;s:13:\"site.Diy.edit\";i:29;s:15:\"site.Diy.status\";i:30;s:12:\"site.Diy.del\";i:31;s:18:\"site.DiyData.index\";i:32;s:16:\"site.DiyData.add\";i:33;s:17:\"site.DiyData.edit\";i:34;s:19:\"site.DiyData.status\";i:35;s:16:\"site.DiyData.del\";i:36;s:22:\"statis.SiteViews.index\";i:37;s:18:\"system.Index.index\";i:38;s:21:\"system.Index.userData\";i:39;s:19:\"system.Notice.index\";i:40;s:17:\"system.Notice.del\";i:41;s:19:\"system.Update.index\";i:42;s:19:\"system.Config.index\";i:43;s:18:\"system.Config.user\";i:44;s:18:\"system.Config.info\";i:45;s:20:\"system.Config.upload\";i:46;s:25:\"system.ConfigManage.index\";i:47;s:23:\"system.ConfigManage.add\";i:48;s:24:\"system.ConfigManage.edit\";i:49;s:26:\"system.ConfigManage.status\";i:50;s:23:\"system.ConfigManage.del\";i:51;s:22:\"system.ConfigApi.index\";i:52;s:20:\"system.ConfigApi.add\";i:53;s:21:\"system.ConfigApi.edit\";i:54;s:23:\"system.ConfigApi.status\";i:55;s:20:\"system.ConfigApi.del\";i:56;s:25:\"system.ConfigUpload.index\";i:57;s:24:\"system.ConfigUpload.edit\";i:58;s:17:\"system.User.index\";i:59;s:15:\"system.User.add\";i:60;s:16:\"system.User.edit\";i:61;s:18:\"system.User.status\";i:62;s:15:\"system.User.del\";i:63;s:17:\"system.Role.index\";i:64;s:15:\"system.Role.add\";i:65;s:16:\"system.Role.edit\";i:66;s:15:\"system.Role.del\";i:67;s:18:\"system.Debug.index\";i:68;s:16:\"system.Debug.del\";i:69;s:22:\"system.SystemLog.index\";i:70;s:20:\"system.SystemLog.del\";i:71;s:24:\"system.Application.index\";i:72;s:22:\"system.Application.add\";i:73;s:23:\"system.Application.edit\";i:74;s:22:\"system.Application.del\";i:75;s:20:\"tools.SendData.index\";i:76;s:16:\"tools.Send.index\";i:77;s:14:\"tools.Send.add\";i:78;s:15:\"tools.Send.info\";i:79;s:20:\"tools.SendConf.index\";i:80;s:22:\"tools.SendConf.setting\";i:81;s:19:\"tools.SendTpl.index\";i:82;s:17:\"tools.SendTpl.add\";i:83;s:18:\"tools.SendTpl.edit\";i:84;s:17:\"tools.SendTpl.del\";i:85;s:23:\"tools.SendDefault.index\";i:86;s:17:\"tools.Label.index\";i:87;s:17:\"tools.Queue.index\";i:88;s:21:\"tools.QueueConf.index\";i:89;s:25:\"wechat.WechatConfig.index\";i:90;s:23:\"wechat.MenuConfig.index\";i:91;s:26:\"wechat.MiniappConfig.index\";i:92;s:22:\"wechat.AppConfig.index\";}');
 
 /*!40000 ALTER TABLE `dux_system_role` ENABLE KEYS */;
 UNLOCK TABLES;

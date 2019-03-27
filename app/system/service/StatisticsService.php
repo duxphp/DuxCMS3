@@ -24,7 +24,6 @@ class StatisticsService {
         if($type <> 'web' && $type <> 'mobile' && $type <> 'api') {
             return false;
         }
-        //$this->refreshStats();
         //保存当天统计
         $dateInfo = json_decode($this->storage->get('stats.' . $this->date), true);
         $dateInfo[$type] = intval($dateInfo[$type]) + 1;

@@ -25,6 +25,8 @@ class IndexAdmin extends \app\system\admin\SystemAdmin {
      */
     public function index() {
 
+        target('system/Statistics', 'service')->refreshStats();
+
         $siteViews = target('statis/StatisViews')->where([
             'species' => 'site',
         ])->sum('num');
