@@ -26,12 +26,12 @@
         </div>
         <div class="uk-navbar-right">
             <ul class="uk-navbar-nav">
-                <li class="uk-active"><a href="index.html">首页</a></li>
+                <li class="uk-active"><a href="/">首页</a></li>
                 <!--list{app="page" label="pageList" limit=10 parent_id=0}-->
                 <li><a href="{url('page/index/index', ['id' => $list.page_id])}">{$list.name}</a></li>
                 <!--{/list}-->
                 <!--list{app="article" label="classList" limit=10 parent_id=0}-->
-                <li><a href="{url('article/index/index', ['id' => $list.page_id])}">{$list.name}</a></li>
+                <li><a href="{url('article/index/index', ['id' => $list.class_id])}">{$list.name}</a></li>
                 <!--{/list}-->
             </ul>
         </div>

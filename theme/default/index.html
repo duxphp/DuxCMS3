@@ -1,89 +1,93 @@
 <!doctype html>
 <html>
 <!--#include file="head.html"-->
-<div class="uk-container dux-banner">
-    <div class="banner-inner">
-        <h2>
-            <!--echo{app="site" label="fragment" id=1}-->
-        </h2>
-        <p>
-            <!--echo{app="site" label="fragment" id=2}-->
-        </p>
-    </div>
-</div>
-<div class="uk-container dux-info">
-    <div class="info-divider uk-divider-small uk-text-center"></div>
-    <h3 class="uk-width-2-3@m">
-        DuxCMS 是一款基于 PHP + Mysql 构建的轻量级内容管理框架，致力于为开发者提供快速开发所需要的基本架构功能，产品遵循标准开源协议，让您的开发无后顾之忧
-    </h3>
-    <div class="uk-grid uk-child-width-1-2@s uk-child-width-1-4@m">
-        <div>
-            <div class="info-box">
-                <div class="image">
-                    <img src="images/info-easy.svg">
-                </div>
-                <h4>简单</h4>
-                <p>
-                    简单的开发模式与清晰的架构，让您快速上手
-                </p>
-            </div>
-        </div>
-        <div>
-            <div class="info-box">
-                <div class="image">
-                    <img src="images/info-use.svg">
-                </div>
-                <h4>易用</h4>
-                <p>
-                    基于人性化的UI设置，让您的操作得心应手
-                </p>
-            </div>
-        </div>
-        <div>
-            <div class="info-box">
-                <div class="image">
-                    <img src="images/info-strong.svg">
-                </div>
-                <h4>强大</h4>
-                <p>
-                    引入composer同时封装基础类库，让您随用随取
-                </p>
-            </div>
-        </div>
-        <div>
-            <div class="info-box">
-                <div class="image">
-                    <img src="images/info-free.svg">
-                </div>
-                <h4>开源</h4>
-                <p>
-                    遵循标准的Zlib开源协议，协议内可免费用于商业用途
-                </p>
-            </div>
+<div class="uk-container ">
+    <div class="dux-banner">
+        <div class="banner-inner">
+            <h2>
+                <!--echo{app="site" label="fragment" id=1}-->
+            </h2>
+            <p>
+                <!--echo{app="site" label="fragment" id=2}-->
+            </p>
         </div>
     </div>
-</div>
-
-<div class="uk-container dux-show">
-
-    <div class="uk-grid uk-child-width-1-2@m">
-        <!--list{app="article" label="contentList" limit=4 image=true}-->
-        <div class="show-item">
-            <div class="uk-margin">
-                <a href="{url('article/info/index', ['id' => $list.article_id])}"><img src="{$list.image}"></a>
-                <h3 class="uk-h3">
-                    <a href="{url('article/info/index', ['id' => $list.article_id])}">{$list.title}</a>
-                </h3>
-                <p class="uk-margin">
-                    {str_len($list.description, 100)}
-                </p>
+    <div class="dux-info">
+        <div class="info-divider uk-divider-small uk-text-center"></div>
+        <h3 class="uk-width-2-3@m">
+            DuxCMS 是一款基于 PHP + Mysql 构建的轻量级内容管理框架，致力于为开发者提供快速开发所需要的基本架构功能，产品遵循标准开源协议，让您的开发无后顾之忧
+        </h3>
+        <div class="uk-grid uk-child-width-1-2@s uk-child-width-1-4@m">
+            <div>
+                <div class="info-box">
+                    <div class="image">
+                        <img src="images/info-easy.svg">
+                    </div>
+                    <h4>简单</h4>
+                    <p>
+                        简单的开发模式与清晰的架构，让您快速上手
+                    </p>
+                </div>
+            </div>
+            <div>
+                <div class="info-box">
+                    <div class="image">
+                        <img src="images/info-use.svg">
+                    </div>
+                    <h4>易用</h4>
+                    <p>
+                        基于人性化的UI设置，让您的操作得心应手
+                    </p>
+                </div>
+            </div>
+            <div>
+                <div class="info-box">
+                    <div class="image">
+                        <img src="images/info-strong.svg">
+                    </div>
+                    <h4>强大</h4>
+                    <p>
+                        引入composer同时封装基础类库，让您随用随取
+                    </p>
+                </div>
+            </div>
+            <div>
+                <div class="info-box">
+                    <div class="image">
+                        <img src="images/info-free.svg">
+                    </div>
+                    <h4>开源</h4>
+                    <p>
+                        遵循标准的Zlib开源协议，协议内可免费用于商业用途
+                    </p>
+                </div>
             </div>
         </div>
-        
-        <!--{/list}-->
     </div>
 
+    <div class="dux-show">
 
+        <div class="uk-grid uk-child-width-1-2@m uk-grid-collapse">
+            <!--list{app="article" label="contentList" limit=4 image=true}-->
+            <div>
+                <div class="show-item">
+                    <div class="uk-margin">
+                        <a href="{url('article/info/index', ['id' => $list.article_id])}"><img src="{$list.image}"></a>
+                        <h3 class="uk-h3">
+                            <a href="{url('article/info/index', ['id' => $list.article_id])}">{$list.title}</a>
+                        </h3>
+                        <p class="uk-margin">
+                            {str_len($list.description, 100)}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!--{/list}-->
+        </div>
+
+
+
+    </div>
 
 </div>
 

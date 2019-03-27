@@ -2,6 +2,11 @@ html {
   font-size: 16px;
 }
 
+.uk-breadcrumb {
+  font-size: 1rem;
+  padding: 10px 0;
+}
+
 .dux-logo {
   font-size: 18px;
   img {
@@ -64,14 +69,17 @@ html {
 }
 
 .dux-show {
-  margin-top: 80px;
-  padding-top: 50px;
+  margin-top: 60px;
+  padding-top: 40px;
   background: #f5f5f5;
   .show-item {
-    margin-bottom: 20px;
+    margin-bottom: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
     h3 {
       font-weight: normal;
       font-size: 1.2rem;
+      margin-top: 20px;
       a {
         color: #333;
       }
@@ -85,24 +93,45 @@ html {
 }
 
 .dux-footer {
-  padding: 30px;
-  text-align: center;
-  margin-top: 50px;
-  font-size: 1.4rem;
-  border-top: 1px solid #ddd;
-  color: #666;
-  .link {
-    margin-bottom: 20px;
+  .footer-item {
+    padding-left: 80px;
   }
+}
+
+.dux-article {
+  
+  .article-content {
+    font-size: 1rem;
+    padding: 0 20px;
+  }
+}
+
+.dux-page-banner {
+  background-image: url(../images/page-banner.webp);
+  background-position: center center;
+  background-size: cover;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .banner-inner {
+    text-align: center;
+    h2 {
+      color: #fff;
+      margin: 0;
+    }
+  }
+}
+
+.dux-list {
   p {
-    margin: 0;
-  }
-  a {
-    font-size: 1.6rem;
+    font-size: 1rem;
+    color: #999;
   }
 }
 
 .dux-pages {
+  padding-top: 20px;
   a,span {
     position: relative;
     display: inline-block;
@@ -114,6 +143,7 @@ html {
     border-radius: 0;
     margin-bottom: 5px;
     margin-right: 5px;
+    font-size: .8rem;
     &.current {
       background-color: #0e90d2;
       border-color: #0e90d2;

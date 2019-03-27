@@ -6,7 +6,7 @@
 
 namespace app\index\api;
 
-class IndexApi extends \app\member\api\MemberApi {
+class IndexApi extends \app\base\api\BaseApi {
 
     protected $_middle = 'index/Index';
 
