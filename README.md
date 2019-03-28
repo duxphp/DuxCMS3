@@ -89,10 +89,13 @@ QQ群：131331864
    ```
    https://www.phpcomposer.com/
    ```
-
    
 
-2. 建立站点指向Dux程序根目录
+2. 建立站点指向Dux程序根目录，目录内命令安装依赖
+
+   ```
+   composer install
+   ```
 
 3. 设置站点伪静态规则
 
