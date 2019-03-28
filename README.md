@@ -1,0 +1,82 @@
+
+<p align="center">
+  <a href="https://gitee.com/duxcms/DuxCMS3">
+   <img alt="DuxCMS" src="https://gitee.com/uploads/images/2018/0523/113606_31f0cb86_3525.png">
+  </a>
+</p>
+
+<p align="center">
+  为快速站点开发而生
+</p>
+
+<p align="center">
+  <a href="https://gitee.com/duxcms/DuxCMS3">
+    <img alt="maven" src="https://img.shields.io/badge/duxcms-v3-blue.svg">
+  </a>
+
+  <a href="http://zlib.net/zlib_license.html">
+    <img alt="code style" src="https://img.shields.io/badge/zlib-licenses-brightgreen.svg">
+  </a>
+</p>
+
+# 简介
+
+DuxCMS 是一款基于PHP/MYSQL开发的、专注于多种平台的基础化内容管理框架
+
+# 特点
+
+- **模块化**：采用类HMVC模式，将系统内部交互采用hook方式，除基础应用外模块之间互相独立互不影响
+
+- **轻量级**：底层采用轻量级框架开发，保留必要类库，提升系统速度与降低学习成本
+
+- **多终端支持**：系统采用pc+mobile+api多终端访问模式，便于多种用户需求，兼容传统模板开发与多种类app程序
+
+- **高度灵活**：系统采用composer作为依赖，同时封装常用类库
+
+- **操作简单**：简化用户后台操作体验，完全符合快速上手使用
+
+- **便捷标签**：模板采用注释类标签语法，三种格式标签，简单易开发
+
+- **代码开源**：系统开放源代码，方便开发者二次开发与后期协作维护
+
+
+# 适用范围
+
+- 个人网站
+
+- 企业/新闻类站点
+
+- 图片展示站
+
+- 电子商务开发
+
+- 管理系统开发
+
+# 推荐环境
+
+- 语言版本：PHP 7.0+
+
+- 数据库版本：Mysql 5.6+
+
+- WEB服务器：Apache/Nginx
+
+- 后台浏览器：Chrome 30+ IE11+ FireFox 22+
+
+
+# 讨论
+
+QQ群：131331864
+
+# bug反馈
+
+[issues反馈](https://github.com/duxphp/DuxCMS3/issues)
+    
+# 捐赠
+
+![输入图片说明](https://gitee.com/uploads/images/2018/0523/154335_f4bd5962_3525.jpeg "支付宝捐赠.jpg")
+![输入图片说明](https://gitee.com/uploads/images/2018/0523/154348_30180a6b_3525.jpeg "微信捐赠码.jpg")
+
+
+# 安装说明
+
+- 
