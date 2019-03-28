@@ -93,6 +93,7 @@ class ListMiddle extends \app\base\middle\BaseMiddle {
             'classInfo' => $this->classInfo,
             'parentClassInfo' => $parentClassInfo,
             'topClassInfo' => $topClassInfo,
+            'tpl' => $this->tpl
         ]);
     }
 
