@@ -71,10 +71,13 @@ QQ群：131331864
 
 [issues反馈](https://github.com/duxphp/DuxCMS3/issues)
     
-# 捐赠
+# 版权说明
 
-![输入图片说明](https://gitee.com/uploads/images/2018/0523/154335_f4bd5962_3525.jpeg "支付宝捐赠.jpg")
-![输入图片说明](https://gitee.com/uploads/images/2018/0523/154348_30180a6b_3525.jpeg "微信捐赠码.jpg")
+本项目使用zlib开源协议，您可以在协议允许范围内进行进行商业或非商业项目使用
+
+# 开发团队
+
+湖南聚匠信息科技有限公司
 
 
 # 安装说明
