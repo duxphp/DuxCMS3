@@ -154,10 +154,10 @@ body {
     }
     box-shadow: 0 0 1px rgba(0, 0, 0, .1);
     .nav-layout {
-      width: 120px;
       height: 100%;
       overflow-x: hidden;
       overflow-y: auto;
+      margin-right: -17px;
     }
 
     .sub-top {
