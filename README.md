@@ -79,4 +79,58 @@ QQ群：131331864
 
 # 安装说明
 
-- 
+1. 安装composer，请查看文档进行安装与更换国内镜像
+
+   
+
+   ```
+   https://www.phpcomposer.com/
+   ```
+
+   
+
+2. 建立站点指向Dux程序根目录
+
+3. 设置站点伪静态规则
+
+   nginx规则
+
+   ```
+   if (!-e $request_filename) {
+      rewrite  ^(.*)$  /index.php?$1  last;
+      break;
+   }
+   ```
+
+   apache规则
+
+   ```
+   RewriteEngine on
+   RewriteCond %{REQUEST_FILENAME} !-d
+   RewriteCond %{REQUEST_FILENAME} !-f
+   RewriteRule ^(.*)$ index.php?$1 [QSA,PT,L]
+   ```
+
+   iis规则
+
+   ```
+   <?xml version="1.0" encoding="UTF-8"?>
+   <configuration>
+   <system.webServer> 
+   <rewrite>
+   <rules>
+   <rule name="rule 3S" stopProcessing="true">
+   <match url="^(.*)$" />
+   <conditi>
+   <add input="{REQUEST_FILENAME}" matchType="IsFile" ignoreCase="false" negate="true" />
+   <add input="{REQUEST_FILENAME}" matchType="IsDirectory" ignoreCase="false" negate="true" />
+   </conditi>
+   <action type="Rewrite" url="/index.php?{R:1}" appendQueryString="true" />
+   </rule>
+   </rules>
+   </rewrite>
+   </system.webServer>
+   </configuration>
+   ```
+
+   4. 访问站点绑定域名进入安装向导进行配置安装
