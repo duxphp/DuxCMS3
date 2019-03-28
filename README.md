@@ -133,12 +133,14 @@ QQ群：131331864
    </configuration>
    ```
 
-   4. 设置mysql模式为非严格模式 (临时解决方案)
+   
 
-      ```
-      sql-mode=NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
-      ```
+4. 设置mysql模式为非严格模式 (临时解决方案)
 
-      
+```
+sql-mode=NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+```
 
-   5. 访问站点绑定域名进入安装向导进行配置安装 
+
+
+5. 访问站点绑定域名进入安装向导进行配置安装 
