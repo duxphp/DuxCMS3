@@ -12,5 +12,6 @@
     'tpl_cache' => 'files',
     'session_cache' => 'files',
     'data_cache' => 'files',
+    'debug_key' => ''
   ),
 );
