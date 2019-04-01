@@ -39,6 +39,11 @@ class ConfigAdmin extends \app\system\admin\SystemAdmin {
                 'url' => url('upload'),
                 'cur' => ACTION_NAME == 'upload' ? 1 : 0,
             ],
+            [
+                'name' => '更新设置',
+                'url' => url('update'),
+                'cur' => ACTION_NAME == 'update' ? 1 : 0,
+            ],
         ];
         return $menu;
     }
@@ -101,6 +106,25 @@ class ConfigAdmin extends \app\system\admin\SystemAdmin {
                 $this->success('上传配置成功！');
             } else {
                 $this->error('上传配置失败');
+            }
+        }
+    }
+
+    /**
+     * 更新设置
+     */
+    public function update() {
+        $file = 'data/config/use/update';
+        if (!isPost()) {
+            $config = load_config($file);
+            $this->assign('info', $config['dux.update']);
+            $this->assign('hookMenu', $this->menu());
+            $this->systemDisplay();
+        } else {
+            if (save_config($file, ['dux.update' => $_POST])) {
+                $this->success('更新配置成功！');
+            } else {
+                $this->error('更新配置失败');
             }
         }
     }

@@ -10,7 +10,6 @@ class ComService extends \app\base\service\BaseService {
     private $header = 'X-REQUESTED-WITH: XMLHTTPREQUEST';
     //private $updateUrl = 'https://www.duxphp.com';
     private $label = 'duxcms';
-    private $release = 0;
 
     /**
      * 版本信息
@@ -45,11 +44,12 @@ class ComService extends \app\base\service\BaseService {
      */
     public function check() {
         $verInfo = \dux\Config::get('dux.use_ver');
+        $updateConfig = \dux\Config::get('dux.update');
         $data = \dux\lib\Http::doPost($this->updateUrl . '/service/Update/check', [
             'label' => $this->label,
             'ver' => $verInfo['ver'],
             'date' => $verInfo['date'],
-            'release' => $this->release,
+            'release' => intval($updateConfig['release']),
         ], 10, $this->header);
         if (empty($data)) {
             return $this->error('内部请求失败！');
@@ -147,33 +147,6 @@ class ComService extends \app\base\service\BaseService {
             return $this->error($data['message']);
         }
         return $this->success($data['message']);
-    }
-
-    /**
-     * 升级文件
-     *
-     * @return void
-     */
-    public function updateFiles() {
-
-    }
-
-    /**
-     * 升级数据库
-     *
-     * @return void
-     */
-    public function updateSql() {
-
-    }
-
-    /**
-     * 版本更改
-     *
-     * @return void
-     */
-    public function updateVer($ver) {
-
     }
 
     /**

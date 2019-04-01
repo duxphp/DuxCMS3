@@ -1,0 +1,70 @@
+<div class="uk-card uk-card-small uk-card-default dux-panel">
+    <div class="uk-card-body">
+        <form class="dux-form uk-form  uk-form-horizontal  " method="post" action="{url()}" data-dux="form-bind">
+            <fieldset>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">系统更新</label>
+                    <div class="uk-form-controls uk-form-controls-text">
+                        <div class="uk-grid">
+                            <label>
+                                <!--if{$info.status}-->
+                                <input name="status" value="true" checked="checked" type="radio"  class="uk-radio" >
+                                <!--{else}-->
+                                <input name="status" value="true" type="radio"  class="uk-radio" >
+                                <!--{/if}-->
+                                开启
+                            </label>
+                            <label>
+                                <!--if{!$info.status}-->
+                                <input name="status" checked="checked" value="false" type="radio"  class="uk-radio" >
+                                <!--{else}-->
+                                <input name="status" value="false" type="radio"  class="uk-radio" >
+                                <!--{/if}-->
+                                关闭
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">升级类型</label>
+                    <div class="uk-form-controls uk-form-controls-text">
+                        <div class="uk-grid">
+                            <label>
+                                <!--if{$info.release}-->
+                                <input name="release" value="true" checked="checked" type="radio"  class="uk-radio" >
+                                <!--{else}-->
+                                <input name="release" value="true" type="radio"  class="uk-radio" >
+                                <!--{/if}-->
+                                正式版
+                            </label>
+                            <label>
+                                <!--if{!$info.release}-->
+                                <input name="release" checked="checked" value="false" type="radio"  class="uk-radio" >
+                                <!--{else}-->
+                                <input name="release" value="false" type="radio"  class="uk-radio" >
+                                <!--{/if}-->
+                                预览版
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">检测间隔</label>
+
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="number" name="interval" value="{$info.interval}" required>
+                        <div class="uk-form-help">自动检测更新间隔，单位(天)</div>
+                    </div>
+                </div>
+                
+                <div class="uk-form-group">
+                    <div class="uk-form-controls">
+                        <button class="uk-button uk-button-primary" type="submit">保存</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

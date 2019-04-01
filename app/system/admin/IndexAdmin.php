@@ -72,8 +72,18 @@ class IndexAdmin extends \app\system\admin\SystemAdmin {
             ],
         ], 400);
 
+        $config = \dux\Config::get('dux.use');
+        $cache = \dux\Dux::cache($config['data_cache']);
+        $updateConfig = \dux\Config::get('dux.update');
+        $updateStatus = false;
+        if (!$cache->get('update.status')) {
+            $updateStatus = true;
+            $cache->set('update.status', time(), $updateConfig['interval'] * 86400);
+        }
+        
         $this->assign('viewBarJs', $viewBarJs);
         $this->assign('ver', \dux\Config::get('dux.use_ver'));
+        $this->assign('updateStatus', $updateStatus);
         $this->systemDisplay();
     }
 
@@ -82,6 +92,10 @@ class IndexAdmin extends \app\system\admin\SystemAdmin {
         ob_implicit_flush();
         header('X-Accel-Buffering: no');
         $this->systemDisplay();
+        $updateConfig = \dux\Config::get('dux.update');
+        if (!$updateConfig['status']) {
+            $this->updateMsg('系统已关闭更新，请联系管理员！', true);
+        }
         $varInfo = \dux\Config::get('dux.use_ver');
         $this->updateMsg('当前版本：' . $varInfo['ver'] . ' ' . ($varInfo['release'] ? '正式版' : '预览版') . ' [' . $varInfo['date'] . ']');
         $this->updateMsg('获取更新信息中,请稍等...');
@@ -119,10 +133,9 @@ class IndexAdmin extends \app\system\admin\SystemAdmin {
             $this->updateMsg(target('system/Com', 'service')->getError(), true);
         }
         $this->updateMsg('更新包下载成功，开始更新文件...');
-        /* if(!copy_dir($dir, ROOT_PATH)) {
-        $this->updateMsg('更新文件失败，请设置系统目录权限！');
-        } */
-
+        if (!copy_dir($dir, ROOT_PATH)) {
+            $this->updateMsg('更新文件失败，请设置系统目录权限！');
+        }
         $this->updateMsg('更新文件成功，清理临时文件...');
         del_dir(ROOT_PATH . 'data/update');
 
@@ -158,14 +171,14 @@ class IndexAdmin extends \app\system\admin\SystemAdmin {
         }
         $this->updateMsg('更新当前版本号...');
 
-        $status = save_config('data/config/com/ver',  [
+        $status = save_config('data/config/com/ver', [
             'dux.use_ver' => array_merge($varInfo, [
                 'ver' => $info['ver'],
                 'date' => date('Ymd', $info['date']),
-                'release' => intval($info['release'])
-            ])
+                'release' => intval($info['release']),
+            ]),
         ]);
-        if(!$status) {
+        if (!$status) {
             $this->updateMsg('更新版本号失败...', true);
         }
 

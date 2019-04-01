@@ -134,7 +134,7 @@
                         <div class="uk-flex-1 uk-text-danger">
                             <a href="javascript:;" data-info><span class="uk-label uk-label-success"><i
                                         class="fa fa-laptop"></i> 版本信息</span></a>
-                            <a href="javascript:;" data-update><span class="uk-label"><i
+                            <a href="javascript:;" data-update><span class="uk-label" data-update-auto><i
                                         class="fa fa-cloud-download"></i> 检测更新</span></a>
                         </div>
                     </li>
@@ -152,7 +152,7 @@
         <div class="uk-modal-body" uk-overflow-auto data-content>
         </div>
         <div class="uk-modal-footer uk-text-right">
-            <button class="uk-button uk-button-default uk-modal-close" type="button" >关闭</button>
+            <button class="uk-button uk-button-default uk-modal-close" type="button">关闭</button>
         </div>
     </div>
 </div>
@@ -172,6 +172,7 @@
 </div>
 <script>
     Do('base', function () {
+        var lock = false;
         $('[data-info]').on('click', function () {
             app.ajax({
                 url: '{url("info")}',
@@ -188,9 +189,11 @@
             });
         });
         $('[data-update]').on('click', function () {
+            if (lock) {
+                return true;
+            }
             app.ajax({
                 url: '{url("updateCheck")}',
-                loading: true,
                 success: function (info) {
                     $.each(info, function (key, value) {
                         $('#modal-update').find('[data-' + key + ']').html(value);
@@ -203,5 +206,27 @@
                 }
             });
         });
+        //自动更新
+        var update = function () {
+            lock = true;
+            $('[data-update-auto]').html('<i class="fa fa-spinner fa-spin"></i> 检测更新中...');
+            app.ajax({
+                url: '{url("updateCheck")}',
+                success: function (info) {
+                    lock = false;
+                    $('[data-update-auto]').html('检测到新版本');
+                    $.each(info, function (key, value) {
+                        $('#modal-update').find('[data-' + key + ']').html(value);
+                    });
+                    $('#modal-update').find('[data-url]').attr('href', '{url("update")}?id=' + info.ver_id);
+                    UIkit.modal('#modal-update').show();
+                },
+                error: function (msg) {
+                    lock = false;
+                    $('[data-update-auto]').html('未检测到更新');
+                }
+            });
+        }
+        {$updateStatus ? 'update();' : ''}
     });
 </script>
