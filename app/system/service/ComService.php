@@ -6,9 +6,8 @@ use function GuzzleHttp\json_decode;
 
 class ComService extends \app\base\service\BaseService {
 
-    private $updateUrl = 'http://cms.dev.duxcms.com';
     private $header = 'X-REQUESTED-WITH: XMLHTTPREQUEST';
-    //private $updateUrl = 'https://www.duxphp.com';
+    private $updateUrl = 'https://www.duxphp.com';
     private $label = 'duxcms';
 
     /**
