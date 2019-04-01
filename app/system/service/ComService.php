@@ -114,12 +114,11 @@ class ComService extends \app\base\service\BaseService {
             return $this->error('获取更新包内容失败！');
         }
         fclose($file);
-        $zip = new \ZipArchive();
-        if ($zip->open($zipFile) === TRUE) {
-            $zip->extractTo($dir . 'tmp');
+        $zip = new \PhpZip\ZipFile();
+        if ($zip->openFile($zipFile)->extractTo($dir . 'tmp')) {
             $zip->close();
         } else {
-            return $this->error('解压更新包失败！');
+            $this->error('解压更新包失败！');
         }
         return $this->success($dir . 'tmp');
 
