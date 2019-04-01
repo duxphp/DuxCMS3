@@ -1,0 +1,44 @@
+<div class="uk-card uk-card-small uk-card-default dux-panel">
+    <div class="uk-card-header">系统更新</div>
+    <div class="uk-card-body">
+        <div class="dux-content" id="log"></div>
+        <div class="uk-margin-top uk-text-center">
+            <div id="complete" class="uk-hidden">
+                <a class="uk-button uk-button-primary" href="{url('admin/system/Index/index')}">升级完成</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.dux-content {
+    background: #333;
+    color: #fff;
+    padding: 20px;
+    height: 500px;
+    overflow: auto;
+}
+</style>
+
+<script>
+    var msg = function (str, error) {
+        var html = '<p>';
+        if (error) {
+            html += '<span class="uk-text-danger">' + str + '</span>';
+        } else {
+            html += str;
+        }
+        html += '</p>';
+        $('#log').append(html);
+        if (error) {
+            $('#error').removeClass('uk-hidden');
+        }
+        var h = $('#log').height();
+        $('#log').scrollTop(h);
+
+    };
+    var complete = function (str) {
+        msg(str);
+        $('#complete').removeClass('uk-hidden');
+    };
+</script>

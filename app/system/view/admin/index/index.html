@@ -96,9 +96,12 @@
                     <li class="uk-flex">
                         <div class="uk-width-small">技术支持</div>
                         <div class="uk-flex-1">
-                            <a href="//www.duxphp.com" target="_blank"><span class="uk-label uk-label-warning">DuxPHP</span></a>
-                            <a href="//github.com/duxphp/DuxCMS3" target="_blank"><span class="uk-label">github</span></a>
-                            <a href="//shang.qq.com/wpa/qunwpa?idkey=658c2efa6fefcb45c44ddb55e62929e9eff8c2324a6a4c28345b9a1728b22fd7" target="_blank"><span class="uk-label uk-label-success">qq群</span></a>
+                            <a href="//www.duxphp.com" target="_blank"><span
+                                    class="uk-label uk-label-warning">DuxPHP</span></a>
+                            <a href="//github.com/duxphp/DuxCMS3" target="_blank"><span
+                                    class="uk-label">github</span></a>
+                            <a href="//shang.qq.com/wpa/qunwpa?idkey=658c2efa6fefcb45c44ddb55e62929e9eff8c2324a6a4c28345b9a1728b22fd7"
+                                target="_blank"><span class="uk-label uk-label-success">qq群</span></a>
                         </div>
                     </li>
                 </ul>
@@ -108,35 +111,31 @@
     <div class="uk-width-1-2@m">
         <div class="uk-card uk-card-default uk-card-body uk-card-small">
             <h3 class="uk-card-title">
-                授权信息
+                软件信息
             </h3>
             <div class="dux-avg-layout">
                 <ul class="uk-list uk-list-divider">
                     <li class="uk-flex">
                         <div class="uk-width-small">系统版本</div>
-                        <div class="uk-flex-1">v3.5.0</div>
+                        <div class="uk-flex-1">v{$ver.ver}</div>
                     </li>
                     <li class="uk-flex">
-                        <div class="uk-width-small">授权域名</div>
-                        <div class="uk-flex-1 uk-text-danger">暂未获得授权 <a href="http://www.duxphp.com" target="_blank">[立即申请]</a></div>
+                        <div class="uk-width-small">版本日期</div>
+                        <div class="uk-flex-1">{$ver.date}</div>
                     </li>
                     <li class="uk-flex">
-                        <div class="uk-width-small">授权公司</div>
-                        <div class="uk-flex-1">无</div>
+                        <div class="uk-width-small">版本类型</div>
+                        <div class="uk-flex-1">
+                            {$ver.release ? '正式版' : '体验版'}
+                        </div>
                     </li>
-                    <!-- <li class="uk-flex">
-                        <div class="uk-width-small">授权域名</div>
-                        <div class="uk-flex-1 uk-text-danger">www.duxphp.com</div>
-                    </li>
-                    <li class="uk-flex">
-                        <div class="uk-width-small">授权公司</div>
-                        <div class="uk-flex-1">湖南聚匠有限公司</div>
-                    </li> -->
                     <li class="uk-flex">
                         <div class="uk-width-small">系统更新</div>
-                        <div class="uk-flex-1">
-                            <!-- 发现新版本 <a href="">[立即更新]</a> <a href="">[补丁日志]</a> -->
-                            系统已是最新版本
+                        <div class="uk-flex-1 uk-text-danger">
+                            <a href="javascript:;" data-info><span class="uk-label uk-label-success"><i
+                                        class="fa fa-laptop"></i> 版本信息</span></a>
+                            <a href="javascript:;" data-update><span class="uk-label"><i
+                                        class="fa fa-cloud-download"></i> 检测更新</span></a>
                         </div>
                     </li>
                 </ul>
@@ -144,3 +143,65 @@
         </div>
     </div>
 </div>
+<div id="modal-info" uk-modal>
+    <div class="uk-modal-dialog">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <div class="uk-modal-header">
+            <h2 class="uk-modal-title">版本信息</h2>
+        </div>
+        <div class="uk-modal-body" uk-overflow-auto data-content>
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+            <button class="uk-button uk-button-default uk-modal-close" type="button" >关闭</button>
+        </div>
+    </div>
+</div>
+<div id="modal-update" uk-modal>
+    <div class="uk-modal-dialog">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <div class="uk-modal-header">
+            <h2 class="uk-modal-title">检测到新版本</h2>
+        </div>
+        <div class="uk-modal-body" uk-overflow-auto data-content>
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+            <button class="uk-button uk-button-default uk-modal-close" type="button">关闭</button>
+            <a class="uk-button uk-button-primary" data-url href="#">立即升级</a>
+        </div>
+    </div>
+</div>
+<script>
+    Do('base', function () {
+        $('[data-info]').on('click', function () {
+            app.ajax({
+                url: '{url("info")}',
+                loading: true,
+                success: function (info) {
+                    $.each(info, function (key, value) {
+                        $('#modal-info').find('[data-' + key + ']').html(value);
+                    });
+                    UIkit.modal('#modal-info').show();
+                },
+                error: function (msg) {
+                    app.error(msg);
+                }
+            });
+        });
+        $('[data-update]').on('click', function () {
+            app.ajax({
+                url: '{url("updateCheck")}',
+                loading: true,
+                success: function (info) {
+                    $.each(info, function (key, value) {
+                        $('#modal-update').find('[data-' + key + ']').html(value);
+                    });
+                    $('#modal-update').find('[data-url]').attr('href', '{url("update")}?id=' + info.ver_id);
+                    UIkit.modal('#modal-update').show();
+                },
+                error: function (msg) {
+                    app.error(msg);
+                }
+            });
+        });
+    });
+</script>

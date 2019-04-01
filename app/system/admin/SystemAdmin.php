@@ -109,7 +109,6 @@ class SystemAdmin extends \app\base\controller\BaseController {
             $tpl = 'app/' . APP_NAME . '/view/' . LAYER_NAME . '/' . strtolower(MODULE_NAME) . '/' . strtolower($tpl);
         }
         $this->display($tpl);
-        exit;
     }
 
     /**
@@ -133,7 +132,6 @@ class SystemAdmin extends \app\base\controller\BaseController {
             $tpl = 'app/' . APP_NAME . '/view/' . LAYER_NAME . '/' . strtolower(MODULE_NAME) . '/' . strtolower($tpl);
         }
         $this->display($tpl);
-        exit;
     }
 
 
