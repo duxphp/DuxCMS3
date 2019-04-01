@@ -101,7 +101,7 @@ class ComService extends \app\base\service\BaseService {
         $dir = ROOT_PATH . 'data/update/';
         del_dir($dir);
         if (!is_dir($dir)) {
-            if (!@mkdir($dir, 0777)) {
+            if (!@mkdir($dir, 0755, true)) {
                 return $this->error('[data/update/]目录没有权限！');
             }
         }
