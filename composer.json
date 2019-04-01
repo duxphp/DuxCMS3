@@ -11,6 +11,7 @@
         "phpoffice/phpspreadsheet": "~1.0",
         "hisune/echarts-php": "^1.0",
         "intervention/image": "^2.4",
-        "ralouphie/mimey": "^2.0"
+        "ralouphie/mimey": "^2.0",,
+        "nelexa/zip": "^3.1"
     }
 }
