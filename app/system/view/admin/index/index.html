@@ -194,6 +194,7 @@
             }
             app.ajax({
                 url: '{url("updateCheck")}',
+                loading: true,
                 success: function (info) {
                     $.each(info, function (key, value) {
                         $('#modal-update').find('[data-' + key + ']').html(value);
