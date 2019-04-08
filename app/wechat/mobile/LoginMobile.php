@@ -80,6 +80,7 @@ class LoginMobile extends \app\base\controller\BaseController {
         }else{
             $targetUrl .= '&' . $loginParams;
         }
+        unset($_SESSION['wechat_user']);
         $this->redirect($targetUrl);
 
     }
