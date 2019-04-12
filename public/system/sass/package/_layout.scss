@@ -86,8 +86,7 @@ body {
       position: relative;
       overflow: hidden;
       width: 100px;
-      height: 100%;
-
+      height: calc(100% - 100px);
       ul {
         width: 120px;
         height: 100%;
