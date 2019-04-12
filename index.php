@@ -1,4 +1,5 @@
 <?php
+
 if (!defined('ROOT_PATH')) {
     define('ROOT_PATH', str_replace('\\', '/', __DIR__) . '/');
 }
