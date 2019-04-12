@@ -69,5 +69,77 @@ class WechatService extends \app\base\service\BaseService {
     public function config() {
         return $this->config;
     }
+
+    /**
+     * 永久二维码
+     * @param $params
+     * @return mixed
+     */
+    public function perpetual($params) {
+        $params = json_encode($params);
+        $savePath = 'upload/qrcode/wechat_perpetual/';
+        $filename = md5($params) . '.png';
+        if (!is_file(ROOT_PATH . $savePath . $filename)) {
+            $response = $this->wechat()->qrcode->forever($params);
+            if(empty($response['ticket']) || empty($response['url'])) {
+                return $this->error('生成失败！');
+            }
+            $image = \dux\lib\Http::doGet($response['url']);
+            if(empty($image)) {
+                return $this->error('二维码获取失败！');
+            }
+            if(!is_dir(ROOT_PATH . $savePath)) {
+                mkdir(ROOT_PATH . $savePath, 0777, true);
+            }
+            if(!file_put_contents(ROOT_PATH . $savePath . $filename, $image)) {
+                return $this->error('二维码保存失败！');
+            }
+        }
+
+        return $this->success([
+            'url' => DOMAIN_HTTP . ROOT_URL . '/' . $savePath . $filename,
+            'file' => $savePath . $filename,
+        ]);
+    }
+
+    /**
+     * 临时二维码
+     * @param $params
+     * @param int $size
+     * @return mixed
+     */
+    public function tmp($params, $day = 30) {
+        $savePath = 'upload/qrcode/wechat_tmp/';
+        $filename = md5($params) . '.png';
+
+        $filePath = ROOT_PATH . $savePath . $filename;
+        $status = false;
+        if(is_file($filePath)) {
+            $time = filemtime($filePath) + $day * 24 * 3600;
+            if($time > time()) {
+                $status = true;
+            }
+        }
+        if (!$status) {
+            $response = $this->wechat()->qrcode->temporary($params, $day * 24 * 3600);
+            if(empty($response['ticket']) || empty($response['url'])) {
+                return $this->error('生成失败！');
+            }
+            $image = \dux\lib\Http::doGet($response['url']);
+            if(empty($image)) {
+                return $this->error('二维码获取失败！');
+            }
+            if(!is_dir(ROOT_PATH . $savePath)) {
+                mkdir(ROOT_PATH . $savePath, 0777, true);
+            }
+            if(!file_put_contents(ROOT_PATH . $savePath . $filename, $image)) {
+                return $this->error('二维码保存失败！');
+            }
+        }
+        return $this->run([
+            'url' => DOMAIN_HTTP . ROOT_URL . '/' . $savePath . $filename,
+            'file' => $savePath . $filename,
+        ]);
+    }
 }
 
