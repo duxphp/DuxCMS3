@@ -88,9 +88,9 @@ class IndexAdmin extends \app\system\admin\SystemAdmin {
     }
 
     public function update() {
+        header('X-Accel-Buffering: no');
         ob_end_clean();
         ob_implicit_flush();
-        header('X-Accel-Buffering: no');
         $this->systemDisplay();
         $updateConfig = \dux\Config::get('dux.update');
         if (!$updateConfig['status']) {
