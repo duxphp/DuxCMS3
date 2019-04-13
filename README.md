@@ -67,6 +67,8 @@ DuxCMS 是一款基于PHP/MYSQL开发的、专注于多种平台的基础化内�
 
 QQ群：131331864
 
+> 本系统非盈利产品，未防止垃圾广告和水群已开启收费入群，入群之前请仔细查看文档，常见安装等问题通过搜索引擎解决，切勿做伸手党
+
 # bug反馈
 
 [issues反馈](https://github.com/duxphp/DuxCMS3/issues)
