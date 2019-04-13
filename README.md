@@ -1,7 +1,7 @@
 
 <p align="center">
   <a href="https://github.com/duxphp/DuxCMS3">
-   <img alt="DuxCMS" src="https://gitee.com/uploads/images/2018/0523/113606_31f0cb86_3525.png">
+   <img alt="DuxCMS" src="https://github.com/duxphp/DuxPHP-Document/blob/master/logo.png?raw=true">
   </a>
 </p>
 
