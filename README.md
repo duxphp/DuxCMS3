@@ -1,6 +1,6 @@
 
 <p align="center">
-  <a href="https://gitee.com/duxcms/DuxCMS3">
+  <a href="https://github.com/duxphp/DuxCMS3">
    <img alt="DuxCMS" src="https://gitee.com/uploads/images/2018/0523/113606_31f0cb86_3525.png">
   </a>
 </p>
@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="https://gitee.com/duxcms/DuxCMS3">
+  <a href="https://github.com/duxphp/DuxCMS3">
     <img alt="maven" src="https://img.shields.io/badge/duxcms-v3-blue.svg">
   </a>
 
