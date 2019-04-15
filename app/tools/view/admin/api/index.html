@@ -1,7 +1,35 @@
 <div class="dux-alert-list">
     生成的文档位于系统下 "docs" 目录，可以通过网址直接访问，请勿在页面中放置敏感信息
 </div>
+<div class="uk-card uk-card-small uk-card-default dux-panel uk-margin-top">
+    <div class="uk-card-header">文档设置</div>
+    <div class="uk-card-body">
+        <form class="dux-form uk-form  uk-form-horizontal" action="{url('config')}" data-dux="form-bind" method="post">
+            <fieldset>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">生成目录名</label>
+                    <div class="uk-form-controls">
+                        <div class="uk-input-group">
+                            <input class="uk-input" type="text" id="tools_apis" name="tools_apis"
+                                value="{$config.tools_apis}" placeholder="" required>
+                            <span class="uk-input-group-btn">
+                                <button class="uk-button uk-button-default" type="button" data-target="#tools_apis"
+                                    data-dux="system-random">随机生成</button>
+                            </span>
+                        </div>
+                        <div class="uk-form-help">位于系统根路径，更换目录请手动删除原目录</div>
+                    </div>
 
+                </div>
+                <div class="uk-form-group">
+                    <div class="uk-form-controls">
+                        <button class="uk-button uk-button-primary" type="submit" disabled>保存</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
 <div class="uk-card uk-card-small uk-card-default dux-panel uk-margin-top">
 
     <div class="uk-card-body">

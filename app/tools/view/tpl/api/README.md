@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/duxphp/duxphp">
-   <img alt="DuxPHP" src="logo.png">
+   <img alt="DuxPHP" src="/public/images/logo.png">
   </a>
 </p>
 

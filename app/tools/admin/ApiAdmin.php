@@ -11,7 +11,15 @@ class ApiAdmin extends \app\system\admin\SystemExtendAdmin {
 
     protected $_model = 'toolsQueue';
 
-    private $docsDir = ROOT_PATH . 'docs/';
+    private $docsDir = '';
+
+    public function __construct() {
+        parent::__construct();
+        $config = target('site/SiteConfig')->getConfig();
+        if(!empty($config['tools_apis'])) {
+            $this->docsDir = ROOT_PATH . $config['tools_apis'] . '/';
+        }
+    }
 
     /**
      * 模块信息
@@ -30,15 +38,25 @@ class ApiAdmin extends \app\system\admin\SystemExtendAdmin {
     }
 
     public function index() {
-        $file = ROOT_PATH . 'docs/README.md';
+        $file = $this->docsDir . 'README.md';
+        $config = target('site/SiteConfig')->getConfig();
         if (!isPost()) {
             $content = '';
             if (is_file($file)) {
                 $content = file_get_contents($file);
+            } else {
+                $content = file_get_contents(ROOT_PATH . 'app/tools/view/tpl/api/README.md');
             }
             $this->assign('content', $content);
+            $this->assign('config', $config);
             $this->systemDisplay();
         } else {
+            if (empty($config['tools_apis'])) {
+                $this->error('请先设置文档目录');
+            }
+            if(!$this->isDir()) {
+                $this->error('目录写入失败！');
+            }
             $content = $_POST['content'];
             if (!file_put_contents($file, $content)) {
                 $this->error('页面内容无法写入，请检查是否有权限！');
@@ -47,15 +65,44 @@ class ApiAdmin extends \app\system\admin\SystemExtendAdmin {
         }
     }
 
+    public function config() {
+        if (target('site/SiteConfig')->saveInfo()) {
+            if(empty($_POST['tools_apis'])) {
+                $this->error('请设置文档目录');
+            }
+            $fileDir = ROOT_PATH . $_POST['tools_apis'] . '/';
+            $this->docsDir = $fileDir;
+            if(!$this->isDir()) {
+                $this->error('目录写入失败！');
+            }
+            $this->success('站点配置成功！');
+        } else {
+            $this->error('站点配置失败');
+        }
+    }
+
+    private function isDir() {
+        if(!is_dir($this->docsDir)) {
+            if (@mkdir($this->docsDir, 0755, true) === false) {
+                return false;
+            }
+            copy_dir(ROOT_PATH . 'app/tools/view/tpl/api/', $this->docsDir);
+        }
+        return true;
+    }
+
     public function make() {
         header('X-Accel-Buffering: no');
         ob_end_clean();
         ob_implicit_flush();
         $this->systemDisplay();
+        if(empty($this->docsDir)) {
+            $this->tip('请先设置文档目录', true);
+        }
 
         $this->tip('检查文档目录...');
-        if (!is_dir($this->docsDir)) {
-            $this->tip('基础文档配置不存在!', true);
+        if (!$this->isDir()) {
+            $this->tip('目录写入失败!', true);
         }
         $this->tip('获取系统Api中...');
         $data = $this->getApi();
