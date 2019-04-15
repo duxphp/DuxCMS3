@@ -17,7 +17,7 @@ class ApiAdmin extends \app\system\admin\SystemExtendAdmin {
         parent::__construct();
         $config = target('site/SiteConfig')->getConfig();
         if(!empty($config['tools_apis'])) {
-            $this->docsDir = ROOT_PATH . $config['tools_apis'] . '/';
+            $this->docsDir = ROOT_PATH . $config['tools_apis'] . '//';
         }
     }
 
@@ -101,7 +101,7 @@ class ApiAdmin extends \app\system\admin\SystemExtendAdmin {
         $this->makeDirectory($data);
         $this->tip('开始生成文档...');
         $this->makePage($data);
-        $this->complete('文档生成结束，请直接通过 \"http://域名/docs/\" 访问 api 文档');
+        $this->complete('文档生成结束，请直接通过域名访问 api 文档');
     }
 
     private function isDir() {
