@@ -42,7 +42,7 @@ class ApiAdmin extends \app\system\admin\SystemExtendAdmin {
         $config = target('site/SiteConfig')->getConfig();
         if (!isPost()) {
             $content = '';
-            if (is_file($file)) {
+            if (is_file($file) && !empty($config['tools_apis'])) {
                 $content = file_get_contents($file);
             } else {
                 $content = file_get_contents(ROOT_PATH . 'app/tools/view/tpl/api/README.md');
@@ -81,16 +81,6 @@ class ApiAdmin extends \app\system\admin\SystemExtendAdmin {
         }
     }
 
-    private function isDir() {
-        if(!is_dir($this->docsDir)) {
-            if (@mkdir($this->docsDir, 0755, true) === false) {
-                return false;
-            }
-            copy_dir(ROOT_PATH . 'app/tools/view/tpl/api/', $this->docsDir);
-        }
-        return true;
-    }
-
     public function make() {
         header('X-Accel-Buffering: no');
         ob_end_clean();
@@ -112,6 +102,16 @@ class ApiAdmin extends \app\system\admin\SystemExtendAdmin {
         $this->tip('开始生成文档...');
         $this->makePage($data);
         $this->complete('文档生成结束，请直接通过 \"http://域名/docs/\" 访问 api 文档');
+    }
+
+    private function isDir() {
+        if(!is_dir($this->docsDir)) {
+            if (@mkdir($this->docsDir, 0755, true) === false) {
+                return false;
+            }
+            copy_dir(ROOT_PATH . 'app/tools/view/tpl/api/', $this->docsDir);
+        }
+        return true;
     }
 
     private function tip($msg, $error = false) {
