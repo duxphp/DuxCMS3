@@ -63,6 +63,13 @@ class PurviewService {
                     'index' => '设置',
                 )
             ),
+            'Api' => array(
+                'name' => 'Api文档',
+                'auth' => array(
+                    'index' => '管理',
+                    'make' => '生成',
+                )
+            ),
         );
     }
 

@@ -1,0 +1,30 @@
+<div class="dux-alert-list">
+    生成的文档位于系统下 "docs" 目录，可以通过网址直接访问，请勿在页面中放置敏感信息
+</div>
+
+<div class="uk-card uk-card-small uk-card-default dux-panel uk-margin-top">
+
+    <div class="uk-card-body">
+        <form class="dux-form uk-form  " data-dux="form-bind" method="post">
+            <fieldset>
+
+                <div class="uk-form-group">
+                    <div class="uk-form-controls">
+                        <textarea class="uk-textarea" rows="20" name="content" required>{$content}</textarea>
+                        <div class="uk-form-help">该页面为文档首页，页面使用 markdown 语法</div>
+                    </div>
+                </div>
+
+
+                <div id="param" style="padding-bottom: 20px"></div>
+
+                <div class="uk-form-group">
+                    <div class="uk-form-controls">
+                        <button class="uk-button uk-button-primary" type="submit" disabled>保存页面</button>
+                        <a href="{url('make')}" class="uk-button uk-button-success" disabled>生成文档</a>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

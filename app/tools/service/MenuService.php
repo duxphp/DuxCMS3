@@ -58,6 +58,17 @@ class MenuService {
                             ),
                         )
                     ),
+                    array(
+                        'name' => '其他',
+                        'order' => 3,
+                        'menu' => array(
+                            array(
+                                'name' => 'Api文档',
+                                'url' => url('tools/Api/index'),
+                                'order' => 0
+                            ),
+                        )
+                    ),
                 ),
             ),
         );

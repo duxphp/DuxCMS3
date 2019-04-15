@@ -1,0 +1,38 @@
+<div class="uk-card uk-card-small uk-card-default dux-panel">
+    <div class="uk-card-header">文档生成工具</div>
+    <div class="uk-card-body">
+        <div class="dux-content" id="log"></div>
+    </div>
+</div>
+
+<style>
+.dux-content {
+    background: #333;
+    color: #fff;
+    padding: 20px;
+    height: 500px;
+    overflow: auto;
+}
+</style>
+
+<script>
+    var msg = function (str, error) {
+        var html = '<p>';
+        if (error) {
+            html += '<span class="uk-text-danger">' + str + '</span>';
+        } else {
+            html += str;
+        }
+        html += '</p>';
+        $('#log').append(html);
+        if (error) {
+            $('#error').removeClass('uk-hidden');
+        }
+        var h = $('#log').height();
+        $('#log').scrollTop(h);
+
+    };
+    var complete = function (str) {
+        msg(str);
+    };
+</script>

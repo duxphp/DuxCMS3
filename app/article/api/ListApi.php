@@ -1,15 +1,22 @@
 <?php
 
+namespace app\article\api;
+
 /**
  * 文章列表
  */
 
-namespace app\article\api;
-
 class ListApi extends \app\base\api\BaseApi {
 
     protected $_middle = 'article/List';
-
+    
+    /**
+     * 获取文章列表
+     * @method GET
+     * @return inetger $code 200
+     * @return string $message json示例
+     * @return json $result [{"name":"名称", "class_id": "栏目ID"}]
+     */
     public function index() {
         $pageLimit = $this->data['limit'] ? $this->data['limit'] : 10;
         $classId = $this->data['id'];
