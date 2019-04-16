@@ -97,7 +97,7 @@ class ListMiddle extends \app\base\middle\BaseMiddle {
         ]);
     }
 
-    protected function data($filterStatus = true) {
+    protected function data() {
         $classId = $this->params['classId'];
         $keyword = str_len(html_clear(urldecode($this->params['keyword'])), 10, false);
         $this->params['limit'] = intval($this->params['limit']);
@@ -143,6 +143,8 @@ class ListMiddle extends \app\base\middle\BaseMiddle {
         if ($keyword && $list) {
             target('site/siteSearch')->stats($keyword, 'article');
         }
+
+
 
         return $this->run([
             'tagInfo' => $tagInfo,
