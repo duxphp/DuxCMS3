@@ -19,7 +19,12 @@ class ListApi extends \app\base\api\BaseApi {
      * @param inetger $limit 每页数量，默认10
      * @return inetger $code 200
      * @return string $message ok
-     * @return json $result [{"article_id": 1, "class_id": 1, "title": "标题", "keyword": "", "description": "", "image": "", "auth": "dux", "content": "文章内容", "create_time": 1546272000, "update_time": 1546272000, "virtual_view": 100, "view": 0, "sort": 0}]
+     * @return json $result {"pageInfo": {}, "classInfo": {},  "countList":1, "tagInfo":{}, "pageData": {"limit": 10, "page": 1, "totalPage": 1, "raw": {}}, "pageList":[{"article_id": 1, "class_id": 1, "title": "标题", "keyword": "", "description": "", "image": "", "auth": "dux", "content": "文章内容", "create_time": 1546272000, "update_time": 1546272000, "virtual_view": 100, "view": 0, "sort": 0}]}
+     * @field object $pageInfo 页面信息
+     * @field object $classInfo 栏目信息
+     * @field inetger $countList 文章总数
+     * @field object $tagInfo Tag信息
+     * @field object $pageData 分页数据
      * @field inetger $article_id 文章ID 
      * @field inetger $class_id 上级ID
      * @field string $title 文章标题 

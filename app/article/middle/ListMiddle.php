@@ -102,7 +102,6 @@ class ListMiddle extends \app\base\middle\BaseMiddle {
         $keyword = str_len(html_clear(urldecode($this->params['keyword'])), 10, false);
         $this->params['limit'] = intval($this->params['limit']);
         $listLimit = $this->params['limit'] ? $this->params['limit'] : 20;
-        $modelId = $this->params['model_id'] ? $this->params['model_id'] : 0;
         $tag = str_len(html_clear(urldecode($this->params['tag'])), 10, false);
         $classIds = 0;
         if ($classId) {
@@ -120,8 +119,7 @@ class ListMiddle extends \app\base\middle\BaseMiddle {
                 return $this->stop('标签不存在', 404);
             }
         }
-
-        $filter = [];
+        
         $where = [];
 
         if ($classIds) {
@@ -148,11 +146,9 @@ class ListMiddle extends \app\base\middle\BaseMiddle {
 
         return $this->run([
             'tagInfo' => $tagInfo,
-            'pageParams' => $filter['urlParam'],
             'pageData' => $pageData,
             'countList' => $count,
-            'pageList' => $list,
-            'attrList' => $filter['attrList']
+            'pageList' => $list
         ]);
     }
 

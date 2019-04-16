@@ -17,7 +17,7 @@ class ClassApi extends BaseApi {
      * @method GET
      * @return inetger $code 200
      * @return string $message ok
-     * @return json $result [{"class_id": 1, "parent_id": 0, "name": "分类名称", "subname": "副分类名称", "image": "", "keyword": "", "description": "", "sort": 0}]
+     * @return json $result {"treeList":[{"class_id": 1, "parent_id": 0, "name": "分类名称", "subname": "副分类名称", "image": "", "keyword": "", "description": "", "sort": 0}]}
      * @field inetger $class_id 分类ID 
      * @field inetger $parent_id 上级ID
      * @field string $name 分类名称 

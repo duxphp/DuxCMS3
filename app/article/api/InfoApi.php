@@ -17,7 +17,10 @@ class InfoApi extends BaseApi {
      * @param inetger $id 文章ID
      * @return inetger $code 200
      * @return string $message ok
-     * @return json $result [{"article_id": 1, "class_id": 1, "title": "标题", "keyword": "", "description": "", "image": "", "auth": "dux", "content": "文章内容", "create_time": 1546272000, "update_time": 1546272000, "virtual_view": 100, "view": 0, "sort": 0}]
+     * @return json $result {"pageInfo":{},"classInfo":{},"tagList":[],"info":[{"article_id": 1, "class_id": 1, "title": "标题", "keyword": "", "description": "", "image": "", "auth": "dux", "content": "文章内容", "create_time": 1546272000, "update_time": 1546272000, "virtual_view": 100, "view": 0, "sort": 0}]}
+     * @field object $pageInfo 页面信息
+     * @field object $classInfo 栏目信息
+     * @field array $tagList Tag信息
      * @field inetger $article_id 文章ID 
      * @field inetger $class_id 上级ID
      * @field string $title 文章标题 
