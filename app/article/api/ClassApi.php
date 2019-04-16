@@ -13,14 +13,19 @@ class ClassApi extends BaseApi {
     protected $_middle = 'article/Category';
 
     /**
-     * 获取分类列表
+     * 文章分类列表
      * @method GET
-     * @param inetger $id 上级分类ID
      * @return inetger $code 200
-     * @return string $message json示例
-     * @return json $result {"pageList": [{"id": "分类ID", "name": "名称"}]}
-     * @field string $id 栏目id 
-     * @field inetger $name 栏目名称
+     * @return string $message ok
+     * @return json $result [{"class_id": 1, "parent_id": 0, "name": "分类名称", "subname": "副分类名称", "image": "", "keyword": "", "description": "", "sort": 0}]
+     * @field inetger $class_id 分类ID 
+     * @field inetger $parent_id 上级ID
+     * @field string $name 分类名称 
+     * @field string $subname 副分类名称 
+     * @field string $image 栏目图 
+     * @field string $keyword 关键词 
+     * @field string $description 描述 
+     * @field inetger $sort 顺序 
      */
     public function index() {
 

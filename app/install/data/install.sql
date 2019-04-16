@@ -30,6 +30,7 @@ CREATE TABLE `dux_article` (
   `article_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `class_id` int(10) NOT NULL DEFAULT '0' COMMENT '栏目ID',
   `title` varchar(250) DEFAULT '',
+  `sub_title` varchar(250) DEFAULT '',
   `keyword` varchar(250) DEFAULT '',
   `description` varchar(250) DEFAULT '',
   `image` varchar(250) DEFAULT '',
@@ -49,9 +50,9 @@ CREATE TABLE `dux_article` (
 LOCK TABLES `dux_article` WRITE;
 /*!40000 ALTER TABLE `dux_article` DISABLE KEYS */;
 
-INSERT INTO `dux_article` (`article_id`, `class_id`, `title`, `keyword`, `description`, `image`, `auth`, `content`, `tags_id`, `create_time`, `update_time`, `virtual_view`, `view`, `status`, `sort`)
+INSERT INTO `dux_article` (`article_id`, `class_id`, `title`, `sub_title`, `keyword`, `description`, `image`, `auth`, `content`, `tags_id`, `create_time`, `update_time`, `virtual_view`, `view`, `status`, `sort`)
 VALUES
-	(1,1,'这是一篇默认的文章','','欢迎使用DuxCMS作为你的文章管理系统，请开始编写第一篇内容吧...','/theme/default/images/show1.webp','','&lt;p&gt;欢迎使用DuxCMS作为你的文章管理系统，请开始编写第一篇内容吧&lt;/p&gt;','',1553588391,0,0,45,1,0);
+	(1,1,'这是一篇默认的文章','','','欢迎使用DuxCMS作为你的文章管理系统，请开始编写第一篇内容吧...','/theme/default/images/show1.webp','','&lt;p&gt;欢迎使用DuxCMS作为你的文章管理系统，请开始编写第一篇内容吧&lt;/p&gt;','',1553588391,0,0,45,1,0);
 
 /*!40000 ALTER TABLE `dux_article` ENABLE KEYS */;
 UNLOCK TABLES;
