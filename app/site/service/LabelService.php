@@ -9,6 +9,23 @@ use function GuzzleHttp\json_decode;
 class LabelService {
 
     /**
+     * 搜索列表
+     * @param $data
+     * @return mixed
+     */
+    public function search($data) {
+        return target('site/Search', 'middle')->setParams([
+            'app' => $data['app'],
+            'limit' => $data['limit'],
+            'order' => $data['order']
+        ])->export(function ($data, $msg) {
+            return $data;
+        }, function ($message, $code) {
+            return [];
+        });
+    }
+    
+    /**
      * 碎片内容
      * @param $data
      * @return mixed
