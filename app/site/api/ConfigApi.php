@@ -12,8 +12,6 @@ class ConfigApi extends BaseApi {
 
     public function index() {
         $config = target('site/SiteConfig')->getConfig();
-        //wechatLogin
-        $config['wechat_wap_login'] = url('mobile/wechat/Login/index', [], true);
         $this->success('ok', $config);
     }
 

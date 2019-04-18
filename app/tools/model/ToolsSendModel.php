@@ -37,10 +37,6 @@ class ToolsSendModel extends SystemModel {
         $sendData['param'] = json_decode($data['param'], true);
         $sendData['user_info'] = [];
 
-        if($data['user_status']) {
-            $sendData['user_info'] = target('member/MemberUser')->getInfo($data['receive']);
-        }
-
         if (!empty($sendData['param'])) {
             foreach ($sendData['param'] as $key => $vo) {
                 $sendData['content'] = str_replace('{' . $key . '}', $vo, $sendData['content']);

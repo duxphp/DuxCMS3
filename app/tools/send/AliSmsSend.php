@@ -33,10 +33,6 @@ class AliSmsSend extends \app\base\service\BaseService {
             return $this->error('配置不存在!');
         }
 		$receive = $info['receive'];
-        if($info['user_status']) {
-			$userInfo = target('member/MemberUser')->getUser($info['receive']);
-            $receive = $userInfo['tel'];
-        }
 		$params = json_decode($info['param'], true);
         if(!$params['tpl']) {
             return $this->error('请配置短信模板');

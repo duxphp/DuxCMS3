@@ -78,13 +78,6 @@ class SendService {
                     'android_name' => '安卓包名',
                 )
             ),
-            'site' => array(
-                'name' => '会员通知',
-                'target' => 'tools/Site',
-                'class' => 'site',
-                'configRule' => array(
-                )
-            ),
         );
     }
 }

@@ -23,7 +23,6 @@ class BaseApi extends \dux\kernel\Api {
         target('system/Statistics', 'service')->incStats('api');
         target('statis/Views', 'service')->statis([
             'species' => 'site',
-            'user_id' => $_SERVER['HTTP_AUTHUID'],
             'type' => $_SERVER['HTTP_PLATFORM']
         ]);
         define('PLATFORM', $_SERVER['HTTP_PLATFORM']);

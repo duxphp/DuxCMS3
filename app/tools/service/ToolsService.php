@@ -60,16 +60,6 @@ class ToolsService extends \app\base\service\BaseService {
             if ($dataInfo['url'] == 'mobile') {
                 $data['url'] = $siteConfig['site_wap'] . '/' . $path;
             }
-            if (strpos($dataInfo['url'], 'mini_') !== false) {
-                $miniapp = explode('_', $dataInfo['url']);
-                $miniapp = target('wechat/WechatMiniapp')->getInfo($miniapp[1]);
-                if($miniapp) {
-                    $data['miniapp'] = [
-                        'appid' => $miniapp['appid'],
-                        'pagepath' => $path,
-                    ];
-                }
-            }
             $status = target('tools/Tools', 'service')->sendMessage([
                 'receive' => $receive,
                 'class' => $vo,
