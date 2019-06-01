@@ -16,7 +16,7 @@ class MenuService {
                 'order' => 20,
                 'menu' => [
                     [
-                        'name' => '商城',
+                        'name' => '系统',
                         'order' => 0,
                         'menu' => [
                             [

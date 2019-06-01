@@ -102,7 +102,7 @@ class MenuModel {
                     }
                 }
             }
-            if(!empty($appData)) {
+            if(!empty($appData['url'])) {
                 $list[$app] = $appData;
             }else {
                 unset($list[$app]);
